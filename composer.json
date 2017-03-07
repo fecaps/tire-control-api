@@ -1,0 +1,22 @@
+{
+    "name": "tire_control/backend",
+    "description": "Tire Control Software - Backend API",
+    "authors": [
+        {
+            "name": "Fellipe Capelli",
+            "email": "fellipecapelli@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "silex/silex": "~2.0",
+        "symfony/yaml": "^3.2",
+        "symfony/console": "^3.2",
+        "doctrine/dbal": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Backend\\": "src/Backend"
+        }
+    }
+}

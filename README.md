@@ -15,5 +15,11 @@ cp config/params.yml.dist config/params.yml
 ### Start local server
 
 ```
-php -S localhost:8090 -t public/
+php -S localhost:8080 -t public/
+```
+
+### Create a new user
+
+```
+php bin/console tire-control:create-user  
 ```
