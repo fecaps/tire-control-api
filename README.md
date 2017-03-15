@@ -9,7 +9,7 @@ composer install
 ### Copy params dist file to params file and change database configs if necessary
 
 ```
-cp config/params.yml.dist config/params.yml  
+cp config/parameters.yml.dist config/parameters.yml  
 ```
 
 ### Start local server
