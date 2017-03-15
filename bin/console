@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+$app = require __DIR__ . '/../bootstrap.php';
+
+use Symfony\Component\Console\Application;
+use Backend\Api\Command\UserCreateCommand;
+
+$application = new Application();
+
+$userCreateCommand = new UserCreateCommand;
+$userCreateCommand->setModel($app['model.user']);
+
+$application->add($userCreateCommand);
+
+$application->run();
