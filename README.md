@@ -18,6 +18,23 @@ cp config/params.yml.dist config/params.yml
 php -S localhost:8080 -t public/
 ```
 
+### Test application
+
+Check syntax errors with Php Scan:
+```
+vendor/bin/phpstan analyse -v src/ tests/
+```
+
+Check code style with Code Sniffer:
+```
+./vendor/bin/phpcs --colors src/ tests/
+```
+
+Fix specific errors with Code Sniffer:
+```
+./vendor/bin/phpcbf -n file.php
+
+
 ### Create a new user
 
 ```
