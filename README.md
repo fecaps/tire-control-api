@@ -20,20 +20,20 @@ php -S localhost:8080 -t public/
 
 ### Test application
 
-Check syntax errors with Php Scan:
+Check syntax errors with PHP Scan:
 ```
 vendor/bin/phpstan analyse -v src/ tests/
 ```
 
-Check code style with Code Sniffer:
+Check code style with PHP Code Sniffer:
 ```
 ./vendor/bin/phpcs --colors src/ tests/
 ```
 
-Fix specific errors with Code Sniffer:
+Fix specific errors with PHP Code Sniffer:
 ```
 ./vendor/bin/phpcbf -n file.php
-
+```
 
 ### Create a new user
 
