@@ -1,2 +1,4 @@
 config/parameters.yml
+tests/codeCoverage/
+phpunit.xml
 vendor/

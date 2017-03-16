@@ -9,7 +9,7 @@ composer install
 ### Copy params dist file to params file and change database configs if necessary
 
 ```
-cp config/parameters.yml.dist config/parameters.yml  
+cp config/parameters.yml.dist config/parameters.yml 
 ```
 
 ### Start local server
@@ -33,6 +33,13 @@ Check code style with PHP Code Sniffer:
 Fix specific errors with PHP Code Sniffer:
 ```
 ./vendor/bin/phpcbf -n file.php
+```
+
+Run unit tests:
+```
+cp phpunit.xml.dist phpunit.xml
+
+phpunit tests/
 ```
 
 ### Create a new user
