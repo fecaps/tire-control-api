@@ -22,6 +22,15 @@ class User
         return $user;
     }
 
+    public function findByUsername($username)
+    {
+        $sentence = $this->connection->executeQuery('SELECT * FROM user where username = ?', [$username]);
+
+        $user = $sentence->fetchAll();
+
+        return $user;
+    }
+
     public function create(array $data): array
     {
         $this->connection->insert('user', $data);

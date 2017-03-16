@@ -53,7 +53,12 @@ class UserCreateCommand extends Command
         $username  = $input->getArgument('username');
         $passwd = $input->getArgument('passwd');
 
-        $userData = ['name' => $name, 'email' => $email, 'username' => $username, 'passwd' => $passwd];
+        $userData = [
+            'name' => $name, 
+            'email' => $email, 
+            'username' => $username, 
+            'passwd' => $passwd
+        ];
 
         $user = $this->userModel->create($userData);
 
