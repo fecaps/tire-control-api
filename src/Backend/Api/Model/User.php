@@ -21,8 +21,8 @@ class User
         $existsEmail = $this->repository->findByEmail($email);
 
         if ($existsEmail) {
-            $exception = new Exception('This email is already in use');
-            throw $exception;
+            $exceptionEmail = new Exception('This email is already in use');
+            throw $exceptionEmail;
         }
 
         $username = $userData['username'];
@@ -30,8 +30,8 @@ class User
         $existsUsername = $this->repository->findByUsername($username);
 
         if ($existsUsername) {
-            $exception = new Exception('This username is already in use');
-            throw $exception;
+            $exceptionUsername = new Exception('This username is already in use');
+            throw $exceptionUsername;
         }
 
         return $this->repository->create($userData);

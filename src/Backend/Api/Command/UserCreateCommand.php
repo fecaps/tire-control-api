@@ -48,16 +48,16 @@ class UserCreateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $name   = $input->getArgument('name');
-        $email  = $input->getArgument('email');
-        $username  = $input->getArgument('username');
-        $passwd = $input->getArgument('passwd');
+        $name       = $input->getArgument('name');
+        $email      = $input->getArgument('email');
+        $username   = $input->getArgument('username');
+        $passwd     = $input->getArgument('passwd');
 
         $userData = [
-            'name' => $name, 
-            'email' => $email, 
-            'username' => $username, 
-            'passwd' => $passwd
+            'name'      => $name, 
+            'email'     => $email, 
+            'username'  => $username, 
+            'passwd'    => $passwd
         ];
 
         $user = $this->userModel->create($userData);

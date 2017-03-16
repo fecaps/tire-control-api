@@ -15,18 +15,18 @@ class User
 
     public function findByEmail($email)
     {
-        $sentence = $this->connection->executeQuery('SELECT * FROM user where email = ?', [$email]);
+        $query = $this->connection->executeQuery('SELECT * FROM user where email = ?', [$email]);
 
-        $user = $sentence->fetchAll();
+        $user = $query->fetchAll();
 
         return $user;
     }
 
     public function findByUsername($username)
     {
-        $sentence = $this->connection->executeQuery('SELECT * FROM user where username = ?', [$username]);
+        $query = $this->connection->executeQuery('SELECT * FROM user where username = ?', [$username]);
 
-        $user = $sentence->fetchAll();
+        $user = $query->fetchAll();
 
         return $user;
     }
