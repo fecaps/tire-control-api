@@ -1,5 +1,5 @@
 config/parameters.yml
 build/codeCoverage/
-build/phpDox/
+build/phpdox/
 vendor/
 composer.lock
