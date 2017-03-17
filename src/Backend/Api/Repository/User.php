@@ -15,7 +15,7 @@ class User
 
     public function findByEmail($email)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM user where email = ?', [$email]);
+        $query = $this->connection->executeQuery('SELECT * FROM user WHERE email = ?', [$email]);
 
         $user = $query->fetchAll();
 
@@ -24,7 +24,7 @@ class User
 
     public function findByUsername($username)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM user where username = ?', [$username]);
+        $query = $this->connection->executeQuery('SELECT * FROM user WHERE username = ?', [$username]);
 
         $user = $query->fetchAll();
 
