@@ -2,7 +2,7 @@
 
 <phpunit backupGlobals="false"
     backupStaticAttributes="false"
-    bootstrap="./bootstrap.php"
+    bootstrap="../bootstrap.php"
     cacheTokens="true"
     colors="true"
     processIsolation="false"
@@ -10,13 +10,13 @@
     verbose="true">
     
     <testsuites>
-        <testsuite name="Tire Control API">
-            <directory>./tests/unit/</directory>
+        <testsuite name="Tire Control API - PHP Unit">
+            <directory>../tests/unit/</directory>
         </testsuite>
     </testsuites>
 
     <logging>
-        <log type="coverage-html" target="./tests/codeCoverage" charset="UTF-8"/>
+        <log type="coverage-html" target="../build/codeCoverage" charset="UTF-8"/>
     </logging>
 
     <filter>

@@ -35,11 +35,14 @@ Fix specific errors with PHP Code Sniffer:
 ./vendor/bin/phpcbf -n file.php
 ```
 
-Run unit tests:
+Run unit tests and generate code coverage:
 ```
-cp phpunit.xml.dist phpunit.xml
+phpunit -c build/
+```
 
-phpunit tests/
+Update documentation:
+```
+phpdox -f build/phpdox.xml
 ```
 
 ### Create a new user

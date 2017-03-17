@@ -1,4 +1,5 @@
 config/parameters.yml
-tests/codeCoverage/
-phpunit.xml
+build/codeCoverage/
+build/phpDox/
 vendor/
+composer.lock
