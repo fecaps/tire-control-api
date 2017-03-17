@@ -13,5 +13,9 @@ class RepositoryProvider implements ServiceProviderInterface
         $app['repository.user'] = function () use ($app) {
             return new Repository\User($app['db']);
         };
+
+        $app['repository.passwd'] = function () {
+            return new Repository\Passwd;
+        };
     }
 }

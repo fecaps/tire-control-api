@@ -16,6 +16,9 @@ class UserTest extends TestCase
             'passwd'    => '123456'
         ];
 
+        $changedUserData = $userData;
+        $changedUserData['passwd'] = '202020';
+
         $mockRepository = $this
             ->getMockBuilder('Backend\\Api\\Repository\\User')
             ->disableOriginalConstructor()
@@ -34,15 +37,26 @@ class UserTest extends TestCase
             ->with($userData['username'])
             ->willReturn(null);
 
-        $newUserData = ['id' => 123] + $userData;
+        $newUserData = ['id' => 123] + $changedUserData;
 
         $mockRepository
             ->expects($this->once())
             ->method('create')
-            ->with($userData)
+            ->with($changedUserData)
             ->willReturn($newUserData);
 
-        $userModel = new User($mockRepository);
+        $mockPassword = $this
+            ->getMockBuilder('Backend\\Api\\Repository\\Passwd')
+            ->setMethods(['tokenize'])
+            ->getMock();
+
+        $mockPassword
+            ->expects($this->once())
+            ->method('tokenize')
+            ->with($userData['passwd'])
+            ->willReturn($changedUserData['passwd']);
+
+        $userModel = new User($mockRepository, $mockPassword);
 
         $retrieveData = $userModel->create($userData);
 
@@ -74,7 +88,11 @@ class UserTest extends TestCase
             ->with($userData['email'])
             ->willReturn($userData);
 
-        $userModel = new User($mockRepository);
+        $mockPassword = $this
+            ->getMockBuilder('Backend\\Api\\Repository\\Passwd')
+            ->getMock();
+
+        $userModel = new User($mockRepository, $mockPassword);
 
         $userModel->create($userData);
     }

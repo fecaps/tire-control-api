@@ -9,7 +9,12 @@ class UserTest extends TestCase
 {
     public function testShouldFindOneUserByEmail()
     {
-        $expectedUserData = ['name' => 'Test', 'email' => 'test@gmail.com', 'username' => 'usernameTest', 'password' => '123'];
+        $expectedUserData = [
+            'name'      => 'Test',
+            'email'     => 'test@gmail.com',
+            'username'  => 'usernameTest',
+            'password'  => '123'
+        ];
 
         $mockQuery = $this
             ->getMockBuilder('Doctrine\\DBAL\\Statement')
@@ -43,7 +48,12 @@ class UserTest extends TestCase
 
     public function testShouldFindOneUserByUsername()
     {
-        $expectedUserData = ['name' => 'Test', 'email' => 'test@gmail.com', 'username' => 'usernameTest', 'password' => '123'];
+        $expectedUserData = [
+            'name'      => 'Test',
+            'email'     => 'test@gmail.com',
+            'username'  => 'usernameTest',
+            'password'  => '123'
+        ];
 
         $mockQuery = $this
             ->getMockBuilder('Doctrine\\DBAL\\Statement')
@@ -77,7 +87,12 @@ class UserTest extends TestCase
 
     public function testShouldCreateAnUser()
     {
-        $userData = ['name' => 'Test', 'email' => 'test@gmail.com', 'username' => 'usernameTest', 'passwd' => '123'];
+        $userData = [
+            'name'      => 'Test',
+            'email'     => 'test@gmail.com',
+            'username'  => 'usernameTest', 
+            'passwd'    => '123'
+        ];
 
         $mockConnection = $this
             ->getMockBuilder('Doctrine\\DBAL\\Connection')

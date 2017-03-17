@@ -11,7 +11,10 @@ class ModelProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['model.user'] = function () use ($app) {
-            return new User($app['repository.user']);
+            return new User(
+                $app['repository.user'],
+                $app['repository.passwd']
+            );
         };
     }
 
