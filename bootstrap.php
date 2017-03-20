@@ -30,5 +30,6 @@ $app['debug'] = $parameters['debug'] ?? false;
 $app->register(new DoctrineServiceProvider, $parameters['database']);
 $app->register(new Backend\Api\Provider\ModelProvider);
 $app->register(new Backend\Api\Provider\RepositoryProvider);
+$app->register(new Backend\Api\Provider\ValidatorProvider);
 
 return $app;

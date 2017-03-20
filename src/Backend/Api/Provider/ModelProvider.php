@@ -12,10 +12,10 @@ class ModelProvider implements ServiceProviderInterface
     {
         $app['model.user'] = function () use ($app) {
             return new User(
+                $app['validator.user'],
                 $app['repository.user'],
                 $app['repository.passwd']
             );
         };
     }
-
 }

@@ -13,11 +13,21 @@ class UserTest extends TestCase
             'name'      => 'Test Name',
             'email'     => 'test@gmail.com',
             'username'  => 'testUsername',
-            'passwd'    => '123456'
+            'passwd'    => '12345678'
         ];
 
         $changedUserData = $userData;
-        $changedUserData['passwd'] = '202020';
+        $changedUserData['passwd'] = '20202020';
+
+        $mockValidator = $this
+            ->getMockBuilder('Backend\\Api\\Validator\\User')
+            ->setMethods(['sanitizeInputData'])
+            ->getMock();
+
+        $mockValidator
+            ->expects($this->once())
+            ->method('sanitizeInputData')
+            ->with($userData);
 
         $mockRepository = $this
             ->getMockBuilder('Backend\\Api\\Repository\\User')
@@ -56,7 +66,7 @@ class UserTest extends TestCase
             ->with($userData['passwd'])
             ->willReturn($changedUserData['passwd']);
 
-        $userModel = new User($mockRepository, $mockPassword);
+        $userModel = new User($mockValidator, $mockRepository, $mockPassword);
 
         $retrieveData = $userModel->create($userData);
 
@@ -64,8 +74,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * @expectedException Exception
-     * @expectedExceptionMessage This email is already in use
+     * @expectedException Backend\Api\Validator\ValidatorException
      */
     public function testShouldGetErrorWhenEmailIsAlreadyInUse()
     {
@@ -73,13 +82,23 @@ class UserTest extends TestCase
             'name'      => 'Test Name',
             'email'     => 'test@gmail.com',
             'username'  => 'newTestUsername',
-            'passwd'    => '123456'
+            'passwd'    => '12345678'
         ];
+
+        $mockValidator = $this
+            ->getMockBuilder('Backend\\Api\\Validator\\User')
+            ->setMethods(['sanitizeInputData'])
+            ->getMock();
+
+        $mockValidator
+            ->expects($this->once())
+            ->method('sanitizeInputData')
+            ->with($userData);
 
         $mockRepository = $this
             ->getMockBuilder('Backend\\Api\\Repository\\User')
             ->disableOriginalConstructor()
-            ->setMethods(['findByEmail'])
+            ->setMethods(['findByEmail', 'findByUsername'])
             ->getMock();
 
         $mockRepository
@@ -88,11 +107,17 @@ class UserTest extends TestCase
             ->with($userData['email'])
             ->willReturn($userData);
 
+        $mockRepository
+            ->expects($this->once())
+            ->method('findByUsername')
+            ->with($userData['username'])
+            ->willReturn($userData);
+
         $mockPassword = $this
             ->getMockBuilder('Backend\\Api\\Repository\\Passwd')
             ->getMock();
 
-        $userModel = new User($mockRepository, $mockPassword);
+        $userModel = new User($mockValidator, $mockRepository, $mockPassword);
 
         $userModel->create($userData);
     }

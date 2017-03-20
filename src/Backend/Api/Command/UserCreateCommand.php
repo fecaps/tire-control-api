@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\DBAL\Connection;
 use Backend\Api\Model\User;
+use Backend\Api\Validator\ValidatorException;
+use Exception;
 
 class UserCreateCommand extends Command
 {
@@ -60,7 +62,11 @@ class UserCreateCommand extends Command
             'passwd'    => $passwd
         ];
 
-        $user = $this->userModel->create($userData);
+        try {
+            $user = $this->userModel->create($userData);
+        } catch (ValidatorException $exception) {
+            throw new Exception($exception->getFullMessage());
+        }
 
         $output->writeln([
             'User created:',

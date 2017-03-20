@@ -5,16 +5,17 @@ namespace Backend\Api\Command;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Tester\CommandTester;
+use Backend\Api\Validator\ValidatorException;
 
 class UserCreateCommandTest extends TestCase
 {
     public function testShouldCreateNewUser()
     {
         $userData = [
-            'name'      => 'Test',
+            'name'      => 'Name Test',
             'email'     => 'test@gmail.com',
             'username'  => 'usernameTest',
-            'passwd'    => '123456'
+            'passwd'    => '12345678'
         ];
 
         $mockModel = $this
@@ -45,5 +46,37 @@ class UserCreateCommandTest extends TestCase
         $expectedOutput.= 'Username: '   . $userData['username'] . PHP_EOL;
 
         $this->assertEquals($expectedOutput, $output);
+    }
+
+    /** 
+    * @expectedException Exception
+    **/
+    public function testShouldThrowValidatorErrorOnInvalidUserData()
+    {
+        $userData = [
+            'name'      => 'Name Test',
+            'email'     => 'test@gmail.com',
+            'username'  => 'usernameTest',
+            'passwd'    => '12345'
+        ];
+
+        $mockModel = $this
+            ->getMockBuilder('Backend\\Api\\Model\\User')
+            ->disableOriginalConstructor()
+            ->setMethods(['create'])
+            ->getMock();
+
+        $mockModel
+            ->expects($this->once())
+            ->method('create')
+            ->with($userData)
+            ->will($this->throwException(new ValidatorException('An error has ocorred.')));
+
+        $command = new UserCreateCommand;
+        $command->setModel($mockModel);
+
+        $commandTester = new CommandTester($command);
+
+        $commandTester->execute($userData);
     }
 }

@@ -14,10 +14,6 @@ class Passwd
             ['cost' => 12]
         );
 
-        if ($passwordHash === false) {
-            throw new Exception('Password hash has failed.');
-        }
-
         return $passwordHash;
     }
 }
