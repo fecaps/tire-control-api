@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Backend\Api\Model;
 
@@ -9,9 +10,9 @@ use Backend\Api\Validator\ValidatorException;
 
 class User
 {
+    private $validator;
     private $repository;
     private $passwd;
-    private $validator;
 
     public function __construct(UserValidator $validator, UserRepository $repository, Passwd $passwd)
     {

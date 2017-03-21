@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Backend\Api\Provider;
 
@@ -13,6 +14,14 @@ class ModelProvider implements ServiceProviderInterface
         $app['model.user'] = function () use ($app) {
             return new User(
                 $app['validator.user'],
+                $app['repository.user'],
+                $app['repository.passwd']
+            );
+        };
+
+        $app['model.login'] = function () use ($app) {
+            return new User(
+                $app['validator.login'],
                 $app['repository.user'],
                 $app['repository.passwd']
             );
