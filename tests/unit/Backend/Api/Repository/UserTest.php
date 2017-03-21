@@ -91,7 +91,7 @@ class UserTest extends TestCase
         $userData = [
             'name'      => 'Test',
             'email'     => 'test@gmail.com',
-            'username'  => 'usernameTest', 
+            'username'  => 'usernameTest',
             'passwd'    => '123'
         ];
 

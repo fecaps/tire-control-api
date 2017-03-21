@@ -27,7 +27,7 @@ vendor/bin/phpstan analyse -v src/ tests/ --level 5
 
 Check code style with PHP Code Sniffer:
 ```
-./vendor/bin/phpcs --colors src/ tests/
+./vendor/bin/phpcs --standard=PSR2 --colors src/ tests/
 ```
 
 Fix specific errors with PHP Code Sniffer:

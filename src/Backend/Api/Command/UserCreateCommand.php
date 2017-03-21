@@ -57,9 +57,9 @@ class UserCreateCommand extends Command
         $passwd     = $input->getArgument('passwd');
 
         $userData = [
-            'name'      => $name, 
-            'email'     => $email, 
-            'username'  => $username, 
+            'name'      => $name,
+            'email'     => $email,
+            'username'  => $username,
             'passwd'    => $passwd
         ];
 

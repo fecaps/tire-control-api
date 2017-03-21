@@ -49,7 +49,7 @@ class UserCreateCommandTest extends TestCase
         $this->assertEquals($expectedOutput, $output);
     }
 
-    /** 
+    /**
     * @expectedException Exception
     **/
     public function testShouldThrowValidatorErrorOnInvalidUserData()
