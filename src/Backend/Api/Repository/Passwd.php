@@ -17,4 +17,9 @@ class Passwd
 
         return $passwordHash;
     }
+
+    public function check($rawPassword, $hashPassword)
+    {
+        return password_verify($rawPassword, $hashPassword);
+    }
 }
