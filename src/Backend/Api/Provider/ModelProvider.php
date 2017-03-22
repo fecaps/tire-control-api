@@ -26,5 +26,11 @@ class ModelProvider implements ServiceProviderInterface
                 $app['repository.passwd']
             );
         };
+
+        $app['model.authsession'] = function () use ($app) {
+            return new Models\AuthSession(
+                $app['repository.authsession']
+            );
+        };
     }
 }
