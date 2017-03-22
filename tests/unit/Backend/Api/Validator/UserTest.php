@@ -55,8 +55,8 @@ class UserTest extends TestCase
             ],
             [
                 [
-                    'name'      => '<p><script>window.location.href="http://example.com";</script></p>', 
-                    'email'     => 'paul@gmail.com', 
+                    'name'      => '<p><script>window.location.href="http://example.com";</script></p>',
+                    'email'     => 'paul@gmail.com',
                     'username'  => '<p><script>alert("You cannot do whatever you want");</script></p>',
                     'passwd'    => 'avalidpasswd'
                 ],

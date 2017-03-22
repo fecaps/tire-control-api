@@ -25,7 +25,7 @@ class User
             $exception->addMessage('name', ValidatorMessages::INVALID_NAME);
         } elseif (filter_var($data['name'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH)) {
             $this->validateMoreThan('name', $data['name'], self::NAME_MAX_LEN, $exception);
-            $this->validateLessThan('name', $data['name'], self::NAME_MIN_LEN, $exception);            
+            $this->validateLessThan('name', $data['name'], self::NAME_MIN_LEN, $exception);
         }
 
         if (!isset($data['username']) || $data['username'] == '') {
