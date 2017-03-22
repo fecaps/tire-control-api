@@ -17,6 +17,7 @@ class UserTest extends TestCase
                 [
                     'name'      => [sprintf(ValidatorMessages::LESS_THAN, User::NAME_MIN_LEN)],
                     'email'     => [ValidatorMessages::INVALID_EMAIL],
+                    'username'  => [ValidatorMessages::INVALID_USERNAME],
                     'passwd'    => [sprintf(ValidatorMessages::LESS_THAN, User::PASSWORD_MIN_LEN)]
                 ]
             ],
@@ -50,6 +51,18 @@ class UserTest extends TestCase
                     'passwd'    => 'avalidpasswd'
                 ],
                 [
+                ]
+            ],
+            [
+                [
+                    'name'      => '<p><script>window.location.href="http://example.com";</script></p>', 
+                    'email'     => 'paul@gmail.com', 
+                    'username'  => '<p><script>alert("You cannot do whatever you want");</script></p>',
+                    'passwd'    => 'avalidpasswd'
+                ],
+                [
+                    'name'      => [ValidatorMessages::INVALID_NAME],
+                    'username'  => [ValidatorMessages::INVALID_USERNAME]
                 ]
             ]
         ];

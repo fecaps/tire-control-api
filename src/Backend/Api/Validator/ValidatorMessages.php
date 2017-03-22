@@ -5,6 +5,8 @@ namespace Backend\Api\Validator;
 
 class ValidatorMessages
 {
+    const INVALID_NAME          = 'Invalid name';
+    const INVALID_USERNAME      = 'Invalid username';
     const INVALID_EMAIL         = 'Invalid email';
     const LESS_THAN             = 'This field must have %s or more characters';
     const MORE_THAN             = 'This field must have %s or less characters';

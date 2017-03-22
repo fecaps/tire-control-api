@@ -21,13 +21,17 @@ class User
 
         if (!isset($data['name']) || $data['name'] == '') {
             $exception->addMessage('name', ValidatorMessages::NOT_BLANK);
+        } elseif (htmlentities($data['name'], ENT_QUOTES, 'UTF-8') != $data['name']) {
+            $exception->addMessage('name', ValidatorMessages::INVALID_NAME);
         } elseif (filter_var($data['name'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH)) {
-            $this->validateLessThan('name', $data['name'], self::NAME_MIN_LEN, $exception);
             $this->validateMoreThan('name', $data['name'], self::NAME_MAX_LEN, $exception);
+            $this->validateLessThan('name', $data['name'], self::NAME_MIN_LEN, $exception);            
         }
 
         if (!isset($data['username']) || $data['username'] == '') {
             $exception->addMessage('username', ValidatorMessages::NOT_BLANK);
+        } elseif (htmlentities($data['username'], ENT_QUOTES, 'UTF-8') != $data['username']) {
+            $exception->addMessage('username', ValidatorMessages::INVALID_USERNAME);
         } elseif (filter_var($data['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH)) {
             $this->validateLessThan('username', $data['username'], self::USERNAME_MIN_LEN, $exception);
             $this->validateMoreThan('username', $data['username'], self::USERNAME_MAX_LEN, $exception);
