@@ -14,6 +14,15 @@ class User
         $this->connection = $connection;
     }
 
+    public function create(array $data): array
+    {
+        $this->connection->insert('user', $data);
+     
+        $lastInsertId = $this->connection->lastInsertId();
+
+        return ['id' => $lastInsertId] + $data;
+    }
+    
     public function findByEmail($email)
     {
         $query = $this->connection->executeQuery('SELECT * FROM user WHERE email = ?', [$email]);
@@ -30,14 +39,5 @@ class User
         $user = $query->fetchAll();
 
         return $user;
-    }
-
-    public function create(array $data): array
-    {
-        $this->connection->insert('user', $data);
-     
-        $lastInsertId = $this->connection->lastInsertId();
-
-        return ['id' => $lastInsertId] + $data;
     }
 }
