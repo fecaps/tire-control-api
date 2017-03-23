@@ -20,12 +20,12 @@ class UserTest extends TestCase
         $mockQuery = $this
             ->getMockBuilder('Doctrine\\DBAL\\Statement')
             ->disableOriginalConstructor()
-            ->setMethods(['fetchAll'])
+            ->setMethods(['fetch'])
             ->getMock();
 
         $mockQuery
             ->expects($this->once())
-            ->method('fetchAll')
+            ->method('fetch')
             ->willReturn($expectedUserData);
 
         $mockConnection = $this
@@ -59,12 +59,12 @@ class UserTest extends TestCase
         $mockQuery = $this
             ->getMockBuilder('Doctrine\\DBAL\\Statement')
             ->disableOriginalConstructor()
-            ->setMethods(['fetchAll'])
+            ->setMethods(['fetch'])
             ->getMock();
 
         $mockQuery
             ->expects($this->once())
-            ->method('fetchAll')
+            ->method('fetch')
             ->willReturn($expectedUserData);
 
         $mockConnection = $this

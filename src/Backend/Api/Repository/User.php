@@ -27,7 +27,7 @@ class User
     {
         $query = $this->connection->executeQuery('SELECT * FROM user WHERE email = ?', [$email]);
 
-        $user = $query->fetchAll();
+        $user = $query->fetch();
 
         return $user;
     }
@@ -36,7 +36,7 @@ class User
     {
         $query = $this->connection->executeQuery('SELECT * FROM user WHERE username = ?', [$username]);
 
-        $user = $query->fetchAll();
+        $user = $query->fetch();
 
         return $user;
     }
