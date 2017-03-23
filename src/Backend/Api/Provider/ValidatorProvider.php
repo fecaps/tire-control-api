@@ -18,9 +18,5 @@ class ValidatorProvider implements ServiceProviderInterface
         $app['validator.login'] = function () {
             return new Validators\Login;
         };
-
-        $app['validator.authsession'] = function () {
-            return new Validators\AuthSession;
-        };
     }
 }
