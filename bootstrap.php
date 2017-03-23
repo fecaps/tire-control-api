@@ -27,10 +27,12 @@ $app = new Application();
 
 $app['debug'] = $parameters['debug'] ?? false;
 
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
 $app->register(new DoctrineServiceProvider, $parameters['database']);
+$app->register(new Backend\Api\Provider\AuthProvider);
+$app->register(new Backend\Api\Provider\ControllerProvider);
 $app->register(new Backend\Api\Provider\ModelProvider);
 $app->register(new Backend\Api\Provider\RepositoryProvider);
 $app->register(new Backend\Api\Provider\ValidatorProvider);
-$app->register(new Backend\Api\Provider\AuthProvider);
 
 return $app;
