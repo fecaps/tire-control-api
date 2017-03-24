@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `auth_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_session` (
-  `token` varchar(32) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   `expire_at` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
