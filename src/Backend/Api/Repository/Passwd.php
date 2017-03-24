@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Backend\Api\Repository;
 
-use Exception;
-
 class Passwd
 {
     public function tokenize($password)

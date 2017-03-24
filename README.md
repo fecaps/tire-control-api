@@ -22,7 +22,7 @@ php -S localhost:8080 -t public/
 
 Check syntax errors with PHP Scan:
 ```
-vendor/bin/phpstan analyse -v src/ tests/ --level 5
+vendor/bin/phpstan analyse -v src/ --level 5
 ```
 
 Check code style with PHP Code Sniffer:

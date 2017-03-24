@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 chdir(__DIR__);
 
 $composerAutoload = 'vendor/autoload.php';
@@ -34,5 +36,6 @@ $app->register(new Backend\Api\Provider\ControllerProvider);
 $app->register(new Backend\Api\Provider\ModelProvider);
 $app->register(new Backend\Api\Provider\RepositoryProvider);
 $app->register(new Backend\Api\Provider\ValidatorProvider);
+$app->register(new Backend\Api\Provider\ViewerProvider);
 
 return $app;
