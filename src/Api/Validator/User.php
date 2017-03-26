@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Api\Validator;
 
+use Api\Exception\ValidatorException;
+
 class User
 {
     const NAME_MIN_LEN      = 5;

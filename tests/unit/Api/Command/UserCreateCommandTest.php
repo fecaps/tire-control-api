@@ -6,7 +6,7 @@ namespace Api\Command;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Tester\CommandTester;
-use Api\Validator\ValidatorException;
+use Api\Exception\ValidatorException;
 
 class UserCreateCommandTest extends TestCase
 {

@@ -6,7 +6,7 @@ namespace Api\Model;
 use Api\Validator\User as UserValidator;
 use Api\Repository\User as UserRepository;
 use Api\Repository\Passwd;
-use Api\Validator\ValidatorException;
+use Api\Exception\ValidatorException;
 
 class User
 {

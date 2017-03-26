@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Api\Validator;
 
+use Api\Exception\ValidatorException;
+
 class AuthSession
 {
     public function validate(array $data)

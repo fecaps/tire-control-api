@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Validator;
 
 use PHPUnit\Framework\TestCase;
+use Api\Exception\ValidatorException;
 
 class ValidatorMessagesTest extends TestCase
 {

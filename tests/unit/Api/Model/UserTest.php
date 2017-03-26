@@ -74,7 +74,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * @expectedException Api\Validator\ValidatorException
+     * @expectedException Api\Exception\ValidatorException
      */
     public function testShouldGetErrorWhenEmailIsAlreadyInUse()
     {

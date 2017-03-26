@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace Api\Validator;
 
 use PHPUnit\Framework\TestCase;
-use Api\Validator\ValidatorException;
-use Api\Validator\ValidatorMessages;
+use Api\Exception\ValidatorException;
 
 class LoginTest extends TestCase
 {

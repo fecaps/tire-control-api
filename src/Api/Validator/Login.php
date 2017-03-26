@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Api\Validator;
 
+use Api\Exception\ValidatorException;
+
 class Login
 {
     public function validateInputData(array $data)

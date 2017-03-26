@@ -59,7 +59,7 @@ class LoginTest extends TestCase
     }
 
      /**
-     * @expectedException Api\Validator\ValidatorException
+     * @expectedException Api\Exception\ValidatorException
      */
     public function testShouldGetErrorWhenUserIsNotFound()
     {
@@ -100,7 +100,7 @@ class LoginTest extends TestCase
     }
 
     /**
-     * @expectedException Api\Validator\ValidatorException
+     * @expectedException Api\Exception\ValidatorException
      */
     public function testShouldGetErrorWhenPasswordIsInvalid()
     {
