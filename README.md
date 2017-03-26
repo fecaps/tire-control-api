@@ -1,4 +1,4 @@
-# Backend - The API for Tire Control Software
+# The Web API for Tire Control Software
 
 ### Install dependencies
 

@@ -25,6 +25,8 @@ if (file_exists($parametersFile) === false) {
 
 $parameters = Yaml::parse(file_get_contents($parametersFile));
 
+date_default_timezone_set('America/Sao_Paulo');
+
 $app = new Application();
 
 $app['debug'] = $parameters['debug'] ?? false;
