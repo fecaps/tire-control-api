@@ -18,11 +18,6 @@ Check code style with PHP Code Sniffer:
 ./vendor/bin/phpcs -sw --standard=PSR2 --colors src/ tests/
 ```
 
-Fix specific errors with PHP Code Sniffer:
-```
-./vendor/bin/phpcbf -w --standard=PSR2 file.php
-```
-
 Run unit tests and generate code coverage:
 ```
 phpunit -c build/
