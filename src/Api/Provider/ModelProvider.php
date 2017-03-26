@@ -29,6 +29,7 @@ class ModelProvider implements ServiceProviderInterface
 
         $app['model.authsession'] = function () use ($app) {
             return new Models\AuthSession(
+                $app['validator.authsession'],
                 $app['repository.authsession']
             );
         };

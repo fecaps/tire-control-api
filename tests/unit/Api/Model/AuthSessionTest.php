@@ -17,6 +17,17 @@ class AuthSessionTest extends TestCase
             'user_ip'       => '127.0.0.1'
         ];
 
+        $mockValidator = $this
+            ->getMockBuilder('Api\\Validator\\AuthSession')
+            ->disableOriginalConstructor()
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $mockValidator
+            ->expects($this->once())
+            ->method('validate')
+            ->with($data);
+
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\AuthSession')
             ->disableOriginalConstructor()
@@ -28,7 +39,7 @@ class AuthSessionTest extends TestCase
             ->method('create')
             ->with($data);
 
-        $model = new AuthSession($mockRepository);
+        $model = new AuthSession($mockValidator, $mockRepository);
 
         $model->create($data);
     }

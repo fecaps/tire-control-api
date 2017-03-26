@@ -13,5 +13,4 @@ class ValidatorMessages
     const NOT_BLANK             = 'This field cannot be blank';
     const INVALID_DATE_TIME     = 'Invalid date time. Format: %s';
     const INVALID_IP_ADDRESS    = 'Invalid IP address';
-    const INVALID_DATE          = 'Invalid date. Format: %s';
 }
