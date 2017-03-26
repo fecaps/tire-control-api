@@ -1,6 +1,6 @@
 {
-    "name": "tire_control/backend",
-    "description": "Tire Control Software - Backend API",
+    "name": "tire_control/webapi",
+    "description": "Tire Control Software - Web API",
     "authors": [
         {
             "name": "Fellipe Capelli",
