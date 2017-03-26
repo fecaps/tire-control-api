@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\DBAL\Connection;
 use Api\Model\User;
-use Api\Exceptiom\ValidatorException;
+use Api\Exception\ValidatorException;
 use Exception;
 
 class UserCreateCommand extends Command
