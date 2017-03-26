@@ -4,7 +4,7 @@
 $app = require __DIR__ . '/../bootstrap.php';
 
 use Symfony\Component\Console\Application;
-use Backend\Api\Command\UserCreateCommand;
+use Api\Command\UserCreateCommand;
 
 $application = new Application();
 

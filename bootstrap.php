@@ -31,11 +31,11 @@ $app['debug'] = $parameters['debug'] ?? false;
 
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 $app->register(new DoctrineServiceProvider, $parameters['database']);
-$app->register(new Backend\Api\Provider\AuthProvider);
-$app->register(new Backend\Api\Provider\ControllerProvider);
-$app->register(new Backend\Api\Provider\ModelProvider);
-$app->register(new Backend\Api\Provider\RepositoryProvider);
-$app->register(new Backend\Api\Provider\ValidatorProvider);
-$app->register(new Backend\Api\Provider\ViewerProvider);
+$app->register(new Api\Provider\AuthProvider);
+$app->register(new Api\Provider\ControllerProvider);
+$app->register(new Api\Provider\ModelProvider);
+$app->register(new Api\Provider\RepositoryProvider);
+$app->register(new Api\Provider\ValidatorProvider);
+$app->register(new Api\Provider\ViewerProvider);
 
 return $app;
