@@ -35,6 +35,7 @@ $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 $app->register(new DoctrineServiceProvider, $parameters['database']);
 $app->register(new Api\Provider\AuthProvider);
 $app->register(new Api\Provider\ControllerProvider);
+$app->register(new Api\Provider\ErrorProvider);
 $app->register(new Api\Provider\ModelProvider);
 $app->register(new Api\Provider\RepositoryProvider);
 $app->register(new Api\Provider\ValidatorProvider);
