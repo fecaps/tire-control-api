@@ -21,12 +21,12 @@ class UserTest extends TestCase
 
         $mockValidator = $this
             ->getMockBuilder('Api\\Validator\\User')
-            ->setMethods(['sanitizeInputData'])
+            ->setMethods(['validate'])
             ->getMock();
 
         $mockValidator
             ->expects($this->once())
-            ->method('sanitizeInputData')
+            ->method('validate')
             ->with($userData);
 
         $mockRepository = $this
@@ -87,12 +87,12 @@ class UserTest extends TestCase
 
         $mockValidator = $this
             ->getMockBuilder('Api\\Validator\\User')
-            ->setMethods(['sanitizeInputData'])
+            ->setMethods(['validate'])
             ->getMock();
 
         $mockValidator
             ->expects($this->once())
-            ->method('sanitizeInputData')
+            ->method('validate')
             ->with($userData);
 
         $mockRepository = $this

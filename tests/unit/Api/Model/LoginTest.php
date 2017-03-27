@@ -16,12 +16,12 @@ class LoginTest extends TestCase
 
         $mockValidator = $this
             ->getMockBuilder('Api\\Validator\\Login')
-            ->setMethods(['validateInputData'])
+            ->setMethods(['validate'])
             ->getMock();
 
         $mockValidator
             ->expects($this->once())
-            ->method('validateInputData')
+            ->method('validate')
             ->with($loginData);
 
         $mockRepository = $this
@@ -70,12 +70,12 @@ class LoginTest extends TestCase
 
         $mockValidator = $this
             ->getMockBuilder('Api\\Validator\\Login')
-            ->setMethods(['validateInputData'])
+            ->setMethods(['validate'])
             ->getMock();
 
         $mockValidator
             ->expects($this->once())
-            ->method('validateInputData')
+            ->method('validate')
             ->with($loginData);
 
         $mockRepository = $this
@@ -111,12 +111,12 @@ class LoginTest extends TestCase
 
         $mockValidator = $this
             ->getMockBuilder('Api\\Validator\\Login')
-            ->setMethods(['validateInputData'])
+            ->setMethods(['validate'])
             ->getMock();
 
         $mockValidator
             ->expects($this->once())
-            ->method('validateInputData')
+            ->method('validate')
             ->with($loginData);
 
         $mockRepository = $this

@@ -5,7 +5,7 @@ namespace Api\Validator;
 
 use Api\Exception\ValidatorException;
 
-class AuthSession
+class AuthSession implements ValidatorInterface
 {
     public function validate(array $data)
     {

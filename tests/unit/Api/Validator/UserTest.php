@@ -78,7 +78,7 @@ class UserTest extends TestCase
         $messages = [];
 
         try {
-            $userValidator->sanitizeInputData($testData);
+            $userValidator->validate($testData);
         } catch (ValidatorException $e) {
             $messages = $e->getMessages();
         }

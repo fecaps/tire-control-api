@@ -47,7 +47,7 @@ class LoginTest extends TestCase
         $messages = [];
 
         try {
-            $loginValidator->validateInputData($testData);
+            $loginValidator->validate($testData);
         } catch (ValidatorException $e) {
             $messages = $e->getMessages();
         }

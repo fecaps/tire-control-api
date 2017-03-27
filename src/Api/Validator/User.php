@@ -5,7 +5,7 @@ namespace Api\Validator;
 
 use Api\Exception\ValidatorException;
 
-class User
+class User implements ValidatorInterface
 {
     const NAME_MIN_LEN      = 5;
     const USERNAME_MIN_LEN  = 5;
@@ -14,7 +14,7 @@ class User
     const USERNAME_MAX_LEN  = 255;
     const PASSWORD_MAX_LEN  = 255;
 
-    public function sanitizeInputData(array $data)
+    public function validate(array $data)
     {
         $exception = new ValidatorException;
 

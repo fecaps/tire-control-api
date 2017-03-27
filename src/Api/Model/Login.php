@@ -23,7 +23,7 @@ class Login
 
     public function authenticate(array $loginData): array
     {
-        $this->validator->validateInputData($loginData);
+        $this->validator->validate($loginData);
 
         $email = $loginData['email'];
         $psswd = $loginData['passwd'];

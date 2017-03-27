@@ -25,7 +25,7 @@ class User
     {
         $exception = new ValidatorException;
 
-        $this->validator->sanitizeInputData($userData);
+        $this->validator->validate($userData);
 
         $email = $userData['email'];
 
