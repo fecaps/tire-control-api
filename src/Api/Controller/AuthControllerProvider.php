@@ -12,7 +12,7 @@ class AuthControllerProvider implements ControllerProviderInterface, ServiceProv
 {
     public function register(Container $app)
     {
-        $app['controller.auth'] = function () use ($app) {
+        $app['authcontroller'] = function () use ($app) {
             return new AuthController($app['model.login'], $app['auth.session']);
         };
 
@@ -23,7 +23,8 @@ class AuthControllerProvider implements ControllerProviderInterface, ServiceProv
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->post('/login', 'controller.auth:login');
+        $controllers->post('/login', 'authcontroller:login');
+        $controllers->put('/logout', 'authcontroller:logout');
 
         return $controllers;
     }

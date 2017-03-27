@@ -23,4 +23,11 @@ class AuthSession
 
         $this->repository->create($sessionData);
     }
+
+    public function update($token, array $data)
+    {
+        $criteria = ['token' => $token];
+
+        $this->repository->update($data, $criteria);
+    }
 }

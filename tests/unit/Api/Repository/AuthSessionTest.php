@@ -32,4 +32,25 @@ class AuthSessionTest extends TestCase
 
         $repository->create($data);
     }
+
+    public function testShouldUpdateSessionData()
+    {
+        $data = ['expire_at' => '2017-03-27 10:20:01'];
+        $criteria = ['token' => 'ABCDEFGHIJKL'];
+
+        $mockConn = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['update'])
+            ->getMock();
+
+        $mockConn
+            ->expects($this->once())
+            ->method('update')
+            ->with('auth_session', $data, $criteria);
+
+        $repository = new AuthSession($mockConn);
+
+        $repository->update($data, $criteria);
+    }
 }

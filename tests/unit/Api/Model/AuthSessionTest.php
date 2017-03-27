@@ -43,4 +43,31 @@ class AuthSessionTest extends TestCase
 
         $model->create($data);
     }
+
+    public function testShouldUpdateAuthSession()
+    {
+        $data = ['expire_at' => '2017-03-22 14:50:30'];
+        $criteria = ['token' => 'aValidToken'];
+
+        $mockValidator = $this
+            ->getMockBuilder('Api\\Validator\\AuthSession')
+            ->disableOriginalConstructor()
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $mockRepository = $this
+            ->getMockBuilder('Api\\Repository\\AuthSession')
+            ->disableOriginalConstructor()
+            ->setMethods(['update'])
+            ->getMock();
+
+        $mockRepository
+            ->expects($this->once())
+            ->method('update')
+            ->with($data, $criteria);
+
+        $model = new AuthSession($mockValidator, $mockRepository);
+
+        $model->update($criteria['token'], $data);
+    }
 }

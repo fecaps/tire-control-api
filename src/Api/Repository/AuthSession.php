@@ -18,4 +18,9 @@ class AuthSession
     {
         $this->connection->insert('auth_session', $data);
     }
+
+    public function update(array $data, array $criteria)
+    {
+        $this->connection->update('auth_session', $data, $criteria);
+    }
 }

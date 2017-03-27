@@ -34,4 +34,13 @@ class AuthController
 
         return $returnData;
     }
+
+    public function logout(Request $request): array
+    {
+        $token = $request->headers->get('webapi-token');
+
+        $this->session->expire($token);
+
+        return [];
+    }
 }

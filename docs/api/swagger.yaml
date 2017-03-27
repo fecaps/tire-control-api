@@ -37,6 +37,21 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
 
+  /logout:
+    put:
+      description: Logout from Web API using webapi-token
+
+      parameters:
+        - name: webapi-token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        204:
+          description: Logout success
+
 definitions:
 
   Login:

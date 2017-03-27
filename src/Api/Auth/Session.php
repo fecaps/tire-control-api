@@ -37,4 +37,15 @@ class Session
 
         return $sessionData;
     }
+
+    public function expire($token)
+    {
+        $date = new DateTime();
+        
+        $date->modify('-1 second');
+
+        $data = ['expire_at' => $date->format('Y-m-d H:i:s')];
+
+        $this->model->update($token, $data);
+    }
 }

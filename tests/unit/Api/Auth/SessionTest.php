@@ -26,4 +26,22 @@ class SessionTest extends TestCase
 
         $this->assertEquals(['token', 'created_at', 'expire_at', 'user_id', 'user_ip'], array_keys($data));
     }
+
+    public function testShouldExpireToken()
+    {
+        $mockModel = $this
+            ->getMockBuilder('Api\\Model\\AuthSession')
+            ->disableOriginalConstructor()
+            ->setMethods(['update'])
+            ->getMock();
+
+        $mockModel
+            ->expects($this->once())
+            ->method('update')
+            ->willReturn(null);
+
+        $session = new Session($mockModel);
+
+        $data = $session->expire('aValidToken');
+    }
 }
