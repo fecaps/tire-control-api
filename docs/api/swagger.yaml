@@ -1,0 +1,60 @@
+swagger: '2.0'
+
+info:
+  version: "0.1"
+  title: Web API for Tire Control Software 
+
+paths:
+
+  /login:
+    post:
+      description: Login to the API and GET api-token
+
+      parameters:
+        - name: email
+          in: formData
+          description: User email
+          required: true
+          type: string
+        - name: passwd
+          in: formData
+          description: User password
+          required: true
+          type: string
+          format: password
+
+      responses:
+        201:
+          description: Login success
+          schema:
+            $ref: '#/definitions/Login'
+        401:
+          description: Unauthorized login
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+definitions:
+
+  Login:
+    type: object
+    properties:
+      user_name:
+        type: string
+      user_email:
+        type: string
+      token:
+        type: string
+
+  ApiError:
+    type: object
+    properties:
+      error:
+        type: string
+      errors:
+        type: array
+        items:
+          type: string
