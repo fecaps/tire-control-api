@@ -37,6 +37,8 @@ class AuthProvider implements ServiceProviderInterface, BootableProviderInterfac
                 if (!$check) {
                     throw new Exception('Token not found or expired.');
                 }
+
+                $app['auth.session']->renew($token);
             }
         });
     }

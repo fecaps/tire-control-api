@@ -44,4 +44,22 @@ class SessionTest extends TestCase
 
         $data = $session->expire('aValidToken');
     }
+
+    public function testShouldRenewToken()
+    {
+        $mockModel = $this
+            ->getMockBuilder('Api\\Model\\AuthSession')
+            ->disableOriginalConstructor()
+            ->setMethods(['update'])
+            ->getMock();
+
+        $mockModel
+            ->expects($this->once())
+            ->method('update')
+            ->willReturn(null);
+
+        $session = new Session($mockModel);
+
+        $data = $session->renew('TESTRENEWTOKEN');
+    }
 }

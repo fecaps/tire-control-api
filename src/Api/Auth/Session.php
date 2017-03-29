@@ -48,4 +48,15 @@ class Session
 
         $this->model->update($token, $data);
     }
+
+    public function renew($token)
+    {
+        $date = new DateTime();
+
+        $date->modify(self::EXPIRE_TOKEN_WINDOW);
+
+        $data = ['expire_at' => $date->format('Y-m-d H:i:s')];
+
+        $this->model->update($token, $data);
+    }
 }
