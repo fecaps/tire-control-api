@@ -5,6 +5,7 @@ namespace Api\Model;
 
 use Api\Validator\AuthSession as AuthSessionValidator;
 use Api\Repository\AuthSession as AuthSessionRepository;
+use DateTime;
 
 class AuthSession
 {
@@ -29,5 +30,20 @@ class AuthSession
         $criteria = ['token' => $token];
 
         $this->repository->update($data, $criteria);
+    }
+
+    public function check($token)
+    {
+        $session = $this->repository->findByToken($token);
+
+        if (!$session) {
+            return false;
+        }
+
+        $currentDate = new Datetime();
+
+        $expireAtDate = new Datetime($session['expire_at']);
+
+        return $currentDate < $expireAtDate;
     }
 }

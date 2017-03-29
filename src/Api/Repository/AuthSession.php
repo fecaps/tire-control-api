@@ -23,4 +23,13 @@ class AuthSession
     {
         $this->connection->update('auth_session', $data, $criteria);
     }
+
+    public function findByToken($token)
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM auth_session WHERE token = ?', [$token]);
+
+        $session = $query->fetch();
+        
+        return $session;
+    }
 }

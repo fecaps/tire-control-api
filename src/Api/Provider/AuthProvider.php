@@ -31,6 +31,12 @@ class AuthProvider implements ServiceProviderInterface, BootableProviderInterfac
                 if (!$token) {
                     throw new Exception('Token is missing on request headers.');
                 }
+
+                $check = $app['model.authsession']->check($token);
+
+                if (!$check) {
+                    throw new Exception('Token not found or expired.');
+                }
             }
         });
     }

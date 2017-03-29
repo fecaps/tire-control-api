@@ -53,4 +53,44 @@ class AuthSessionTest extends TestCase
 
         $repository->update($data, $criteria);
     }
+
+    public function testShouldFindByToken()
+    {
+        $expectedData = [
+            'token'         => 'AOBADHMDLOFNAC',
+            'created_at'    => '2017-03-21 14:50:30',
+            'expire_at'     => '2017-03-22 14:50:30',
+            'user_id'       => '1739162',
+            'user_ip'       => '127.0.0.1'
+        ];
+
+        $mockStatement = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Statement')
+            ->disableOriginalConstructor()
+            ->setMethods(['fetch'])
+            ->getMock();
+
+        $mockStatement
+            ->expects($this->once())
+            ->method('fetch')
+            ->willReturn($expectedData);
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['executeQuery'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('executeQuery')
+            ->with('SELECT * FROM auth_session WHERE token = ?', [$expectedData['token']])
+            ->willReturn($mockStatement);
+
+        $repository = new AuthSession($mockConnection);
+
+        $retrieveData = $repository->findByToken($expectedData['token']);
+
+        $this->assertEquals($expectedData, $retrieveData);
+    }
 }
