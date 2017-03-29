@@ -11,11 +11,6 @@ class ValidatorProviderTest extends TestCase
     {
         $mockContainer = $this->createMock('Pimple\\Container');
 
-        $mockConnection = $this
-            ->getMockBuilder('Doctrine\\DBAL\\Connection')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $validatorProvider = new ValidatorProvider;
 
         $validatorProvider->register($mockContainer);
