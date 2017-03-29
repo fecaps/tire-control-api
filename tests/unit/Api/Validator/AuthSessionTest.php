@@ -8,7 +8,7 @@ use Api\Exception\ValidatorException;
 
 class AuthSessionTest extends TestCase
 {
-    public function testData()
+    public function additionProvider()
     {
         $testData = [
             [
@@ -57,7 +57,7 @@ class AuthSessionTest extends TestCase
     }
 
     /**
-    * @dataProvider testData
+    * @dataProvider additionProvider
     */
     public function testShouldValidateData($testData, $expectedData)
     {

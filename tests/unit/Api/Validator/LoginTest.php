@@ -8,7 +8,7 @@ use Api\Exception\ValidatorException;
 
 class LoginTest extends TestCase
 {
-    public function testData()
+    public function additionProvider()
     {
         $testData = [
             [
@@ -39,7 +39,7 @@ class LoginTest extends TestCase
     }
 
     /**
-     * @dataProvider testData
+     * @dataProvider additionProvider
      */
     public function testShouldThrowValidatorExceptionOnInvalidaData($testData, $expectedData)
     {
