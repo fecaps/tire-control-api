@@ -1,5 +1,7 @@
 debug: true
 
+timezone: America/Sao_Paulo
+
 database:
   db.options:
     driver: pdo_mysql

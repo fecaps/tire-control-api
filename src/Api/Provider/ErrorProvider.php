@@ -8,6 +8,7 @@ use Pimple\ServiceProviderInterface;
 use Silex\Application;
 use Silex\Api\BootableProviderInterface;
 use Api\Exception\ValidatorException;
+use Exception;
 
 class ErrorProvider implements ServiceProviderInterface, BootableProviderInterface
 {
@@ -24,9 +25,16 @@ class ErrorProvider implements ServiceProviderInterface, BootableProviderInterfa
             return $app->json(
                 [
                     'error' => $exception->getMessage(),
-                    'errors' => $exception->getMessages(),
+                    'errors' => $exception->getMessages()
                 ],
                 401
+            );
+        });
+
+        $app->error(function (Exception $exception) use ($app) {
+            return $app->json(
+                ['error' => $exception->getMessage()],
+                403
             );
         });
     }

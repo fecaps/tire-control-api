@@ -22,7 +22,7 @@ class User implements ValidatorInterface
             $exception->addMessage('name', ValidatorMessages::NOT_BLANK);
         } elseif (htmlentities($data['name'], ENT_QUOTES, 'UTF-8') != $data['name']) {
             $exception->addMessage('name', ValidatorMessages::INVALID_NAME);
-        } elseif (filter_var($data['name'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH)) {
+        } else {
             $this->validateMoreThan('name', $data['name'], self::NAME_MAX_LEN, $exception);
             $this->validateLessThan('name', $data['name'], self::NAME_MIN_LEN, $exception);
         }
@@ -31,7 +31,7 @@ class User implements ValidatorInterface
             $exception->addMessage('username', ValidatorMessages::NOT_BLANK);
         } elseif (htmlentities($data['username'], ENT_QUOTES, 'UTF-8') != $data['username']) {
             $exception->addMessage('username', ValidatorMessages::INVALID_USERNAME);
-        } elseif (filter_var($data['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH)) {
+        } else {
             $this->validateLessThan('username', $data['username'], self::USERNAME_MIN_LEN, $exception);
             $this->validateMoreThan('username', $data['username'], self::USERNAME_MAX_LEN, $exception);
         }
@@ -56,14 +56,14 @@ class User implements ValidatorInterface
 
     public function validateLessThan($fieldName, $fieldValue, $limit, $exception)
     {
-        if (strlen($fieldValue) < $limit) {
+        if (mb_strlen($fieldValue) < $limit) {
             $exception->addMessage($fieldName, sprintf(ValidatorMessages::LESS_THAN, $limit));
         }
     }
 
     public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
     {
-        if (strlen($fieldValue) > $limit) {
+        if (mb_strlen($fieldValue) > $limit) {
             $exception->addMessage($fieldName, sprintf(ValidatorMessages::MORE_THAN, $limit));
         }
     }
