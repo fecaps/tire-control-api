@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Repository;
 
 use PHPUnit\Framework\TestCase;
+use Doctrine\DBAL\DBALException;
 
 class AuthSessionTest extends TestCase
 {
@@ -92,5 +93,47 @@ class AuthSessionTest extends TestCase
         $retrieveData = $repository->findByToken($expectedData['token']);
 
         $this->assertEquals($expectedData, $retrieveData);
+    }
+
+    /**
+     * @expectedException Api\Exception\DatabaseException
+     */
+    public function testShouldGetDatabaseExceptionWhenTryingToInsertSession()
+    {
+        $mockConn = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['insert'])
+            ->getMock();
+
+        $mockConn
+            ->expects($this->once())
+            ->method('insert')
+            ->will($this->throwException(new DBALException('An error has ocurred')));
+
+        $repository = new AuthSession($mockConn);
+
+        $repository->create([]);
+    }
+
+    /**
+     * @expectedException Api\Exception\DatabaseException
+     */
+    public function testShouldGetDatabaseExceptionWhenTryingToUpdateSession()
+    {
+        $mockConn = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['update'])
+            ->getMock();
+
+        $mockConn
+            ->expects($this->once())
+            ->method('update')
+            ->will($this->throwException(new DBALException('An error has ocurred')));
+
+        $repository = new AuthSession($mockConn);
+
+        $repository->update([], []);
     }
 }

@@ -120,4 +120,25 @@ class UserTest extends TestCase
 
         $this->assertEquals($expectedUserData, $retrieveUserData);
     }
+
+    /**
+     * @expectedException Api\Exception\DatabaseException
+     */
+    public function testShouldGetDatabaseExceptionWhenTryingToInsertSession()
+    {
+        $mockConn = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['insert'])
+            ->getMock();
+
+        $mockConn
+            ->expects($this->once())
+            ->method('insert')
+            ->will($this->throwException(new DBALException('An error has ocurred')));
+
+        $repository = new User($mockConn);
+
+        $repository->create([]);
+    }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Api\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Api\Exception\DatabaseException;
 
 class User
 {
@@ -16,8 +18,12 @@ class User
 
     public function create(array $data): array
     {
-        $this->connection->insert('user', $data);
-     
+        try {
+            $this->connection->insert('user', $data);
+        } catch (DBALException $exception) {
+            throw new DatabaseException($exception->getMessage());
+        }
+
         $lastInsertId = $this->connection->lastInsertId();
 
         return ['id' => $lastInsertId] + $data;
