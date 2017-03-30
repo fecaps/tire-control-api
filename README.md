@@ -25,6 +25,11 @@ Run unit tests and generate code coverage:
 phpunit -c build/
 ```
 
+Check raw metrics stream using PHP Mess Detector:
+```
+vendor/bin/phpmd src/ text codesize
+```
+
 Update documentation:
 ```
 phpdox -f build/phpdox.xml
