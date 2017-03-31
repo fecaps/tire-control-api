@@ -5,7 +5,7 @@
 ### Install dependencies
 
 ```
-composer install
+$ composer install
 ```
 
 ### Test application
