@@ -1,6 +1,6 @@
 # The Web API for Tire Control Software
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca0ce2fb86ba423bae951e183e321b25)](https://www.codacy.com/app/fecaps/tire_control_api?utm_source=github.com&utm_medium=referral&utm_content=fecaps/tire_control_api&utm_campaign=badger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca0ce2fb86ba423bae951e183e321b25)](https://www.codacy.com/app/fecaps/tire-control-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fecaps/tire-control-api&amp;utm_campaign=Badge_Grade)
 
 ### Install dependencies
 
