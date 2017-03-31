@@ -37,19 +37,27 @@ $ phpdox -f build/phpdox.xml
 
 ### Usage
 
+Access database and create tire_control:
+```
+CREATE DATABASE tire_control; 
+```
+
+Restore sql script to create tables (this command is for mysql):
+```
+$ mysql -uroot -p tire_control < docs/db/schema.sql 
+```
+
 Copy params dist file to params file and change database configs if necessary:
 ```
 $ cp config/parameters.yml.dist config/parameters.yml 
 ```
 
 Start local server:
-
 ```
 $ php -S localhost:8080 -t public/
 ```
 
 Create a new user:
-
 ```
 $ php bin/console tire-control:create-user  
 ```
