@@ -12,44 +12,44 @@ composer install
 
 Check syntax errors with PHP Scan:
 ```
-vendor/bin/phpstan analyse -v src/ --level 5
+$ vendor/bin/phpstan analyse -v src/ --level 5
 ```
 
 Check code style with PHP Code Sniffer:
 ```
-./vendor/bin/phpcs -sw --standard=PSR2 --colors src/ tests/
+$ ./vendor/bin/phpcs -sw --standard=PSR2 --colors src/ tests/
 ```
 
 Run unit tests and generate code coverage:
 ```
-phpunit -c build/
+$ phpunit -c build/
 ```
 
 Check raw metrics stream using PHP Mess Detector:
 ```
-vendor/bin/phpmd src/ text codesize
+$ vendor/bin/phpmd src/ text codesize
 ```
 
 Update documentation:
 ```
-phpdox -f build/phpdox.xml
+$ phpdox -f build/phpdox.xml
 ```
 
 ### Usage
 
 Copy params dist file to params file and change database configs if necessary:
 ```
-cp config/parameters.yml.dist config/parameters.yml 
+$ cp config/parameters.yml.dist config/parameters.yml 
 ```
 
 Start local server:
 
 ```
-php -S localhost:8080 -t public/
+$ php -S localhost:8080 -t public/
 ```
 
 Create a new user:
 
 ```
-php bin/console tire-control:create-user  
+$ php bin/console tire-control:create-user  
 ```
