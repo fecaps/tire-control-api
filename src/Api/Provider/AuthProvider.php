@@ -25,7 +25,7 @@ class AuthProvider implements ServiceProviderInterface, BootableProviderInterfac
         $app->before(function (Request $request, Application $app) {
             $controllerName = $request->attributes->get('_controller');
 
-            if ($controllerName != 'authcontroller.login') {
+            if ($controllerName != 'authcontroller:login') {
                 $token = $request->headers->get('webapi-token');
                 
                 if (!$token) {
