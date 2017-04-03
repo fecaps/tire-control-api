@@ -26,7 +26,7 @@ class AuthProvider implements ServiceProviderInterface, BootableProviderInterfac
             $controllerName = $request->attributes->get('_controller');
 
             if ($controllerName != 'authcontroller:login') {
-                $token = $request->headers->get('webapi-token');
+                $token = $request->headers->get('token');
                 
                 if (!$token) {
                     throw new Exception('Token is missing on request headers.');

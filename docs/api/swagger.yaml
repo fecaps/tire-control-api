@@ -8,7 +8,7 @@ paths:
 
   /login:
     post:
-      description: Login to the API and GET api-token
+      description: Login to the API and GET token
 
       parameters:
         - name: email
@@ -25,11 +25,11 @@ paths:
 
       responses:
         201:
-          description: Login success
+          description: Created
           schema:
             $ref: '#/definitions/Login'
         401:
-          description: Unauthorized login
+          description: Unauthorized
           schema:
             $ref: '#/definitions/ApiError'
         500:
@@ -39,10 +39,10 @@ paths:
 
   /logout:
     put:
-      description: Logout from Web API using webapi-token
+      description: Logout from Web API using token
 
       parameters:
-        - name: webapi-token
+        - name: token
           in: header
           description: The Web API Token
           required: true
@@ -50,7 +50,7 @@ paths:
 
       responses:
         204:
-          description: Logout success
+          description: No Content
 
 definitions:
 

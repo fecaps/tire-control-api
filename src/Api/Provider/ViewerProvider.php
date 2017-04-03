@@ -34,5 +34,14 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
         
             return $app->json($data, $code);
         });
+
+        $app->after(function (Request $request, Response $response) {
+            $allowedHeaders = 'Date, Server, X-Powered-By, Accept, Accept-Version,' .
+            'Content-Length, Content-Type, Origin, token';
+
+            $response->headers->set('Access-Control-Allow-Origin', '*');
+            $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+            $response->headers->set('Access-Control-Allow-Headers', $allowedHeaders);
+        });
     }
 }
