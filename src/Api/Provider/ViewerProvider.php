@@ -7,6 +7,8 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Application;
 use Silex\Api\BootableProviderInterface;
+use Silex\Controller;
+use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -43,5 +45,10 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
             $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
             $response->headers->set('Access-Control-Allow-Headers', $allowedHeaders);
         });
+
+        $app->options('{wildcard}', function (Request $request) {
+            return [];
+        })
+        ->assert('wildcard', '.*');
     }
 }
