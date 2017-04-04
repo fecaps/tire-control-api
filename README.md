@@ -12,7 +12,7 @@ $ composer install
 
 Script to check for syntax errors, code style, raw metrics stream and perform unit tests:
 ```
-$ chmod +x script/pre-commit.sh
+$ chmod +x scripts/pre-commit.sh
 $ ./scripts/pre-commit.sh
 ```
 
