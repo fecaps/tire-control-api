@@ -10,29 +10,10 @@ $ composer install
 
 ### Test application
 
-Check syntax errors with PHP Scan:
+Script to check for syntax errors, code style, raw metrics stream and perform unit tests:
 ```
-$ vendor/bin/phpstan analyse -v src/ --level 5
-```
-
-Check code style with PHP Code Sniffer:
-```
-$ ./vendor/bin/phpcs -sw --standard=PSR2 --colors src/ tests/
-```
-
-Run unit tests and generate code coverage:
-```
-$ phpunit -c build/
-```
-
-Check raw metrics stream using PHP Mess Detector:
-```
-$ vendor/bin/phpmd src/ text codesize
-```
-
-Update documentation:
-```
-$ phpdox -f build/phpdox.xml
+$ chmod +x script/pre-commit.sh
+$ ./scripts/pre-commit.sh
 ```
 
 ### Usage
