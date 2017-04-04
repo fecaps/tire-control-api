@@ -1,11 +1,11 @@
 #!/bin/sh
-echo "Check syntax errors with PHP Scan:"
+printf "Check syntax errors with PHP Scan:\n"
 vendor/bin/phpstan analyse -v src/ --level 5
-echo "\nCheck code style with PHP Code Sniffer:"
+printf "\nCheck code style with PHP Code Sniffer:\n"
 ./vendor/bin/phpcs -sw --standard=PSR2 --colors src/ tests/
-echo "\nRun unit tests and generate code coverage:"
+printf "\nRun unit tests and generate code coverage:\n"
 vendor/bin/phpunit -c build/
-echo "\nCheck raw metrics stream using PHP Mess Detector:"
+printf "\nCheck raw metrics stream using PHP Mess Detector:\n"
 vendor/bin/phpmd src/ text codesize
 
 
