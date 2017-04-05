@@ -38,7 +38,7 @@ Start local server:
 $ php -S localhost:8080 -t public/
 ```
 
-Create a new user:
+Create a new user by console:
 ```
 $ php bin/console tire-control:create-user  
 ```

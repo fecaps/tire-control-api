@@ -51,6 +51,14 @@ paths:
       responses:
         204:
           description: No Content
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
 
 definitions:
 
