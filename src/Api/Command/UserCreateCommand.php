@@ -71,7 +71,6 @@ class UserCreateCommand extends Command
 
         $output->writeln([
             'User created:',
-            'ID:       ' . $user['id'],
             'Name:     ' . $user['name'],
             'Email:    ' . $user['email'],
             'Username: ' . $user['username']

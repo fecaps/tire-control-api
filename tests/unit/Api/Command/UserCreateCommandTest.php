@@ -41,7 +41,6 @@ class UserCreateCommandTest extends TestCase
         $output = $commandTester->getDisplay();
 
         $expectedOutput = 'User created:'. PHP_EOL;
-        $expectedOutput.= 'ID:       1'     . PHP_EOL;
         $expectedOutput.= 'Name:     '      . $userData['name']     . PHP_EOL;
         $expectedOutput.= 'Email:    '      . $userData['email']    . PHP_EOL;
         $expectedOutput.= 'Username: '   . $userData['username'] . PHP_EOL;
