@@ -6,6 +6,48 @@ info:
 
 paths:
 
+  /signup:
+    post:
+      description: Create user in the API
+
+      parameters:
+        - name: name
+          in: formData
+          description: User name
+          required: true
+          type: string
+        - name: username
+          in: formData
+          description: Username (user login)
+          required: true
+          type: string
+        - name: email
+          in: formData
+          description: User email
+          required: true
+          type: string
+        - name: passwd
+          in: formData
+          description: User password
+          required: true
+          type: string
+          format: password
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Signup'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+
   /login:
     post:
       description: Login to the API and GET token
@@ -61,6 +103,16 @@ paths:
             $ref: '#/definitions/ApiError'
 
 definitions:
+
+  Signup:
+    type: object
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      username:
+        type: string
 
   Login:
     type: object
