@@ -25,21 +25,24 @@ class AuthProvider implements ServiceProviderInterface, BootableProviderInterfac
         $app->before(function (Request $request, Application $app) {
             $controllerName = $request->attributes->get('_controller');
 
-            if ($controllerName != 'authcontroller:login' && $request->getMethod() != 'OPTIONS') {
-                $token = $request->headers->get('token');
-                
-                if (!$token) {
-                    throw new Exception('Token is missing on request headers.');
-                }
-
-                $check = $app['model.authsession']->check($token);
-
-                if (!$check) {
-                    throw new Exception('Token not found or expired.');
-                }
-
-                $app['auth.session']->renew($token);
+            if ($controllerName != 'authcontroller:login' || $controllerName != 'usercontroller:signup' ||
+                $request->getMethod() != 'OPTIONS') {
+                    return;
             }
+
+            $token = $request->headers->get('token');
+            
+            if (!$token) {
+                throw new Exception('Token is missing on request headers.');
+            }
+
+            $check = $app['model.authsession']->check($token);
+
+            if (!$check) {
+                throw new Exception('Token not found or expired.');
+            }
+
+            $app['auth.session']->renew($token);
         });
     }
 }

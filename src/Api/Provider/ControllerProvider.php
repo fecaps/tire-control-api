@@ -5,12 +5,13 @@ namespace Api\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Api\Controller\AuthControllerProvider;
+use Api\Controller as Controllers;
 
 class ControllerProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
-        $app->register(new AuthControllerProvider);
+        $app->register(new Controllers\AuthControllerProvider);
+        $app->register(new Controllers\UserControllerProvider);
     }
 }

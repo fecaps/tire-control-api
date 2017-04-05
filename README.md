@@ -42,3 +42,10 @@ Create a new user:
 ```
 $ php bin/console tire-control:create-user  
 ```
+
+Available endpoints:
+```
+/signup  
+/login
+/logout
+```
