@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ValidatorProviderTest extends TestCase
 {
-    public function testShouldRegisterControllersProviders()
+    public function testShouldRegisterValidatorProviders()
     {
         $mockContainer = $this->createMock('Pimple\\Container');
 

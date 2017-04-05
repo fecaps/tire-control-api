@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class AuthProviderTest extends TestCase
 {
-    public function testShouldRegisterAuthClasses()
+    public function testShouldRegisterAuthProviders()
     {
         $mockContainer = $this->createMock('Pimple\\Container');
 
