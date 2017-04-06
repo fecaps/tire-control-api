@@ -5,14 +5,14 @@ namespace Api\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Api\Model as Models;
+use Api\Model;
 
 class ModelProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
         $app['model.user'] = function () use ($app) {
-            return new Models\User(
+            return new Model\User(
                 $app['validator.user'],
                 $app['repository.user'],
                 $app['repository.passwd']
@@ -20,7 +20,7 @@ class ModelProvider implements ServiceProviderInterface
         };
 
         $app['model.login'] = function () use ($app) {
-            return new Models\Login(
+            return new Model\Login(
                 $app['validator.login'],
                 $app['repository.user'],
                 $app['repository.passwd']
@@ -28,9 +28,16 @@ class ModelProvider implements ServiceProviderInterface
         };
 
         $app['model.authsession'] = function () use ($app) {
-            return new Models\AuthSession(
+            return new Model\AuthSession(
                 $app['validator.authsession'],
                 $app['repository.authsession']
+            );
+        };
+
+        $app['model.tire'] = function () use ($app) {
+            return new Model\Tire(
+                $app['validator.tire'],
+                $app['repository.tire']
             );
         };
     }
