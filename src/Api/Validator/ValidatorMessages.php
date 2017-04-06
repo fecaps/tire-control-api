@@ -14,8 +14,8 @@ class ValidatorMessages
     const INVALID_DATE_TIME     = 'Invalid date time. Format: %s';
     const INVALID_IP_ADDRESS    = 'Invalid IP address';
     const INVALID_TYPE          = 'Invalid type of tire';
-    const INVALID_BRAND         = 'Invalid brand if tire';
-    const INVALID_DURABILITY    = 'Invalid situation';
+    const INVALID_BRAND         = 'Invalid brand of tire';
+    const INVALID_DURABILITY    = 'Invalid durability';
     const INVALID_COST          = 'Invalid cost';
     const INVALID_NOTE          = 'Invalid note';
     const INVALID_SITUATION     = 'Invalid situation';
