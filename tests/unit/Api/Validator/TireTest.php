@@ -25,8 +25,8 @@ class TireTest extends TestCase
                 [
                     'type'          => str_pad('A', Tire::TYPE_MAX_LEN + 1),
                     'brand'         => str_pad('A', Tire::BRAND_MAX_LEN + 1),
-                    'durability'    => 1000.000,
-                    'cost'          => 1000000,
+                    'durability'    => '1000.000',
+                    'cost'          => 'Can not be a text',
                     'note'          => str_pad('A', Tire::NOTE_MAX_LEN + 1),
                     'situation'     => str_pad('A', Tire::SITUATION_MAX_LEN + 1)
                 ],

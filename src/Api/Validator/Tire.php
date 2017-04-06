@@ -35,14 +35,14 @@ class Tire implements ValidatorInterface
         $field = 'durability';
         if (!isset($data[$field]) || $data[$field] == '') {
             $exception->addMessage($field, ValidatorMessages::NOT_BLANK);
-        } elseif (!is_int($data[$field])) {
+        } elseif (!filter_var($data[$field], FILTER_VALIDATE_INT)) {
             $exception->addMessage($field, ValidatorMessages::INVALID_DURABILITY);
         }
 
         $field = 'cost';
         if (!isset($data[$field]) || $data[$field] == '') {
             $exception->addMessage($field, ValidatorMessages::NOT_BLANK);
-        } elseif (!is_float($data[$field])) {
+        } elseif (!filter_var($data[$field], FILTER_VALIDATE_FLOAT)) {
             $exception->addMessage($field, ValidatorMessages::INVALID_COST);
         }
 
