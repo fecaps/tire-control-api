@@ -48,4 +48,5 @@ Available endpoints:
 /signup  
 /login
 /logout
+/tires/register
 ```
