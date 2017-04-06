@@ -18,35 +18,37 @@ class User implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        if (!isset($data['name']) || $data['name'] == '') {
-            $exception->addMessage('name', ValidatorMessages::NOT_BLANK);
-        } elseif (htmlentities($data['name'], ENT_QUOTES, 'UTF-8') != $data['name']) {
-            $exception->addMessage('name', ValidatorMessages::INVALID_NAME);
+        $field = 'name';
+        if (!isset($data[$field]) || $data[$field] == '') {
+            $exception->addMessage($field, ValidatorMessages::NOT_BLANK);
         } else {
-            $this->validateMoreThan('name', $data['name'], self::NAME_MAX_LEN, $exception);
-            $this->validateLessThan('name', $data['name'], self::NAME_MIN_LEN, $exception);
+            $this->validateUnicode($field, $data[$field], $exception, ValidatorMessages::INVALID_NAME);
+            $this->validateMoreThan($field, $data[$field], self::NAME_MAX_LEN, $exception);
+            $this->validateLessThan($field, $data[$field], self::NAME_MIN_LEN, $exception);
         }
 
-        if (!isset($data['username']) || $data['username'] == '') {
-            $exception->addMessage('username', ValidatorMessages::NOT_BLANK);
-        } elseif (htmlentities($data['username'], ENT_QUOTES, 'UTF-8') != $data['username']) {
-            $exception->addMessage('username', ValidatorMessages::INVALID_USERNAME);
+        $field = 'username';
+        if (!isset($data[$field]) || $data[$field] == '') {
+            $exception->addMessage($field, ValidatorMessages::NOT_BLANK);
         } else {
-            $this->validateLessThan('username', $data['username'], self::USERNAME_MIN_LEN, $exception);
-            $this->validateMoreThan('username', $data['username'], self::USERNAME_MAX_LEN, $exception);
+            $this->validateUnicode($field, $data[$field], $exception, ValidatorMessages::INVALID_USERNAME);
+            $this->validateLessThan($field, $data[$field], self::USERNAME_MIN_LEN, $exception);
+            $this->validateMoreThan($field, $data[$field], self::USERNAME_MAX_LEN, $exception);
         }
 
-        if (!isset($data['email']) || $data['email'] == '') {
-            $exception->addMessage('email', ValidatorMessages::NOT_BLANK);
-        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $exception->addMessage('email', ValidatorMessages::INVALID_EMAIL);
+        $field = 'email';
+        if (!isset($data[$field]) || $data[$field] == '') {
+            $exception->addMessage($field, ValidatorMessages::NOT_BLANK);
+        } elseif (!filter_var($data[$field], FILTER_VALIDATE_EMAIL)) {
+            $exception->addMessage($field, ValidatorMessages::INVALID_EMAIL);
         }
 
-        if (!isset($data['passwd']) || $data['passwd'] == '') {
-            $exception->addMessage('passwd', ValidatorMessages::NOT_BLANK);
+        $field = 'passwd';
+        if (!isset($data[$field]) || $data[$field] == '') {
+            $exception->addMessage($field, ValidatorMessages::NOT_BLANK);
         } else {
-            $this->validateLessThan('passwd', $data['passwd'], self::PASSWORD_MIN_LEN, $exception);
-            $this->validateMoreThan('passwd', $data['passwd'], self::PASSWORD_MAX_LEN, $exception);
+            $this->validateLessThan($field, $data[$field], self::PASSWORD_MIN_LEN, $exception);
+            $this->validateMoreThan($field, $data[$field], self::PASSWORD_MAX_LEN, $exception);
         }
 
         if (count($exception->getMessages()) > 0) {
@@ -54,6 +56,13 @@ class User implements ValidatorInterface
         }
     }
 
+    public function validateUnicode($fieldName, $fieldValue, $exception, $message)
+    {
+        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
+            $exception->addMessage($fieldName, $message);
+        }
+    }
+    
     public function validateLessThan($fieldName, $fieldValue, $limit, $exception)
     {
         if (mb_strlen($fieldValue) < $limit) {
