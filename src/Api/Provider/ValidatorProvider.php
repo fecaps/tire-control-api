@@ -26,5 +26,9 @@ class ValidatorProvider implements ServiceProviderInterface
         $app['validator.tire.size'] = function () {
             return new Validator\Tire\Size;
         };
+
+        $app['validator.tire.brand'] = function () {
+            return new Validator\Tire\Brand;
+        };
     }
 }

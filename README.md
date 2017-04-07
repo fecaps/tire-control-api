@@ -48,5 +48,6 @@ Available endpoints:
 POST /signup  
 POST /login
 PUT /logout
+POST /tires/brand
 POST /tires/size
 ```

@@ -8,41 +8,9 @@ use Doctrine\DBAL\DBALException;
 
 class SizeTest extends TestCase
 {
-    public function testShouldCreateASize()
-    {
-        $sizeData = [
-            'name' => 'Size Test',
-        ];
-
-        $mockConnection = $this
-            ->getMockBuilder('Doctrine\\DBAL\\Connection')
-            ->disableOriginalConstructor()
-            ->setMethods(['insert', 'lastInsertId'])
-            ->getMock();
-
-        $mockConnection
-            ->expects($this->once())
-            ->method('insert')
-            ->with('size', $sizeData)
-            ->willReturn(1);
-
-        $mockConnection
-            ->expects($this->once())
-            ->method('lastInsertId')
-            ->willReturn(2);
-
-        $repositorySize = new Size($mockConnection);
-
-        $retrieveSizeData = $repositorySize->create($sizeData);
-
-        $expectedSizeData = $sizeData;
-
-        $this->assertEquals($expectedSizeData, $retrieveSizeData);
-    }
-
     public function testShouldFindByName()
     {
-        $expectedSizeData = [
+        $expectedData = [
             'name' => 'Size Test',
         ];
 
@@ -55,7 +23,7 @@ class SizeTest extends TestCase
         $mockQuery
             ->expects($this->once())
             ->method('fetch')
-            ->willReturn($expectedSizeData);
+            ->willReturn($expectedData);
 
         $mockConnection = $this
             ->getMockBuilder('Doctrine\\DBAL\\Connection')
@@ -66,14 +34,44 @@ class SizeTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM size WHERE name = ?', [$expectedSizeData['name']])
+            ->with('SELECT * FROM size WHERE name = ?', [$expectedData['name']])
             ->willReturn($mockQuery);
 
-        $repositorySize = new Size($mockConnection);
+        $repository = new Size($mockConnection);
 
-        $retrieveData = $repositorySize->findByName($expectedSizeData['name']);
+        $retrieveData = $repository->findByName($expectedData['name']);
 
-        $this->assertEquals($expectedSizeData, $retrieveData);
+        $this->assertEquals($expectedData, $retrieveData);
+    }
+
+    public function testShouldCreateASize()
+    {
+        $expectedData = [
+            'name' => 'Size Test',
+        ];
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['insert', 'lastInsertId'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('insert')
+            ->with('size', $expectedData)
+            ->willReturn(1);
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('lastInsertId')
+            ->willReturn(2);
+
+        $repository = new Size($mockConnection);
+
+        $retrieveData = $repository->create($expectedData);
+
+        $this->assertEquals($expectedData, $retrieveData);
     }
 
     /**

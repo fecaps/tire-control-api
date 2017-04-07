@@ -102,6 +102,36 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
 
+  /tires/brand:
+    post:
+      description: Register tire brand
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: name
+          in: formData
+          description: Tire size brand
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/TireBrand'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
   /tires/size:
     post:
       description: Register tire size
@@ -152,6 +182,12 @@ definitions:
       user_email:
         type: string
       token:
+        type: string
+
+  TireBrand:
+    type: object
+    properties:
+      name:
         type: string
 
   TireSize:

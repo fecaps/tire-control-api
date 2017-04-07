@@ -8,10 +8,46 @@ use Doctrine\DBAL\DBALException;
 
 class BrandTest extends TestCase
 {
+    public function testShouldFindByName()
+    {
+        $expectedData = [
+            'name' => 'Brand Test',
+        ];
+
+        $mockQuery = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Statement')
+            ->disableOriginalConstructor()
+            ->setMethods(['fetch'])
+            ->getMock();
+
+        $mockQuery
+            ->expects($this->once())
+            ->method('fetch')
+            ->willReturn($expectedData);
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['executeQuery'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('executeQuery')
+            ->with('SELECT * FROM brand WHERE name = ?', [$expectedData['name']])
+            ->willReturn($mockQuery);
+
+        $repository = new Brand($mockConnection);
+
+        $retrieveData = $repository->findByName($expectedData['name']);
+
+        $this->assertEquals($expectedData, $retrieveData);
+    }
+
     public function testShouldCreateABrand()
     {
-        $brandData = [
-            'brand' => 'Brand Test',
+        $expectedData = [
+            'name' => 'Brand Test',
         ];
 
         $mockConnection = $this
@@ -23,7 +59,7 @@ class BrandTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('insert')
-            ->with('brand', $brandData)
+            ->with('brand', $expectedData)
             ->willReturn(1);
 
         $mockConnection
@@ -31,13 +67,11 @@ class BrandTest extends TestCase
             ->method('lastInsertId')
             ->willReturn(2);
 
-        $repositoryBrand = new Brand($mockConnection);
+        $repository = new Brand($mockConnection);
 
-        $retrieveBrandData = $repositoryBrand->create($brandData);
+        $retrieveData = $repository->create($expectedData);
 
-        $expectedBrandData = ['id' => 2] + $brandData;
-
-        $this->assertEquals($expectedBrandData, $retrieveBrandData);
+        $this->assertEquals($expectedData, $retrieveData);
     }
 
     /**

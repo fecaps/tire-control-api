@@ -26,5 +26,9 @@ class RepositoryProvider implements ServiceProviderInterface
         $app['repository.tire.size'] = function () use ($app) {
             return new Repository\Tire\Size($app['db']);
         };
+
+        $app['repository.tire.brand'] = function () use ($app) {
+            return new Repository\Tire\Brand($app['db']);
+        };
     }
 }

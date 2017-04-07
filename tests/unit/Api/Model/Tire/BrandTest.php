@@ -5,26 +5,26 @@ namespace Api\Model\Tire;
 
 use PHPUnit\Framework\TestCase;
 
-class SizeTest extends TestCase
+class BrandTest extends TestCase
 {
-    public function testShouldCreateNewSize()
+    public function testShouldCreateNewBrand()
     {
-        $sizeData = [
-            'name' => 'Size Test',
+        $brandData = [
+            'name' => 'Brand Test',
         ];
 
         $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Size')
+            ->getMockBuilder('Api\\Validator\\Tire\\Brand')
             ->setMethods(['validate'])
             ->getMock();
 
         $mockValidator
             ->expects($this->once())
             ->method('validate')
-            ->with($sizeData);
+            ->with($brandData);
 
         $mockRepository = $this
-            ->getMockBuilder('Api\\Repository\\Tire\\Size')
+            ->getMockBuilder('Api\\Repository\\Tire\\Brand')
             ->disableOriginalConstructor()
             ->setMethods(['findByName', 'create'])
             ->getMock();
@@ -32,20 +32,20 @@ class SizeTest extends TestCase
         $mockRepository
             ->expects($this->once())
             ->method('findByName')
-            ->with($sizeData['name'])
+            ->with($brandData['name'])
             ->willReturn(null);
 
         $mockRepository
             ->expects($this->once())
             ->method('create')
-            ->with($sizeData)
-            ->willReturn($sizeData);
+            ->with($brandData)
+            ->willReturn($brandData);
 
-        $sizeModel = new Size($mockValidator, $mockRepository);
+        $brandModel = new Brand($mockValidator, $mockRepository);
 
-        $retrieveData = $sizeModel->create($sizeData);
+        $retrieveData = $brandModel->create($brandData);
 
-        $this->assertEquals($sizeData, $retrieveData);
+        $this->assertEquals($brandData, $retrieveData);
     }
 
     /**
@@ -53,22 +53,22 @@ class SizeTest extends TestCase
      */
     public function testShouldGetErrorWhenNameIsAlreadyInUse()
     {
-        $sizeData = [
-            'name' => 'Size Test',
+        $brandData = [
+            'name' => 'Brand Test',
         ];
 
         $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Size')
+            ->getMockBuilder('Api\\Validator\\Tire\\Brand')
             ->setMethods(['validate'])
             ->getMock();
 
         $mockValidator
             ->expects($this->once())
             ->method('validate')
-            ->with($sizeData);
+            ->with($brandData);
 
         $mockRepository = $this
-            ->getMockBuilder('Api\\Repository\\Tire\\Size')
+            ->getMockBuilder('Api\\Repository\\Tire\\Brand')
             ->disableOriginalConstructor()
             ->setMethods(['findByName'])
             ->getMock();
@@ -76,11 +76,11 @@ class SizeTest extends TestCase
         $mockRepository
             ->expects($this->once())
             ->method('findByName')
-            ->with($sizeData['name'])
-            ->willReturn($sizeData);
+            ->with($brandData['name'])
+            ->willReturn($brandData);
 
-        $sizeModel = new Size($mockValidator, $mockRepository);
+        $brandModel = new Brand($mockValidator, $mockRepository);
 
-        $sizeModel->create($sizeData);
+        $brandModel->create($brandData);
     }
 }

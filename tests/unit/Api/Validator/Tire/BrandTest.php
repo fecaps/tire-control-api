@@ -13,23 +13,23 @@ class BrandTest extends TestCase
     {
         $testData = [
             [
-                ['brand' => ''],
-                ['brand' => [TireMessages::NOT_BLANK]]
+                ['name' => ''],
+                ['name' => [TireMessages::NOT_BLANK]]
             ],
             [
-                ['brand' => str_pad('A', Brand::BRAND_MAX_LEN + 1)],
-                ['brand' => [sprintf(TireMessages::MORE_THAN, Brand::BRAND_MAX_LEN)]]
+                ['name' => str_pad('A', Brand::BRAND_MAX_LEN + 1)],
+                ['name' => [sprintf(TireMessages::MORE_THAN, Brand::BRAND_MAX_LEN)]]
             ],
             [
-                ['brand' => 'ABC'],
-                ['brand' => [sprintf(TireMessages::LESS_THAN, Brand::BRAND_MIN_LEN)]]
+                ['name' => 'ABC'],
+                ['name' => [sprintf(TireMessages::LESS_THAN, Brand::BRAND_MIN_LEN)]]
             ],
             [
-                ['brand' => '<p><script></script></p>'],
-                ['brand' => [TireMessages::INVALID_BRAND]]
+                ['name' => '<p><script></script></p>'],
+                ['name' => [TireMessages::INVALID_BRAND]]
             ],
             [
-                ['brand' => 'Pirelli'],
+                ['name' => 'Pirelli'],
                 []
             ]
         ];
@@ -47,8 +47,8 @@ class BrandTest extends TestCase
 
         try {
             $brandValidator->validate($testData);
-        } catch (ValidatorException $e) {
-            $messages = $e->getMessages();
+        } catch (ValidatorException $exception) {
+            $messages = $exception->getMessages();
         }
 
         $this->assertEquals($expectedData, $messages);

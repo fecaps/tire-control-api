@@ -40,5 +40,12 @@ class ModelProvider implements ServiceProviderInterface
                 $app['repository.tire.size']
             );
         };
+
+        $app['model.tire.brand'] = function () use ($app) {
+            return new Model\Tire\Brand(
+                $app['validator.tire.brand'],
+                $app['repository.tire.brand']
+            );
+        };
     }
 }

@@ -16,7 +16,7 @@ class Brand implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $field = 'brand';
+        $field = 'name';
         if (!isset($data[$field]) || $data[$field] == '') {
             $exception->addMessage($field, TireMessages::NOT_BLANK);
         } else {
