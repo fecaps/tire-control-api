@@ -102,6 +102,36 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
 
+  /tires/size:
+    post:
+      description: Register tire size
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: name
+          in: formData
+          description: Tire size name
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/TireSize'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'       
+
 definitions:
 
   Signup:
@@ -122,6 +152,12 @@ definitions:
       user_email:
         type: string
       token:
+        type: string
+
+  TireSize:
+    type: object
+    properties:
+      name:
         type: string
 
   ApiError:

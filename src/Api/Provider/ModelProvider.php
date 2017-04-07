@@ -34,10 +34,10 @@ class ModelProvider implements ServiceProviderInterface
             );
         };
 
-        $app['model.tire'] = function () use ($app) {
-            return new Model\Tire(
-                $app['validator.tire'],
-                $app['repository.tire']
+        $app['model.tire.size'] = function () use ($app) {
+            return new Model\Tire\Size(
+                $app['validator.tire.size'],
+                $app['repository.tire.size']
             );
         };
     }

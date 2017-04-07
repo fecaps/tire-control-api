@@ -45,8 +45,8 @@ $ php bin/console tire-control:create-user
 
 Available endpoints:
 ```
-/signup  
-/login
-/logout
-/tires/register
+POST /signup  
+POST /login
+PUT /logout
+POST /tires/size
 ```

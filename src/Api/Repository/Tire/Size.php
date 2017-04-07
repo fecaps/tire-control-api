@@ -26,6 +26,15 @@ class Size
 
         $lastInsertId = $this->connection->lastInsertId();
 
-        return ['id' => $lastInsertId] + $data;
+        return $data;
+    }
+
+    public function findByName($name)
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM size WHERE name = ?', [$name]);
+
+        $size = $query->fetch();
+
+        return $size;
     }
 }

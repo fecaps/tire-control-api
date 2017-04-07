@@ -23,8 +23,8 @@ class RepositoryProvider implements ServiceProviderInterface
             return new Repository\AuthSession($app['db']);
         };
 
-        $app['repository.tire'] = function () use ($app) {
-            return new Repository\Tire($app['db']);
+        $app['repository.tire.size'] = function () use ($app) {
+            return new Repository\Tire\Size($app['db']);
         };
     }
 }

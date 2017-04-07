@@ -11,7 +11,7 @@ class SizeTest extends TestCase
     public function testShouldCreateASize()
     {
         $sizeData = [
-            'size' => 'Size Test',
+            'name' => 'Size Test',
         ];
 
         $mockConnection = $this
@@ -35,9 +35,45 @@ class SizeTest extends TestCase
 
         $retrieveSizeData = $repositorySize->create($sizeData);
 
-        $expectedSizeData = ['id' => 2] + $sizeData;
+        $expectedSizeData = $sizeData;
 
         $this->assertEquals($expectedSizeData, $retrieveSizeData);
+    }
+
+    public function testShouldFindByName()
+    {
+        $expectedSizeData = [
+            'name' => 'Size Test',
+        ];
+
+        $mockQuery = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Statement')
+            ->disableOriginalConstructor()
+            ->setMethods(['fetch'])
+            ->getMock();
+
+        $mockQuery
+            ->expects($this->once())
+            ->method('fetch')
+            ->willReturn($expectedSizeData);
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['executeQuery'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('executeQuery')
+            ->with('SELECT * FROM size WHERE name = ?', [$expectedSizeData['name']])
+            ->willReturn($mockQuery);
+
+        $repositorySize = new Size($mockConnection);
+
+        $retrieveData = $repositorySize->findByName($expectedSizeData['name']);
+
+        $this->assertEquals($expectedSizeData, $retrieveData);
     }
 
     /**

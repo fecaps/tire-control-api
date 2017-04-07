@@ -12,8 +12,8 @@ class TireControllerProvider implements ControllerProviderInterface, ServiceProv
 {
     public function register(Container $app)
     {
-        $app['tirecontroller'] = function () use ($app) {
-            return new TireController($app['model.tire']);
+        $app['tire.sizecontroller'] = function () use ($app) {
+            return new Tire\SizeController($app['model.tire.size']);
         };
 
         $app->mount('/', new $this);
@@ -23,7 +23,7 @@ class TireControllerProvider implements ControllerProviderInterface, ServiceProv
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->post('/tires/register', 'tirecontroller:register');
+        $controllers->post('/tires/size', 'tire.sizecontroller:register');
 
         return $controllers;
     }

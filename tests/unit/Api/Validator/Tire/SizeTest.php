@@ -13,23 +13,23 @@ class SizeTest extends TestCase
     {
         $testData = [
             [
-                ['size' => ''],
-                ['size' => [TireMessages::NOT_BLANK]]
+                ['name' => ''],
+                ['name' => [TireMessages::NOT_BLANK]]
             ],
             [
-                ['size' => str_pad('A', Size::SIZE_MAX_LEN + 1)],
-                ['size' => [sprintf(TireMessages::MORE_THAN, Size::SIZE_MAX_LEN)]]
+                ['name' => str_pad('A', Size::SIZE_MAX_LEN + 1)],
+                ['name' => [sprintf(TireMessages::MORE_THAN, Size::SIZE_MAX_LEN)]]
             ],
             [
-                ['size' => 'ABC'],
-                ['size' => [sprintf(TireMessages::LESS_THAN, Size::SIZE_MIN_LEN)]]
+                ['name' => 'ABC'],
+                ['name' => [sprintf(TireMessages::LESS_THAN, Size::SIZE_MIN_LEN)]]
             ],
             [
-                ['size' => '<p><script></script></p>'],
-                ['size' => [TireMessages::INVALID_SIZE]]
+                ['name' => '<p><script></script></p>'],
+                ['name' => [TireMessages::INVALID_SIZE]]
             ],
             [
-                ['size' => 'AB/CD'],
+                ['name' => 'AB/CD'],
                 []
             ]
         ];
@@ -47,8 +47,8 @@ class SizeTest extends TestCase
 
         try {
             $sizeValidator->validate($testData);
-        } catch (ValidatorException $e) {
-            $messages = $e->getMessages();
+        } catch (ValidatorException $exception) {
+            $messages = $exception->getMessages();
         }
 
         $this->assertEquals($expectedData, $messages);

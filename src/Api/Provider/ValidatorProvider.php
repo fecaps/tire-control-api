@@ -23,8 +23,8 @@ class ValidatorProvider implements ServiceProviderInterface
             return new Validator\AuthSession;
         };
 
-        $app['validator.tire'] = function () {
-            return new Validator\Tire;
+        $app['validator.tire.size'] = function () {
+            return new Validator\Tire\Size;
         };
     }
 }
