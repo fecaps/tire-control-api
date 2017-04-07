@@ -24,7 +24,7 @@ class Size
             throw new DatabaseException($exception->getMessage());
         }
 
-        $lastInsertId = $this->connection->lastInsertId();
+        $this->connection->lastInsertId();
 
         return $data;
     }

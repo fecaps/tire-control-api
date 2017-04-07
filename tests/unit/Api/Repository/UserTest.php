@@ -116,7 +116,7 @@ class UserTest extends TestCase
 
         $retrieveUserData = $repositoryUser->create($userData);
 
-        $expectedUserData = ['id' => 2] + $userData;
+        $expectedUserData = $userData;
 
         $this->assertEquals($expectedUserData, $retrieveUserData);
     }

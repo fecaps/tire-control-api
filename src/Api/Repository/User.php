@@ -24,9 +24,9 @@ class User
             throw new DatabaseException($exception->getMessage());
         }
 
-        $lastInsertId = $this->connection->lastInsertId();
+        $this->connection->lastInsertId();
 
-        return ['id' => $lastInsertId] + $data;
+        return $data;
     }
     
     public function findByEmail($email)
