@@ -7,29 +7,29 @@ use PHPUnit\Framework\TestCase;
 use Api\Exception\ValidatorException;
 use Api\Enum\TireMessages;
 
-class BrandTest extends TestCase
+class ModelTest extends TestCase
 {
     public function additionProvider()
     {
         $testData = [
             [
-                ['brand' => ''],
-                ['brand' => [TireMessages::NOT_BLANK]]
+                ['model' => ''],
+                ['model' => [TireMessages::NOT_BLANK]]
             ],
             [
-                ['brand' => str_pad('A', Brand::BRAND_MAX_LEN + 1)],
-                ['brand' => [sprintf(TireMessages::MORE_THAN, Brand::BRAND_MAX_LEN)]]
+                ['model' => str_pad('A', Model::MODEL_MAX_LEN + 1)],
+                ['model' => [sprintf(TireMessages::MORE_THAN, Model::MODEL_MAX_LEN)]]
             ],
             [
-                ['brand' => 'ABC'],
-                ['brand' => [sprintf(TireMessages::LESS_THAN, Brand::BRAND_MIN_LEN)]]
+                ['model' => 'ABC'],
+                ['model' => [sprintf(TireMessages::LESS_THAN, Model::MODEL_MIN_LEN)]]
             ],
             [
-                ['brand' => '<p><script></script></p>'],
-                ['brand' => [TireMessages::INVALID_BRAND]]
+                ['model' => '<p><script></script></p>'],
+                ['model' => [TireMessages::INVALID_MODEL]]
             ],
             [
-                ['brand' => 'Pirelli'],
+                ['model' => 'FR85'],
                 []
             ]
         ];
@@ -42,11 +42,11 @@ class BrandTest extends TestCase
      */
     public function testShouldThrowValidatorExceptionOnInvalidaData($testData, $expectedData)
     {
-        $brandValidator = new Brand();
+        $modelValidator = new Model();
         $messages = [];
 
         try {
-            $brandValidator->validate($testData);
+            $modelValidator->validate($testData);
         } catch (ValidatorException $e) {
             $messages = $e->getMessages();
         }
