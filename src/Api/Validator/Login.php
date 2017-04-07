@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Validator;
 
 use Api\Exception\ValidatorException;
+use Api\Enum\UserMessages;
 
 class Login implements ValidatorInterface
 {
@@ -11,14 +12,16 @@ class Login implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        if (!isset($data['email']) || $data['email'] == '') {
-            $exception->addMessage('email', ValidatorMessages::NOT_BLANK);
-        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $exception->addMessage('email', ValidatorMessages::INVALID_EMAIL);
+        $field = 'email';
+        if (!isset($data[$field]) || $data[$field] == '') {
+            $exception->addMessage($field, UserMessages::NOT_BLANK);
+        } elseif (!filter_var($data[$field], FILTER_VALIDATE_EMAIL)) {
+            $exception->addMessage($field, UserMessages::INVALID_EMAIL);
         }
 
-        if (!isset($data['passwd']) || $data['passwd'] == '') {
-            $exception->addMessage('passwd', ValidatorMessages::NOT_BLANK);
+        $field = 'passwd';
+        if (!isset($data[$field]) || $data[$field] == '') {
+            $exception->addMessage($field, UserMessages::NOT_BLANK);
         }
 
         if (count($exception->getMessages()) > 0) {

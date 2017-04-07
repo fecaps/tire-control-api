@@ -5,6 +5,7 @@ namespace Api\Validator;
 
 use PHPUnit\Framework\TestCase;
 use Api\Exception\ValidatorException;
+use Api\Enum\UserMessages;
 
 class LoginTest extends TestCase
 {
@@ -14,21 +15,21 @@ class LoginTest extends TestCase
             [
                 ['email' => '', 'passwd' => ''],
                 [
-                    'email' => [ValidatorMessages::NOT_BLANK],
-                    'passwd' => [ValidatorMessages::NOT_BLANK]
+                    'email'     => [UserMessages::NOT_BLANK],
+                    'passwd'    => [UserMessages::NOT_BLANK]
                 ]
             ],
             [
                 ['email' => 'paul@', 'passwd' => ''],
                 [
-                    'email' => [ValidatorMessages::INVALID_EMAIL],
-                    'passwd' => [ValidatorMessages::NOT_BLANK]
+                    'email'     => [UserMessages::INVALID_EMAIL],
+                    'passwd'    => [UserMessages::NOT_BLANK]
                 ]
             ],
             [
                 [
-                    'email' => 'paul@gmail.com',
-                    'passwd' => 'avalidpasswd'
+                    'email'     => 'paul@gmail.com',
+                    'passwd'    => 'avalidpasswd'
                 ],
                 [
                 ]

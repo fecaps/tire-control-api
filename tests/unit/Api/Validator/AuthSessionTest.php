@@ -5,6 +5,7 @@ namespace Api\Validator;
 
 use PHPUnit\Framework\TestCase;
 use Api\Exception\ValidatorException;
+use Api\Enum\UserMessages;
 
 class AuthSessionTest extends TestCase
 {
@@ -20,11 +21,11 @@ class AuthSessionTest extends TestCase
                     'user_ip'       => ''
                 ],
                 [
-                    'token'         => [ValidatorMessages::NOT_BLANK],
-                    'created_at'    => [ValidatorMessages::NOT_BLANK],
-                    'expire_at'     => [ValidatorMessages::NOT_BLANK],
-                    'user_id'       => [ValidatorMessages::NOT_BLANK],
-                    'user_ip'       => [ValidatorMessages::NOT_BLANK]
+                    'token'         => [UserMessages::NOT_BLANK],
+                    'created_at'    => [UserMessages::NOT_BLANK],
+                    'expire_at'     => [UserMessages::NOT_BLANK],
+                    'user_id'       => [UserMessages::NOT_BLANK],
+                    'user_ip'       => [UserMessages::NOT_BLANK]
                 ]
             ],
             [
@@ -36,9 +37,9 @@ class AuthSessionTest extends TestCase
                     'user_ip'       => 'hh.jj.mm.ll'
                 ],
                 [
-                    'created_at'    => [sprintf(ValidatorMessages::INVALID_DATE_TIME, 'Y-m-d H:i:s')],
-                    'expire_at'     => [sprintf(ValidatorMessages::INVALID_DATE_TIME, 'Y-m-d H:i:s')],
-                    'user_ip'       => [ValidatorMessages::INVALID_IP_ADDRESS]
+                    'created_at'    => [sprintf(UserMessages::INVALID_DATE_TIME, 'Y-m-d H:i:s')],
+                    'expire_at'     => [sprintf(UserMessages::INVALID_DATE_TIME, 'Y-m-d H:i:s')],
+                    'user_ip'       => [UserMessages::INVALID_IP_ADDRESS]
                 ]
             ],
             [

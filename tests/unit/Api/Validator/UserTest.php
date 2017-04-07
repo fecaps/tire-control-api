@@ -5,6 +5,7 @@ namespace Api\Validator;
 
 use PHPUnit\Framework\TestCase;
 use Api\Exception\ValidatorException;
+use Api\Enum\UserMessages;
 
 class UserTest extends TestCase
 {
@@ -14,19 +15,19 @@ class UserTest extends TestCase
             [
                 ['name' => 'Paul', 'email' => 'paul@', 'username' => 'usernameÇ', 'passwd' => '1234567'],
                 [
-                    'name'      => [sprintf(ValidatorMessages::LESS_THAN, User::NAME_MIN_LEN)],
-                    'email'     => [ValidatorMessages::INVALID_EMAIL],
-                    'username'  => [ValidatorMessages::INVALID_USERNAME],
-                    'passwd'    => [sprintf(ValidatorMessages::LESS_THAN, User::PASSWORD_MIN_LEN)]
+                    'name'      => [sprintf(UserMessages::LESS_THAN, User::NAME_MIN_LEN)],
+                    'email'     => [UserMessages::INVALID_EMAIL],
+                    'username'  => [UserMessages::INVALID_USERNAME],
+                    'passwd'    => [sprintf(UserMessages::LESS_THAN, User::PASSWORD_MIN_LEN)]
                 ]
             ],
             [
                 ['name' => '', 'email' => '', 'username' => ''],
                 [
-                    'name'      => [ValidatorMessages::NOT_BLANK],
-                    'email'     => [ValidatorMessages::NOT_BLANK],
-                    'username'  => [ValidatorMessages::NOT_BLANK],
-                    'passwd'    => [ValidatorMessages::NOT_BLANK]
+                    'name'      => [UserMessages::NOT_BLANK],
+                    'email'     => [UserMessages::NOT_BLANK],
+                    'username'  => [UserMessages::NOT_BLANK],
+                    'passwd'    => [UserMessages::NOT_BLANK]
                 ]
             ],
             [
@@ -37,9 +38,9 @@ class UserTest extends TestCase
                     'passwd'    => str_pad('A', User::PASSWORD_MAX_LEN + 1)
                 ],
                 [
-                    'name'      => [sprintf(ValidatorMessages::MORE_THAN, User::NAME_MAX_LEN)],
-                    'username'  => [sprintf(ValidatorMessages::MORE_THAN, User::USERNAME_MAX_LEN)],
-                    'passwd'    => [sprintf(ValidatorMessages::MORE_THAN, User::PASSWORD_MAX_LEN)]
+                    'name'      => [sprintf(UserMessages::MORE_THAN, User::NAME_MAX_LEN)],
+                    'username'  => [sprintf(UserMessages::MORE_THAN, User::USERNAME_MAX_LEN)],
+                    'passwd'    => [sprintf(UserMessages::MORE_THAN, User::PASSWORD_MAX_LEN)]
                 ]
             ],
             [
@@ -60,8 +61,8 @@ class UserTest extends TestCase
                     'passwd'    => 'avalidpasswd'
                 ],
                 [
-                    'name'      => [ValidatorMessages::INVALID_NAME],
-                    'username'  => [ValidatorMessages::INVALID_USERNAME]
+                    'name'      => [UserMessages::INVALID_NAME],
+                    'username'  => [UserMessages::INVALID_USERNAME]
                 ]
             ]
         ];
