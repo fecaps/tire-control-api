@@ -13,23 +13,23 @@ class ModelTest extends TestCase
     {
         $testData = [
             [
-                ['model' => ''],
-                ['model' => [TireMessages::NOT_BLANK]]
+                ['name' => ''],
+                ['name' => [TireMessages::NOT_BLANK]]
             ],
             [
-                ['model' => str_pad('A', Model::MODEL_MAX_LEN + 1)],
-                ['model' => [sprintf(TireMessages::MORE_THAN, Model::MODEL_MAX_LEN)]]
+                ['name' => str_pad('A', Model::MODEL_MAX_LEN + 1)],
+                ['name' => [sprintf(TireMessages::MORE_THAN, Model::MODEL_MAX_LEN)]]
             ],
             [
-                ['model' => 'ABC'],
-                ['model' => [sprintf(TireMessages::LESS_THAN, Model::MODEL_MIN_LEN)]]
+                ['name' => 'ABC'],
+                ['name' => [sprintf(TireMessages::LESS_THAN, Model::MODEL_MIN_LEN)]]
             ],
             [
-                ['model' => '<p><script></script></p>'],
-                ['model' => [TireMessages::INVALID_MODEL]]
+                ['name' => '<p><script></script></p>'],
+                ['name' => [TireMessages::INVALID_MODEL]]
             ],
             [
-                ['model' => 'FR85'],
+                ['name' => 'FR85'],
                 []
             ]
         ];
@@ -47,8 +47,8 @@ class ModelTest extends TestCase
 
         try {
             $modelValidator->validate($testData);
-        } catch (ValidatorException $e) {
-            $messages = $e->getMessages();
+        } catch (ValidatorException $exception) {
+            $messages = $exception->getMessages();
         }
 
         $this->assertEquals($expectedData, $messages);

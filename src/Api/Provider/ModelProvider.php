@@ -34,6 +34,20 @@ class ModelProvider implements ServiceProviderInterface
             );
         };
 
+        $app['model.tire.brand'] = function () use ($app) {
+            return new Model\Tire\Brand(
+                $app['validator.tire.brand'],
+                $app['repository.tire.brand']
+            );
+        };
+
+        $app['model.tire.model'] = function () use ($app) {
+            return new Model\Tire\Model(
+                $app['validator.tire.model'],
+                $app['repository.tire.model']
+            );
+        };
+
         $app['model.tire.size'] = function () use ($app) {
             return new Model\Tire\Size(
                 $app['validator.tire.size'],
@@ -41,10 +55,10 @@ class ModelProvider implements ServiceProviderInterface
             );
         };
 
-        $app['model.tire.brand'] = function () use ($app) {
-            return new Model\Tire\Brand(
-                $app['validator.tire.brand'],
-                $app['repository.tire.brand']
+        $app['model.tire.type'] = function () use ($app) {
+            return new Model\Tire\Type(
+                $app['validator.tire.type'],
+                $app['repository.tire.type']
             );
         };
     }

@@ -24,8 +24,17 @@ class Model
             throw new DatabaseException($exception->getMessage());
         }
 
-        $lastInsertId = $this->connection->lastInsertId();
+        $this->connection->lastInsertId();
 
-        return ['id' => $lastInsertId] + $data;
+        return $data;
+    }
+
+    public function findByName($name)
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM model WHERE name = ?', [$name]);
+
+        $model = $query->fetch();
+
+        return $model;
     }
 }

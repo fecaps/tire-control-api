@@ -8,9 +8,45 @@ use Doctrine\DBAL\DBALException;
 
 class ModelTest extends TestCase
 {
+    public function testShouldFindByName()
+    {
+        $expectedData = [
+            'name' => 'Model Test',
+        ];
+
+        $mockQuery = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Statement')
+            ->disableOriginalConstructor()
+            ->setMethods(['fetch'])
+            ->getMock();
+
+        $mockQuery
+            ->expects($this->once())
+            ->method('fetch')
+            ->willReturn($expectedData);
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['executeQuery'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('executeQuery')
+            ->with('SELECT * FROM model WHERE name = ?', [$expectedData['name']])
+            ->willReturn($mockQuery);
+
+        $repository = new Model($mockConnection);
+
+        $retrieveData = $repository->findByName($expectedData['name']);
+
+        $this->assertEquals($expectedData, $retrieveData);
+    }
+
     public function testShouldCreateAModel()
     {
-        $modelData = [
+        $expectedData = [
             'model' => 'Model Test',
         ];
 
@@ -23,7 +59,7 @@ class ModelTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('insert')
-            ->with('model', $modelData)
+            ->with('model', $expectedData)
             ->willReturn(1);
 
         $mockConnection
@@ -31,13 +67,11 @@ class ModelTest extends TestCase
             ->method('lastInsertId')
             ->willReturn(2);
 
-        $repositoryModel = new Model($mockConnection);
+        $repository = new Model($mockConnection);
 
-        $retrieveModelData = $repositoryModel->create($modelData);
+        $retrieveData = $repository->create($expectedData);
 
-        $expectedModelData = ['id' => 2] + $modelData;
-
-        $this->assertEquals($expectedModelData, $retrieveModelData);
+        $this->assertEquals($expectedData, $retrieveData);
     }
 
     /**

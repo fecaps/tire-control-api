@@ -23,12 +23,20 @@ class RepositoryProvider implements ServiceProviderInterface
             return new Repository\AuthSession($app['db']);
         };
 
+        $app['repository.tire.brand'] = function () use ($app) {
+            return new Repository\Tire\Brand($app['db']);
+        };
+
+        $app['repository.tire.model'] = function () use ($app) {
+            return new Repository\Tire\Model($app['db']);
+        };
+
         $app['repository.tire.size'] = function () use ($app) {
             return new Repository\Tire\Size($app['db']);
         };
 
-        $app['repository.tire.brand'] = function () use ($app) {
-            return new Repository\Tire\Brand($app['db']);
+        $app['repository.tire.type'] = function () use ($app) {
+            return new Repository\Tire\Type($app['db']);
         };
     }
 }

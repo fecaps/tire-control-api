@@ -23,12 +23,20 @@ class ValidatorProvider implements ServiceProviderInterface
             return new Validator\AuthSession;
         };
 
+        $app['validator.tire.brand'] = function () {
+            return new Validator\Tire\Brand;
+        };
+
+        $app['validator.tire.model'] = function () {
+            return new Validator\Tire\Model;
+        };
+        
         $app['validator.tire.size'] = function () {
             return new Validator\Tire\Size;
         };
 
-        $app['validator.tire.brand'] = function () {
-            return new Validator\Tire\Brand;
+        $app['validator.tire.type'] = function () {
+            return new Validator\Tire\Type;
         };
     }
 }

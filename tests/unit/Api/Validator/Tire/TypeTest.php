@@ -13,23 +13,23 @@ class TypeTest extends TestCase
     {
         $testData = [
             [
-                ['type' => ''],
-                ['type' => [TireMessages::NOT_BLANK]]
+                ['name' => ''],
+                ['name' => [TireMessages::NOT_BLANK]]
             ],
             [
-                ['type' => str_pad('A', Type::TYPE_MAX_LEN + 1)],
-                ['type' => [sprintf(TireMessages::MORE_THAN, Type::TYPE_MAX_LEN)]]
+                ['name' => str_pad('A', Type::TYPE_MAX_LEN + 1)],
+                ['name' => [sprintf(TireMessages::MORE_THAN, Type::TYPE_MAX_LEN)]]
             ],
             [
-                ['type' => 'ABC'],
-                ['type' => [sprintf(TireMessages::LESS_THAN, Type::TYPE_MIN_LEN)]]
+                ['name' => 'ABC'],
+                ['name' => [sprintf(TireMessages::LESS_THAN, Type::TYPE_MIN_LEN)]]
             ],
             [
-                ['type' => '<p><script></script></p>'],
-                ['type' => [TireMessages::INVALID_TYPE]]
+                ['name' => '<p><script></script></p>'],
+                ['name' => [TireMessages::INVALID_TYPE]]
             ],
             [
-                ['type' => 'FR85'],
+                ['name' => 'FR85'],
                 []
             ]
         ];
@@ -47,8 +47,8 @@ class TypeTest extends TestCase
 
         try {
             $typeValidator->validate($testData);
-        } catch (ValidatorException $e) {
-            $messages = $e->getMessages();
+        } catch (ValidatorException $exception) {
+            $messages = $exception->getMessages();
         }
 
         $this->assertEquals($expectedData, $messages);
