@@ -49,5 +49,8 @@ POST /signup
 POST /login
 PUT /logout
 POST /tires/brand
+POST /tires/model
 POST /tires/size
+POST /tires/type
 ```
+To see more, check out docs/api/swagger.yaml
