@@ -8,9 +8,9 @@ use Doctrine\DBAL\DBALException;
 
 class UserTest extends TestCase
 {
-    public function testShouldFindOneUserByEmail()
+    public function testShouldFindByEmail()
     {
-        $expectedUserData = [
+        $expectedData = [
             'name'      => 'Test',
             'email'     => 'test@gmail.com',
             'username'  => 'usernameTest',
@@ -26,7 +26,7 @@ class UserTest extends TestCase
         $mockQuery
             ->expects($this->once())
             ->method('fetch')
-            ->willReturn($expectedUserData);
+            ->willReturn($expectedData);
 
         $mockConnection = $this
             ->getMockBuilder('Doctrine\\DBAL\\Connection')
@@ -37,19 +37,19 @@ class UserTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM user WHERE email = ?', [$expectedUserData['email']])
+            ->with('SELECT * FROM user WHERE email = ?', [$expectedData['email']])
             ->willReturn($mockQuery);
 
-        $repositoryUser = new User($mockConnection);
+        $repository = new User($mockConnection);
 
-        $retrieveData = $repositoryUser->findByEmail($expectedUserData['email']);
+        $retrieveData = $repository->findByEmail($expectedData['email']);
 
-        $this->assertEquals($expectedUserData, $retrieveData);
+        $this->assertEquals($expectedData, $retrieveData);
     }
 
-    public function testShouldFindOneUserByUsername()
+    public function testShouldFindByUsername()
     {
-        $expectedUserData = [
+        $expectedData = [
             'name'      => 'Test',
             'email'     => 'test@gmail.com',
             'username'  => 'usernameTest',
@@ -65,7 +65,7 @@ class UserTest extends TestCase
         $mockQuery
             ->expects($this->once())
             ->method('fetch')
-            ->willReturn($expectedUserData);
+            ->willReturn($expectedData);
 
         $mockConnection = $this
             ->getMockBuilder('Doctrine\\DBAL\\Connection')
@@ -76,14 +76,14 @@ class UserTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM user WHERE username = ?', [$expectedUserData['username']])
+            ->with('SELECT * FROM user WHERE username = ?', [$expectedData['username']])
             ->willReturn($mockQuery);
 
-        $repositoryUser = new User($mockConnection);
+        $repository = new User($mockConnection);
 
-        $retrieveData = $repositoryUser->findByUsername($expectedUserData['username']);
+        $retrieveData = $repository->findByUsername($expectedData['username']);
 
-        $this->assertEquals($expectedUserData, $retrieveData);
+        $this->assertEquals($expectedData, $retrieveData);
     }
 
     public function testShouldCreateAnUser()
@@ -112,13 +112,13 @@ class UserTest extends TestCase
             ->method('lastInsertId')
             ->willReturn(2);
 
-        $repositoryUser = new User($mockConnection);
+        $repository = new User($mockConnection);
 
-        $retrieveUserData = $repositoryUser->create($userData);
+        $retrieveData = $repository->create($userData);
 
-        $expectedUserData = $userData;
+        $expectedData = ['id' => 2] + $userData;
 
-        $this->assertEquals($expectedUserData, $retrieveUserData);
+        $this->assertEquals($expectedData, $retrieveData);
     }
 
     /**

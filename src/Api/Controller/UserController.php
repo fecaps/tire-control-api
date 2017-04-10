@@ -22,6 +22,7 @@ class UserController
         $user = $this->user->create($data);
 
         $returnData = [
+            'id'       => $user['id'],
             'name'     => $user['name'],
             'email'    => $user['email'],
             'username' => $user['username']
