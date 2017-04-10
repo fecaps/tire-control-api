@@ -31,10 +31,6 @@ class TypeController
 
     public function selectAll(Request $request): array
     {
-        $data = $request->request->all();
-
-        $returnData = $this->type->selectAll();
-        
-        return $returnData;
+        return $this->type->selectAll();
     }
 }

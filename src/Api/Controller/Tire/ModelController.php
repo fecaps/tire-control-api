@@ -31,10 +31,6 @@ class ModelController
 
     public function selectAll(Request $request): array
     {
-        $data = $request->request->all();
-
-        $returnData = $this->model->selectAll();
-        
-        return $returnData;
+        return $this->model->selectAll();
     }
 }

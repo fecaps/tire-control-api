@@ -31,10 +31,6 @@ class BrandController
 
     public function selectAll(Request $request): array
     {
-        $data = $request->request->all();
-
-        $returnData = $this->brand->selectAll();
-        
-        return $returnData;
+        return $this->brand->selectAll();
     }
 }
