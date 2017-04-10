@@ -22,9 +22,19 @@ class TypeController
         $type = $this->type->create($data);
         
         $returnData = [
-            'name' => $type['name'],
+            'id'    => $type['id'],
+            'name'  => $type['name']
         ];
 
+        return $returnData;
+    }
+
+    public function selectAll(Request $request): array
+    {
+        $data = $request->request->all();
+
+        $returnData = $this->type->selectAll();
+        
         return $returnData;
     }
 }

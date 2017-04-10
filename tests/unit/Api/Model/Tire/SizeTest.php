@@ -10,7 +10,7 @@ class SizeTest extends TestCase
     public function testShouldCreateNewSize()
     {
         $sizeData = [
-            'name' => 'Size Test',
+            'name' => 'Size Test'
         ];
 
         $mockValidator = $this
@@ -35,15 +35,47 @@ class SizeTest extends TestCase
             ->with($sizeData['name'])
             ->willReturn(null);
 
+        $newSizeData = ['id' => 12] + $sizeData;
+
         $mockRepository
             ->expects($this->once())
             ->method('create')
             ->with($sizeData)
-            ->willReturn($sizeData);
+            ->willReturn($newSizeData);
 
         $sizeModel = new Size($mockValidator, $mockRepository);
 
         $retrieveData = $sizeModel->create($sizeData);
+
+        $this->assertEquals($newSizeData, $retrieveData);
+    }
+
+    public function testShouldSelectAll()
+    {
+        $sizeData = [
+            'id'    => '123',
+            'name'  => 'Size Test'
+        ];
+
+        $mockValidator = $this
+            ->getMockBuilder('Api\\Validator\\Tire\\Size')
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $mockRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire\\Size')
+            ->disableOriginalConstructor()
+            ->setMethods(['selectAll'])
+            ->getMock();
+
+        $mockRepository
+            ->expects($this->once())
+            ->method('selectAll')
+            ->willReturn($sizeData);
+
+        $sizeModel = new Size($mockValidator, $mockRepository);
+
+        $retrieveData = $sizeModel->selectAll();
 
         $this->assertEquals($sizeData, $retrieveData);
     }
@@ -54,7 +86,7 @@ class SizeTest extends TestCase
     public function testShouldGetErrorWhenNameIsAlreadyInUse()
     {
         $sizeData = [
-            'name' => 'Size Test',
+            'name' => 'Size Test'
         ];
 
         $mockValidator = $this

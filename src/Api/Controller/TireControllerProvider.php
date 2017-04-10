@@ -35,9 +35,16 @@ class TireControllerProvider implements ControllerProviderInterface, ServiceProv
     {
         $controllers = $app['controllers_factory'];
 
+        $controllers->get('/tires/brand', 'tire.brandcontroller:selectAll');
         $controllers->post('/tires/brand', 'tire.brandcontroller:register');
+
+        $controllers->get('/tires/model', 'tire.modelcontroller:selectAll');
         $controllers->post('/tires/model', 'tire.modelcontroller:register');
+        
+        $controllers->get('/tires/size', 'tire.sizecontroller:selectAll');
         $controllers->post('/tires/size', 'tire.sizecontroller:register');
+        
+        $controllers->get('/tires/type', 'tire.typecontroller:selectAll');
         $controllers->post('/tires/type', 'tire.typecontroller:register');
 
         return $controllers;

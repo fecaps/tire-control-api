@@ -22,9 +22,19 @@ class BrandController
         $brand = $this->brand->create($data);
         
         $returnData = [
-            'name' => $brand['name'],
+            'id'    => $brand['id'],
+            'name'  => $brand['name']
         ];
 
+        return $returnData;
+    }
+
+    public function selectAll(Request $request): array
+    {
+        $data = $request->request->all();
+
+        $returnData = $this->brand->selectAll();
+        
         return $returnData;
     }
 }

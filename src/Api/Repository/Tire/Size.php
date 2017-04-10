@@ -24,9 +24,9 @@ class Size
             throw new DatabaseException($exception->getMessage());
         }
 
-        $this->connection->lastInsertId();
+        $lastInsertId = $this->connection->lastInsertId();
 
-        return $data;
+        return ['id' => $lastInsertId] + $data;
     }
 
     public function findByName($name)
@@ -34,6 +34,15 @@ class Size
         $query = $this->connection->executeQuery('SELECT * FROM size WHERE name = ?', [$name]);
 
         $size = $query->fetch();
+
+        return $size;
+    }
+
+    public function selectAll()
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM size');
+
+        $size = $query->fetchAll();
 
         return $size;
     }

@@ -103,6 +103,30 @@ paths:
             $ref: '#/definitions/ApiError'
 
   /tires/brand:
+    get:
+      description: Get tire brands
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/TireBrand'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
     post:
       description: Register tire brand
 
@@ -133,6 +157,30 @@ paths:
             $ref: '#/definitions/ApiError'
 
   /tires/model:
+    get:
+      description: Get tire models
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/TireModel'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
     post:
       description: Register tire model
 
@@ -163,6 +211,30 @@ paths:
             $ref: '#/definitions/ApiError'
 
   /tires/size:
+    get:
+      description: Get tire sizes
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/TireSize'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
     post:
       description: Register tire size
 
@@ -193,6 +265,30 @@ paths:
             $ref: '#/definitions/ApiError' 
 
   /tires/type:
+    get:
+      description: Get tire types
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/TireType'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
     post:
       description: Register tire type
 
@@ -227,6 +323,8 @@ definitions:
   Signup:
     type: object
     properties:
+      id:
+        type: string
       name:
         type: string
       email:
@@ -247,24 +345,32 @@ definitions:
   TireBrand:
     type: object
     properties:
+      id:
+        type: string
       name:
         type: string
 
   TireModel:
     type: object
     properties:
+      id:
+        type: string
       name:
         type: string
 
   TireSize:
     type: object
     properties:
+      id:
+        type: string
       name:
         type: string
 
   TireType:
     type: object
     properties:
+      id:
+        type: string
       name:
         type: string
 

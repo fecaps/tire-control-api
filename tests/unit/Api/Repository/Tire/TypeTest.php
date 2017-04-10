@@ -8,10 +8,42 @@ use Doctrine\DBAL\DBALException;
 
 class TypeTest extends TestCase
 {
+    public function testShouldCreateAType()
+    {
+        $typeData = [
+            'name' => 'Type Test'
+        ];
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['insert', 'lastInsertId'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('insert')
+            ->with('type', $typeData)
+            ->willReturn(1);
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('lastInsertId')
+            ->willReturn(2);
+
+        $repository = new Type($mockConnection);
+
+        $retrieveData = $repository->create($typeData);
+
+        $expectedData = ['id' => 2] + $typeData;
+
+        $this->assertEquals($expectedData, $retrieveData);
+    }
+
     public function testShouldFindByName()
     {
         $expectedData = [
-            'name' => 'Type Test',
+            'name' => 'Type Test'
         ];
 
         $mockQuery = $this
@@ -44,32 +76,39 @@ class TypeTest extends TestCase
         $this->assertEquals($expectedData, $retrieveData);
     }
 
-    public function testShouldCreateAType()
+    public function testShouldSelectAll()
     {
         $expectedData = [
-            'name' => 'Type Test',
+            'id'    => '123',
+            'name'  => 'Type Test'
         ];
+
+        $mockQuery = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Statement')
+            ->disableOriginalConstructor()
+            ->setMethods(['fetchAll'])
+            ->getMock();
+
+        $mockQuery
+            ->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($expectedData);
 
         $mockConnection = $this
             ->getMockBuilder('Doctrine\\DBAL\\Connection')
             ->disableOriginalConstructor()
-            ->setMethods(['insert', 'lastInsertId'])
+            ->setMethods(['executeQuery'])
             ->getMock();
 
         $mockConnection
             ->expects($this->once())
-            ->method('insert')
-            ->with('type', $expectedData)
-            ->willReturn(1);
-
-        $mockConnection
-            ->expects($this->once())
-            ->method('lastInsertId')
-            ->willReturn(2);
+            ->method('executeQuery')
+            ->with('SELECT * FROM type')
+            ->willReturn($mockQuery);
 
         $repository = new Type($mockConnection);
 
-        $retrieveData = $repository->create($expectedData);
+        $retrieveData = $repository->selectAll();
 
         $this->assertEquals($expectedData, $retrieveData);
     }

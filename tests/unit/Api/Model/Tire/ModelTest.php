@@ -10,7 +10,7 @@ class ModelTest extends TestCase
     public function testShouldCreateNewModel()
     {
         $modelData = [
-            'name' => 'Model Test',
+            'name' => 'Model Test'
         ];
 
         $mockValidator = $this
@@ -35,15 +35,47 @@ class ModelTest extends TestCase
             ->with($modelData['name'])
             ->willReturn(null);
 
+        $newModelData = ['id' => 12] + $modelData;
+
         $mockRepository
             ->expects($this->once())
             ->method('create')
             ->with($modelData)
-            ->willReturn($modelData);
+            ->willReturn($newModelData);
 
         $modelModel = new Model($mockValidator, $mockRepository);
 
         $retrieveData = $modelModel->create($modelData);
+
+        $this->assertEquals($newModelData, $retrieveData);
+    }
+
+    public function testShouldSelectAll()
+    {
+        $modelData = [
+            'id'    => '123',
+            'name'  => 'Model Test'
+        ];
+
+        $mockValidator = $this
+            ->getMockBuilder('Api\\Validator\\Tire\\Model')
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $mockRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire\\Model')
+            ->disableOriginalConstructor()
+            ->setMethods(['selectAll'])
+            ->getMock();
+
+        $mockRepository
+            ->expects($this->once())
+            ->method('selectAll')
+            ->willReturn($modelData);
+
+        $modelModel = new Model($mockValidator, $mockRepository);
+
+        $retrieveData = $modelModel->selectAll();
 
         $this->assertEquals($modelData, $retrieveData);
     }
@@ -54,7 +86,7 @@ class ModelTest extends TestCase
     public function testShouldGetErrorWhenNameIsAlreadyInUse()
     {
         $modelData = [
-            'name' => 'Model Test',
+            'name' => 'Model Test'
         ];
 
         $mockValidator = $this

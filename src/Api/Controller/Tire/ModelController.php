@@ -22,9 +22,19 @@ class ModelController
         $model = $this->model->create($data);
         
         $returnData = [
-            'name' => $model['name'],
+            'id'    => $model['id'],
+            'name'  => $model['name']
         ];
 
+        return $returnData;
+    }
+
+    public function selectAll(Request $request): array
+    {
+        $data = $request->request->all();
+
+        $returnData = $this->model->selectAll();
+        
         return $returnData;
     }
 }

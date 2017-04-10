@@ -48,9 +48,13 @@ Available endpoints:
 POST /signup  
 POST /login
 PUT /logout
+GET /tires/brand
 POST /tires/brand
+GET /tires/model
 POST /tires/model
+GET /tires/size
 POST /tires/size
+GET /tires/type
 POST /tires/type
 ```
 To see more, check out docs/api/swagger.yml

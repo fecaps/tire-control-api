@@ -24,9 +24,9 @@ class Type
             throw new DatabaseException($exception->getMessage());
         }
 
-        $this->connection->lastInsertId();
+        $lastInsertId = $this->connection->lastInsertId();
 
-        return $data;
+        return ['id' => $lastInsertId] + $data;
     }
 
     public function findByName($name)
@@ -34,6 +34,15 @@ class Type
         $query = $this->connection->executeQuery('SELECT * FROM type WHERE name = ?', [$name]);
 
         $type = $query->fetch();
+
+        return $type;
+    }
+
+    public function selectAll()
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM type');
+
+        $type = $query->fetchAll();
 
         return $type;
     }

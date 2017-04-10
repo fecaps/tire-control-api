@@ -33,4 +33,9 @@ class Type
 
         return $this->repository->create($typeData);
     }
+
+    public function selectAll(): array
+    {
+        return $this->repository->selectAll();
+    }
 }

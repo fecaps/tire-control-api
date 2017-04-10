@@ -22,9 +22,19 @@ class SizeController
         $size = $this->size->create($data);
         
         $returnData = [
-            'name' => $size['name'],
+            'id'    => $size['id'],
+            'name'  => $size['name']
         ];
 
+        return $returnData;
+    }
+
+    public function selectAll(Request $request): array
+    {
+        $data = $request->request->all();
+
+        $returnData = $this->size->selectAll();
+        
         return $returnData;
     }
 }

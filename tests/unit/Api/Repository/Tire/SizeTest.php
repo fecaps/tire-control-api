@@ -8,10 +8,42 @@ use Doctrine\DBAL\DBALException;
 
 class SizeTest extends TestCase
 {
+    public function testShouldCreateASize()
+    {
+        $sizeData = [
+            'name' => 'Size Test'
+        ];
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['insert', 'lastInsertId'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('insert')
+            ->with('size', $sizeData)
+            ->willReturn(1);
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('lastInsertId')
+            ->willReturn(2);
+
+        $repository = new Size($mockConnection);
+
+        $retrieveData = $repository->create($sizeData);
+
+        $expectedData = ['id' => 2] + $sizeData;
+
+        $this->assertEquals($expectedData, $retrieveData);
+    }
+
     public function testShouldFindByName()
     {
         $expectedData = [
-            'name' => 'Size Test',
+            'name' => 'Size Test'
         ];
 
         $mockQuery = $this
@@ -44,32 +76,39 @@ class SizeTest extends TestCase
         $this->assertEquals($expectedData, $retrieveData);
     }
 
-    public function testShouldCreateASize()
+    public function testShouldSelectAll()
     {
         $expectedData = [
-            'name' => 'Size Test',
+            'id'    => '123',
+            'name'  => 'Size Test'
         ];
+
+        $mockQuery = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Statement')
+            ->disableOriginalConstructor()
+            ->setMethods(['fetchAll'])
+            ->getMock();
+
+        $mockQuery
+            ->expects($this->once())
+            ->method('fetchAll')
+            ->willReturn($expectedData);
 
         $mockConnection = $this
             ->getMockBuilder('Doctrine\\DBAL\\Connection')
             ->disableOriginalConstructor()
-            ->setMethods(['insert', 'lastInsertId'])
+            ->setMethods(['executeQuery'])
             ->getMock();
 
         $mockConnection
             ->expects($this->once())
-            ->method('insert')
-            ->with('size', $expectedData)
-            ->willReturn(1);
-
-        $mockConnection
-            ->expects($this->once())
-            ->method('lastInsertId')
-            ->willReturn(2);
+            ->method('executeQuery')
+            ->with('SELECT * FROM size')
+            ->willReturn($mockQuery);
 
         $repository = new Size($mockConnection);
 
-        $retrieveData = $repository->create($expectedData);
+        $retrieveData = $repository->selectAll();
 
         $this->assertEquals($expectedData, $retrieveData);
     }
