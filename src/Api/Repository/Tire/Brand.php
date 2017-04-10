@@ -24,9 +24,9 @@ class Brand
             throw new DatabaseException($exception->getMessage());
         }
 
-        $this->connection->lastInsertId();
+        $lastInsertId = $this->connection->lastInsertId();
 
-        return $data;
+        return ['id' => $lastInsertId] + $data;
     }
 
     public function findByName($name)
@@ -34,6 +34,15 @@ class Brand
         $query = $this->connection->executeQuery('SELECT * FROM brand WHERE name = ?', [$name]);
 
         $brand = $query->fetch();
+
+        return $brand;
+    }
+
+    public function selectAll()
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM brand');
+
+        $brand = $query->fetchAll();
 
         return $brand;
     }

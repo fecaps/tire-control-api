@@ -10,7 +10,7 @@ class BrandTest extends TestCase
     public function testShouldCreateNewBrand()
     {
         $brandData = [
-            'name' => 'Brand Test',
+            'name' => 'Brand Test'
         ];
 
         $mockValidator = $this
@@ -35,15 +35,47 @@ class BrandTest extends TestCase
             ->with($brandData['name'])
             ->willReturn(null);
 
-        $mockRepository
+         $newBrandData = ['id' => 12] + $brandData;
+
+         $mockRepository
             ->expects($this->once())
             ->method('create')
             ->with($brandData)
-            ->willReturn($brandData);
+            ->willReturn($newBrandData);
 
         $brandModel = new Brand($mockValidator, $mockRepository);
 
         $retrieveData = $brandModel->create($brandData);
+
+        $this->assertEquals($newBrandData, $retrieveData);
+    }
+
+    public function testShouldSelectAll()
+    {
+        $brandData = [
+            'id'    => '123',
+            'name'  => 'Brand Test'
+        ];
+
+        $mockValidator = $this
+            ->getMockBuilder('Api\\Validator\\Tire\\Brand')
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $mockRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire\\Brand')
+            ->disableOriginalConstructor()
+            ->setMethods(['selectAll'])
+            ->getMock();
+
+        $mockRepository
+            ->expects($this->once())
+            ->method('selectAll')
+            ->willReturn($brandData);
+
+        $brandModel = new Brand($mockValidator, $mockRepository);
+
+        $retrieveData = $brandModel->selectAll();
 
         $this->assertEquals($brandData, $retrieveData);
     }
@@ -54,7 +86,7 @@ class BrandTest extends TestCase
     public function testShouldGetErrorWhenNameIsAlreadyInUse()
     {
         $brandData = [
-            'name' => 'Brand Test',
+            'name' => 'Brand Test'
         ];
 
         $mockValidator = $this
