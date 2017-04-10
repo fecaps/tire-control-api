@@ -29,7 +29,7 @@ class BrandController
         return $returnData;
     }
 
-    public function selectAll(Request $request): array
+    public function selectAll(): array
     {
         return $this->brand->selectAll();
     }

@@ -29,7 +29,7 @@ class ModelController
         return $returnData;
     }
 
-    public function selectAll(Request $request): array
+    public function selectAll(): array
     {
         return $this->model->selectAll();
     }

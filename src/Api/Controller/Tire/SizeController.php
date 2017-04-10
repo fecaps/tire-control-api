@@ -29,7 +29,7 @@ class SizeController
         return $returnData;
     }
 
-    public function selectAll(Request $request): array
+    public function selectAll(): array
     {
         return $this->size->selectAll();
     }
