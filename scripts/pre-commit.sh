@@ -5,8 +5,10 @@ printf "\nCheck code style with PHP Code Sniffer:\n"
 ./vendor/bin/phpcs -sw --standard=PSR2 --colors src/ tests/
 printf "\nRun unit tests and generate code coverage:\n"
 vendor/bin/phpunit -c build/
-printf "\nCheck raw metrics stream using PHP Mess Detector:\n"
+printf "\nCheck raw metrics stream with PHP Mess Detector:\n"
 vendor/bin/phpmd src/ text codesize
+printf "\nCheck copy/paste with PHP Copy/Paste Detector:\n"
+vendor/bin/phpcpd --verbose src/
 
 
 

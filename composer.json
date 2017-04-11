@@ -18,7 +18,8 @@
         "phpunit/phpunit": "^6.0",
         "squizlabs/php_codesniffer": "^2.8",
         "phpstan/phpstan": "^0.6.4",
-        "phpmd/phpmd": "^2.6"
+        "phpmd/phpmd": "^2.6",
+        "sebastian/phpcpd": "^3.0"
     },
     "autoload": {
         "psr-4": {
