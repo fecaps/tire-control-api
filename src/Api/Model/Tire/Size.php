@@ -34,8 +34,8 @@ class Size
         return $this->repository->create($sizeData);
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->repository->selectAll();
+        return $this->repository->list();
     }
 }

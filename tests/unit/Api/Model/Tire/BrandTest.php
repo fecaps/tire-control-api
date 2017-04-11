@@ -65,17 +65,17 @@ class BrandTest extends TestCase
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Brand')
             ->disableOriginalConstructor()
-            ->setMethods(['selectAll'])
+            ->setMethods(['list'])
             ->getMock();
 
         $mockRepository
             ->expects($this->once())
-            ->method('selectAll')
+            ->method('list')
             ->willReturn($brandData);
 
         $brandModel = new Brand($mockValidator, $mockRepository);
 
-        $retrieveData = $brandModel->selectAll();
+        $retrieveData = $brandModel->list();
 
         $this->assertEquals($brandData, $retrieveData);
     }

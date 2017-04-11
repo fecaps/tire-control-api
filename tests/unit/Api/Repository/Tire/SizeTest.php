@@ -108,7 +108,7 @@ class SizeTest extends TestCase
 
         $repository = new Size($mockConnection);
 
-        $retrieveData = $repository->selectAll();
+        $retrieveData = $repository->list();
 
         $this->assertEquals($expectedData, $retrieveData);
     }

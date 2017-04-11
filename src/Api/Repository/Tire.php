@@ -38,7 +38,7 @@ class Tire
         return $code;
     }
 
-    public function selectAll()
+    public function list()
     {
         $query = $this->connection->executeQuery('SELECT * FROM tire');
 

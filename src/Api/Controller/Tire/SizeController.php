@@ -15,7 +15,7 @@ class SizeController
         $this->size = $size;
     }
 
-    public function register(Request $request): array
+    public function create(Request $request): array
     {
         $data = $request->request->all();
 
@@ -29,8 +29,8 @@ class SizeController
         return $returnData;
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->size->selectAll();
+        return $this->size->list();
     }
 }

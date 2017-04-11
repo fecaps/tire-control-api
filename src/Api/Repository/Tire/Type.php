@@ -38,7 +38,7 @@ class Type
         return $type;
     }
 
-    public function selectAll()
+    public function list()
     {
         $query = $this->connection->executeQuery('SELECT * FROM type');
 

@@ -85,8 +85,8 @@ class Tire
         return $this->repository->create($tireData);
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->repository->selectAll();
+        return $this->repository->list();
     }
 }

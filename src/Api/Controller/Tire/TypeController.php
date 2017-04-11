@@ -15,7 +15,7 @@ class TypeController
         $this->type = $type;
     }
 
-    public function register(Request $request): array
+    public function create(Request $request): array
     {
         $data = $request->request->all();
 
@@ -29,8 +29,8 @@ class TypeController
         return $returnData;
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->type->selectAll();
+        return $this->type->list();
     }
 }

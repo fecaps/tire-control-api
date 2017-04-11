@@ -34,8 +34,8 @@ class Model
         return $this->repository->create($modelData);
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->repository->selectAll();
+        return $this->repository->list();
     }
 }

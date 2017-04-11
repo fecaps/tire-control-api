@@ -16,7 +16,7 @@ class TireController
         $this->tire = $tire;
     }
 
-    public function register(Request $request): array
+    public function create(Request $request): array
     {
         $data = $request->request->all();
 
@@ -35,8 +35,8 @@ class TireController
         return $returnData;
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->tire->selectAll();
+        return $this->tire->list();
     }
 }

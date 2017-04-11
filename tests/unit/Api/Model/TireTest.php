@@ -250,12 +250,12 @@ class TireTest extends TestCase
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire')
             ->disableOriginalConstructor()
-            ->setMethods(['selectAll'])
+            ->setMethods(['list'])
             ->getMock();
 
         $mockRepository
             ->expects($this->once())
-            ->method('selectAll')
+            ->method('list')
             ->willReturn($tireData);
 
         $tireModel = new Tire(
@@ -267,7 +267,7 @@ class TireTest extends TestCase
             $mockRepository
         );
 
-        $retrieveData = $tireModel->selectAll();
+        $retrieveData = $tireModel->list();
 
         $this->assertEquals($tireData, $retrieveData);
     }

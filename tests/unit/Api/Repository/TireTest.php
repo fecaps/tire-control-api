@@ -123,7 +123,7 @@ class TireTest extends TestCase
 
         $repository = new Tire($mockConnection);
 
-        $retrieveData = $repository->selectAll();
+        $retrieveData = $repository->list();
 
         $this->assertEquals($expectedData, $retrieveData);
     }

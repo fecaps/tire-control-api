@@ -65,17 +65,17 @@ class ModelTest extends TestCase
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Model')
             ->disableOriginalConstructor()
-            ->setMethods(['selectAll'])
+            ->setMethods(['list'])
             ->getMock();
 
         $mockRepository
             ->expects($this->once())
-            ->method('selectAll')
+            ->method('list')
             ->willReturn($modelData);
 
         $modelModel = new Model($mockValidator, $mockRepository);
 
-        $retrieveData = $modelModel->selectAll();
+        $retrieveData = $modelModel->list();
 
         $this->assertEquals($modelData, $retrieveData);
     }

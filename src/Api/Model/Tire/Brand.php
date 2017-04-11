@@ -34,8 +34,8 @@ class Brand
         return $this->repository->create($brandData);
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->repository->selectAll();
+        return $this->repository->list();
     }
 }

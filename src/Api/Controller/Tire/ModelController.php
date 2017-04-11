@@ -15,7 +15,7 @@ class ModelController
         $this->model = $model;
     }
 
-    public function register(Request $request): array
+    public function create(Request $request): array
     {
         $data = $request->request->all();
 
@@ -29,8 +29,8 @@ class ModelController
         return $returnData;
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->model->selectAll();
+        return $this->model->list();
     }
 }

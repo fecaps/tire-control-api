@@ -38,7 +38,7 @@ class Model
         return $model;
     }
 
-    public function selectAll()
+    public function list()
     {
         $query = $this->connection->executeQuery('SELECT * FROM model');
 

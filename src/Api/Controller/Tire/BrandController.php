@@ -15,7 +15,7 @@ class BrandController
         $this->brand = $brand;
     }
 
-    public function register(Request $request): array
+    public function create(Request $request): array
     {
         $data = $request->request->all();
 
@@ -29,8 +29,8 @@ class BrandController
         return $returnData;
     }
 
-    public function selectAll(): array
+    public function list(): array
     {
-        return $this->brand->selectAll();
+        return $this->brand->list();
     }
 }

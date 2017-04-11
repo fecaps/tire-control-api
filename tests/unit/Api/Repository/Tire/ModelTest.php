@@ -108,7 +108,7 @@ class ModelTest extends TestCase
 
         $repository = new Model($mockConnection);
 
-        $retrieveData = $repository->selectAll();
+        $retrieveData = $repository->list();
 
         $this->assertEquals($expectedData, $retrieveData);
     }

@@ -108,7 +108,7 @@ class TypeTest extends TestCase
 
         $repository = new Type($mockConnection);
 
-        $retrieveData = $repository->selectAll();
+        $retrieveData = $repository->list();
 
         $this->assertEquals($expectedData, $retrieveData);
     }

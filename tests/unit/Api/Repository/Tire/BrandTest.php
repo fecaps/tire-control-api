@@ -108,7 +108,7 @@ class BrandTest extends TestCase
 
         $repository = new Brand($mockConnection);
 
-        $retrieveData = $repository->selectAll();
+        $retrieveData = $repository->list();
 
         $this->assertEquals($expectedData, $retrieveData);
     }

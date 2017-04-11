@@ -65,17 +65,17 @@ class TypeTest extends TestCase
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Type')
             ->disableOriginalConstructor()
-            ->setMethods(['selectAll'])
+            ->setMethods(['list'])
             ->getMock();
 
         $mockRepository
             ->expects($this->once())
-            ->method('selectAll')
+            ->method('list')
             ->willReturn($typeData);
 
         $typeModel = new Type($mockValidator, $mockRepository);
 
-        $retrieveData = $typeModel->selectAll();
+        $retrieveData = $typeModel->list();
 
         $this->assertEquals($typeData, $retrieveData);
     }

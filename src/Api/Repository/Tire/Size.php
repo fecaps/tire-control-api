@@ -38,7 +38,7 @@ class Size
         return $size;
     }
 
-    public function selectAll()
+    public function list()
     {
         $query = $this->connection->executeQuery('SELECT * FROM size');
 

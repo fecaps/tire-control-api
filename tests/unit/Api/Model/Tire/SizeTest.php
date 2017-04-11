@@ -65,17 +65,17 @@ class SizeTest extends TestCase
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Size')
             ->disableOriginalConstructor()
-            ->setMethods(['selectAll'])
+            ->setMethods(['list'])
             ->getMock();
 
         $mockRepository
             ->expects($this->once())
-            ->method('selectAll')
+            ->method('list')
             ->willReturn($sizeData);
 
         $sizeModel = new Size($mockValidator, $mockRepository);
 
-        $retrieveData = $sizeModel->selectAll();
+        $retrieveData = $sizeModel->list();
 
         $this->assertEquals($sizeData, $retrieveData);
     }
