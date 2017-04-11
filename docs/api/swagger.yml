@@ -9,6 +9,11 @@ paths:
   /signup:
     post:
       description: Create user in the API
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
 
       parameters:
         - name: name
@@ -51,6 +56,11 @@ paths:
   /login:
     post:
       description: Login to the API and GET token
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
 
       parameters:
         - name: email
@@ -129,6 +139,11 @@ paths:
 
     post:
       description: Register tire brand
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
 
       parameters:
         - name: token
@@ -183,6 +198,11 @@ paths:
 
     post:
       description: Register tire model
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
 
       parameters:
         - name: token
@@ -237,6 +257,11 @@ paths:
 
     post:
       description: Register tire size
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
 
       parameters:
         - name: token
@@ -291,6 +316,11 @@ paths:
 
     post:
       description: Register tire type
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
 
       parameters:
         - name: token
@@ -345,6 +375,11 @@ paths:
 
     post:
       description: Register tire
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
 
       parameters:
         - name: token
