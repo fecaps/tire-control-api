@@ -38,8 +38,8 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
         });
 
         $app->after(function (Request $request, Response $response) {
-            $allowedHeaders = 'Date, Server, X-Powered-By, Accept, Accept-Version,' .
-            'Content-Length, Content-Type, Origin, token';
+            $allowedHeaders = 'Server, Content-Type, Connection, X-Powered-By, Cache-Control, Date, ' .
+            'Accept, Accept-Version, Content-Length, Origin, token';
 
             $response->headers->set('Access-Control-Allow-Origin', '*');
             $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
@@ -50,5 +50,12 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
             return [];
         })
         ->assert('wildcard', '.*');
+
+        $app->before(function (Request $request) {
+            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+                $data = json_decode($request->getContent(), true);
+                $request->request->replace(is_array($data) ? $data : array());
+            }
+        });
     }
 }
