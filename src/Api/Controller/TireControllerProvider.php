@@ -28,6 +28,10 @@ class TireControllerProvider implements ControllerProviderInterface, ServiceProv
             return new Tire\TypeController($app['model.tire.type']);
         };
 
+        $app['tirecontroller'] = function () use ($app) {
+            return new TireController($app['model.tire']);
+        };
+
         $app->mount('/', new $this);
     }
 
@@ -35,17 +39,20 @@ class TireControllerProvider implements ControllerProviderInterface, ServiceProv
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/tires/brand', 'tire.brandcontroller:selectAll');
-        $controllers->post('/tires/brand', 'tire.brandcontroller:register');
+        $controllers->get('/tires/brands', 'tire.brandcontroller:selectAll');
+        $controllers->post('/tires/brands', 'tire.brandcontroller:register');
 
-        $controllers->get('/tires/model', 'tire.modelcontroller:selectAll');
-        $controllers->post('/tires/model', 'tire.modelcontroller:register');
+        $controllers->get('/tires/models', 'tire.modelcontroller:selectAll');
+        $controllers->post('/tires/models', 'tire.modelcontroller:register');
         
-        $controllers->get('/tires/size', 'tire.sizecontroller:selectAll');
-        $controllers->post('/tires/size', 'tire.sizecontroller:register');
+        $controllers->get('/tires/sizes', 'tire.sizecontroller:selectAll');
+        $controllers->post('/tires/sizes', 'tire.sizecontroller:register');
         
-        $controllers->get('/tires/type', 'tire.typecontroller:selectAll');
-        $controllers->post('/tires/type', 'tire.typecontroller:register');
+        $controllers->get('/tires/types', 'tire.typecontroller:selectAll');
+        $controllers->post('/tires/types', 'tire.typecontroller:register');
+
+        $controllers->get('/tires', 'tirecontroller:selectAll');
+        $controllers->post('/tires', 'tirecontroller:register');
 
         return $controllers;
     }

@@ -92,7 +92,7 @@ CREATE TABLE `tire` (
   `size` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
   `model` varchar(50) NOT NULL,
-  `date_of_manufacture` datetime NOT NULL,
+  `dot` varchar(50) NOT NULL,
   `code` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_UNIQUE` (`code`),

@@ -13,4 +13,6 @@ class TireMessages
     const INVALID_TYPE  = 'Invalid tire type';
     const INVALID_MODEL = 'Invalid tire model';
     const INVALID_CODE  = 'Invalid tire code';
+    const SPECIFIC_LEN  = 'This field must have %s characters';
+    const INVALID_DOT   = 'Invalid DOT';
 }

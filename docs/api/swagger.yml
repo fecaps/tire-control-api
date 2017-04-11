@@ -102,7 +102,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
 
-  /tires/brand:
+  /tires/brands:
     get:
       description: Get tire brands
 
@@ -156,7 +156,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
 
-  /tires/model:
+  /tires/models:
     get:
       description: Get tire models
 
@@ -210,7 +210,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
 
-  /tires/size:
+  /tires/sizes:
     get:
       description: Get tire sizes
 
@@ -264,7 +264,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiError' 
 
-  /tires/type:
+  /tires/types:
     get:
       description: Get tire types
 
@@ -317,6 +317,85 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/ApiError'      
+
+  /tires:
+    get:
+      description: Get tires
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Tire'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+    post:
+      description: Register tire
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: brand
+          in: formData
+          description: The tire brand name
+          required: true
+          type: string
+        - name: model
+          in: formData
+          description: The tire model name
+          required: true
+          type: string
+        - name: size
+          in: formData
+          description: The tire size name
+          required: true
+          type: string
+        - name: type
+          in: formData
+          description: The tire type name
+          required: true
+          type: string
+        - name: dot
+          in: formData
+          description: The tire dot
+          required: true
+          type: string
+        - name: code
+          in: formData
+          description: The tire code/identification
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Tire'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError' 
 
 definitions:
 
@@ -372,6 +451,24 @@ definitions:
       id:
         type: string
       name:
+        type: string
+
+  Tire:
+    type: object
+    properties:
+      id:
+        type: string
+      brand:
+        type: string
+      model:
+        type: string
+      size:
+        type: string
+      type:
+        type: string
+      dot:
+        type: string
+      code:
         type: string
 
   ApiError:
