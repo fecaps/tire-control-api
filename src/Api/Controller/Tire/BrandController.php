@@ -31,6 +31,6 @@ class BrandController
 
     public function list(): array
     {
-        return $this->brand->list();
+        return ['data' => $this->brand->list()];
     }
 }

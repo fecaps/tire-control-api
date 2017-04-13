@@ -52,7 +52,8 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
         ->assert('wildcard', '.*');
 
         $app->before(function (Request $request) {
-            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $contentType = $request->headers->get('Content-Type') ?? 'Content-Type';
+            if (0 === strpos($contentType, 'application/json')) {
                 $data = json_decode($request->getContent(), true);
                 $request->request->replace(is_array($data) ? $data : array());
             }

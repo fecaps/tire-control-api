@@ -31,6 +31,6 @@ class TypeController
 
     public function list(): array
     {
-        return $this->type->list();
+        return ['data' => $this->type->list()];
     }
 }

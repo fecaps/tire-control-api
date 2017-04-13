@@ -31,6 +31,6 @@ class SizeController
 
     public function list(): array
     {
-        return $this->size->list();
+        return ['data' => $this->size->list()];
     }
 }

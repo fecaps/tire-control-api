@@ -31,6 +31,6 @@ class ModelController
 
     public function list(): array
     {
-        return $this->model->list();
+        return ['data' => $this->model->list()];
     }
 }

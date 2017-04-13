@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Api\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Manager;
 use Api\Model\Tire;
 
 class TireController
@@ -37,6 +39,6 @@ class TireController
 
     public function list(): array
     {
-        return $this->tire->list();
+        return ['data' => $this->tire->list()];
     }
 }
