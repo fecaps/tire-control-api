@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Model\Tire;
+namespace Api\Model\Vehicle;
 
-use Api\Validator\Tire\Type as TypeValidator;
-use Api\Repository\Tire\Type as TypeRepository;
+use Api\Validator\Vehicle\Type as TypeValidator;
+use Api\Repository\Vehicle\Type as TypeRepository;
 use Api\Exception\ValidatorException;
 
 class Type
@@ -27,7 +27,7 @@ class Type
         $existsName = $this->repository->findByName($type);
 
         if ($existsName) {
-            $exception = new ValidatorException('This tire type name already exists.');
+            $exception = new ValidatorException('This vehicle type name already exists.');
             throw $exception;
         }
 

@@ -59,19 +59,19 @@ class Tire
         $existsCode = $this->repository->findByCode($code);
 
         if (!$existsBrand) {
-            $exception->addMessage('brand', 'The brand must be registered in the brands table.');
+            $exception->addMessage('brand', 'The brand must be registered in the tire brand table.');
         }
          
         if (!$existsModel) {
-            $exception->addMessage('model', 'The model must be registered in the models table.');
+            $exception->addMessage('model', 'The model must be registered in the tire model table.');
         }
 
         if (!$existsSize) {
-            $exception->addMessage('size', 'The size must be registered in the sizes table.');
+            $exception->addMessage('size', 'The size must be registered in the tire size table.');
         }
 
         if (!$existsType) {
-            $exception->addMessage('type', 'The type must be registered in the types table.');
+            $exception->addMessage('type', 'The type must be registered in the tire type table.');
         }
 
         if ($existsCode) {

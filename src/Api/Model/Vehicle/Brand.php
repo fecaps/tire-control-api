@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Model\Tire;
+namespace Api\Model\Vehicle;
 
-use Api\Validator\Tire\Brand as BrandValidator;
-use Api\Repository\Tire\Brand as BrandRepository;
+use Api\Validator\Vehicle\Brand as BrandValidator;
+use Api\Repository\Vehicle\Brand as BrandRepository;
 use Api\Exception\ValidatorException;
 
 class Brand
@@ -27,7 +27,7 @@ class Brand
         $existsName = $this->repository->findByName($brand);
 
         if ($existsName) {
-            $exception = new ValidatorException('This tire brand name already exists.');
+            $exception = new ValidatorException('This vehicle brand name already exists.');
             throw $exception;
         }
 
