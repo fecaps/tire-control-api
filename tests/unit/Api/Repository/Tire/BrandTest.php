@@ -23,7 +23,7 @@ class BrandTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('insert')
-            ->with('brand', $brandData)
+            ->with('tire_brand', $brandData)
             ->willReturn(1);
 
         $mockConnection
@@ -66,7 +66,7 @@ class BrandTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM brand WHERE name = ?', [$expectedData['name']])
+            ->with('SELECT * FROM tire_brand WHERE name = ?', [$expectedData['name']])
             ->willReturn($mockQuery);
 
         $repository = new Brand($mockConnection);
@@ -103,7 +103,7 @@ class BrandTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM brand')
+            ->with('SELECT * FROM tire_brand')
             ->willReturn($mockQuery);
 
         $repository = new Brand($mockConnection);

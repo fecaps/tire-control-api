@@ -23,7 +23,7 @@ class ModelTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('insert')
-            ->with('model', $modelData)
+            ->with('tire_model', $modelData)
             ->willReturn(1);
 
         $mockConnection
@@ -66,7 +66,7 @@ class ModelTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM model WHERE name = ?', [$expectedData['name']])
+            ->with('SELECT * FROM tire_model WHERE name = ?', [$expectedData['name']])
             ->willReturn($mockQuery);
 
         $repository = new Model($mockConnection);
@@ -103,7 +103,7 @@ class ModelTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM model')
+            ->with('SELECT * FROM tire_model')
             ->willReturn($mockQuery);
 
         $repository = new Model($mockConnection);

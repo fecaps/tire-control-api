@@ -5,7 +5,6 @@ namespace Api\Validator;
 
 use Api\Exception\ValidatorException;
 use Api\Enum\TireMessages;
-use DateTime;
 
 class Tire implements ValidatorInterface
 {

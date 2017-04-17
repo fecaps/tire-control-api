@@ -19,7 +19,7 @@ class Type
     public function create(array $data): array
     {
         try {
-            $this->connection->insert('type', $data);
+            $this->connection->insert('tire_type', $data);
         } catch (DBALException $exception) {
             throw new DatabaseException($exception->getMessage());
         }
@@ -31,7 +31,7 @@ class Type
 
     public function findByName($name)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM type WHERE name = ?', [$name]);
+        $query = $this->connection->executeQuery('SELECT * FROM tire_type WHERE name = ?', [$name]);
 
         $type = $query->fetch();
 
@@ -40,7 +40,7 @@ class Type
 
     public function list()
     {
-        $query = $this->connection->executeQuery('SELECT * FROM type');
+        $query = $this->connection->executeQuery('SELECT * FROM tire_type');
 
         $type = $query->fetchAll();
 

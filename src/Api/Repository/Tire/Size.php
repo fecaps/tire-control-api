@@ -19,7 +19,7 @@ class Size
     public function create(array $data): array
     {
         try {
-            $this->connection->insert('size', $data);
+            $this->connection->insert('tire_size', $data);
         } catch (DBALException $exception) {
             throw new DatabaseException($exception->getMessage());
         }
@@ -31,7 +31,7 @@ class Size
 
     public function findByName($name)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM size WHERE name = ?', [$name]);
+        $query = $this->connection->executeQuery('SELECT * FROM tire_size WHERE name = ?', [$name]);
 
         $size = $query->fetch();
 
@@ -40,7 +40,7 @@ class Size
 
     public function list()
     {
-        $query = $this->connection->executeQuery('SELECT * FROM size');
+        $query = $this->connection->executeQuery('SELECT * FROM tire_size');
 
         $size = $query->fetchAll();
 

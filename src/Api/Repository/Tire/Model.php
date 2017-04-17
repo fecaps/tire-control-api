@@ -19,7 +19,7 @@ class Model
     public function create(array $data): array
     {
         try {
-            $this->connection->insert('model', $data);
+            $this->connection->insert('tire_model', $data);
         } catch (DBALException $exception) {
             throw new DatabaseException($exception->getMessage());
         }
@@ -31,7 +31,7 @@ class Model
 
     public function findByName($name)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM model WHERE name = ?', [$name]);
+        $query = $this->connection->executeQuery('SELECT * FROM tire_model WHERE name = ?', [$name]);
 
         $model = $query->fetch();
 
@@ -40,7 +40,7 @@ class Model
 
     public function list()
     {
-        $query = $this->connection->executeQuery('SELECT * FROM model');
+        $query = $this->connection->executeQuery('SELECT * FROM tire_model');
 
         $model = $query->fetchAll();
 

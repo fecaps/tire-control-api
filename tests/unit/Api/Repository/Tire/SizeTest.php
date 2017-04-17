@@ -23,7 +23,7 @@ class SizeTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('insert')
-            ->with('size', $sizeData)
+            ->with('tire_size', $sizeData)
             ->willReturn(1);
 
         $mockConnection
@@ -66,7 +66,7 @@ class SizeTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM size WHERE name = ?', [$expectedData['name']])
+            ->with('SELECT * FROM tire_size WHERE name = ?', [$expectedData['name']])
             ->willReturn($mockQuery);
 
         $repository = new Size($mockConnection);
@@ -103,7 +103,7 @@ class SizeTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM size')
+            ->with('SELECT * FROM tire_size')
             ->willReturn($mockQuery);
 
         $repository = new Size($mockConnection);

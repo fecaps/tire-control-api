@@ -6,7 +6,6 @@ namespace Api\Validator;
 use PHPUnit\Framework\TestCase;
 use Api\Exception\ValidatorException;
 use Api\Enum\TireMessages;
-use DateTime;
 
 class TireTest extends TestCase
 {

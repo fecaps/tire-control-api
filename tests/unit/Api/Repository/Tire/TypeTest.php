@@ -23,7 +23,7 @@ class TypeTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('insert')
-            ->with('type', $typeData)
+            ->with('tire_type', $typeData)
             ->willReturn(1);
 
         $mockConnection
@@ -66,7 +66,7 @@ class TypeTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM type WHERE name = ?', [$expectedData['name']])
+            ->with('SELECT * FROM tire_type WHERE name = ?', [$expectedData['name']])
             ->willReturn($mockQuery);
 
         $repository = new Type($mockConnection);
@@ -103,7 +103,7 @@ class TypeTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM type')
+            ->with('SELECT * FROM tire_type')
             ->willReturn($mockQuery);
 
         $repository = new Type($mockConnection);

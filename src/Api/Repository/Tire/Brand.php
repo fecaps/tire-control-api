@@ -19,7 +19,7 @@ class Brand
     public function create(array $data): array
     {
         try {
-            $this->connection->insert('brand', $data);
+            $this->connection->insert('tire_brand', $data);
         } catch (DBALException $exception) {
             throw new DatabaseException($exception->getMessage());
         }
@@ -31,7 +31,7 @@ class Brand
 
     public function findByName($name)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM brand WHERE name = ?', [$name]);
+        $query = $this->connection->executeQuery('SELECT * FROM tire_brand WHERE name = ?', [$name]);
 
         $brand = $query->fetch();
 
@@ -40,7 +40,7 @@ class Brand
 
     public function list()
     {
-        $query = $this->connection->executeQuery('SELECT * FROM brand');
+        $query = $this->connection->executeQuery('SELECT * FROM tire_brand');
 
         $brand = $query->fetchAll();
 
