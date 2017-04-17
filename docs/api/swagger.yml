@@ -432,6 +432,262 @@ paths:
           schema:
             $ref: '#/definitions/ApiError' 
 
+  /vehicles/brands:
+    get:
+      description: Get vehicle brands
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/VehicleBrand'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+    post:
+      description: Register vehicle brand
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: name
+          in: formData
+          description: The vehicle brand name
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/VehicleBrand'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+  /vehicles/categories:
+    get:
+      description: Get vehicle categories
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/VehicleCategory'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+    post:
+      description: Register vehicle category
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: name
+          in: formData
+          description: The vehicle category name
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/VehicleCategory'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError' 
+
+  /vehicles/types:
+    get:
+      description: Get vehicle types
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/VehicleType'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+    post:
+      description: Register vehicle type
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: name
+          in: formData
+          description: The vehicle type name
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/VehicleType'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'      
+
+  /vehicles:
+    get:
+      description: Get vehicles
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Vehicle'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+    post:
+      description: Register vehicle
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: brand
+          in: formData
+          description: The vehicle brand name
+          required: true
+          type: string
+        - name: category
+          in: formData
+          description: The vehicle category name
+          required: true
+          type: string
+        - name: model
+          in: formData
+          description: The vehicle model name
+          required: true
+          type: string
+        - name: type
+          in: formData
+          description: The vehicle type name
+          required: true
+          type: string
+        - name: plate
+          in: formData
+          description: The vehicle plate
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Vehicle'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError' 
+
 definitions:
 
   Signup:
@@ -506,6 +762,46 @@ definitions:
       code:
         type: string
 
+  VehicleBrand:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+
+  VehicleCategory:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+
+  VehicleType:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+
+  Vehicle:
+    type: object
+    properties:
+      id:
+        type: string
+      brand:
+        type: string
+      category:
+        type: string
+      model:
+        type: string
+      type:
+        type: string
+      plate:
+        type: string
+      
   ApiError:
     type: object
     properties:

@@ -72,5 +72,36 @@ class ModelProvider implements ServiceProviderInterface
                 $app['repository.tire']
             );
         };
+
+        $app['model.vehicle.brand'] = function () use ($app) {
+            return new Model\Vehicle\Brand(
+                $app['validator.vehicle.brand'],
+                $app['repository.vehicle.brand']
+            );
+        };
+
+        $app['model.vehicle.category'] = function () use ($app) {
+            return new Model\Vehicle\Category(
+                $app['validator.vehicle.category'],
+                $app['repository.vehicle.category']
+            );
+        };
+
+        $app['model.vehicle.type'] = function () use ($app) {
+            return new Model\Vehicle\Type(
+                $app['validator.vehicle.type'],
+                $app['repository.vehicle.type']
+            );
+        };
+
+        $app['model.vehicle'] = function () use ($app) {
+            return new Model\Vehicle(
+                $app['validator.vehicle'],
+                $app['repository.vehicle.brand'],
+                $app['repository.vehicle.category'],
+                $app['repository.vehicle.type'],
+                $app['repository.vehicle']
+            );
+        };
     }
 }

@@ -42,5 +42,21 @@ class RepositoryProvider implements ServiceProviderInterface
         $app['repository.tire'] = function () use ($app) {
             return new Repository\Tire($app['db']);
         };
+
+        $app['repository.vehicle.brand'] = function () use ($app) {
+            return new Repository\Vehicle\Brand($app['db']);
+        };
+
+        $app['repository.vehicle.category'] = function () use ($app) {
+            return new Repository\Vehicle\Category($app['db']);
+        };
+
+        $app['repository.vehicle.type'] = function () use ($app) {
+            return new Repository\Vehicle\Type($app['db']);
+        };
+
+        $app['repository.vehicle'] = function () use ($app) {
+            return new Repository\Vehicle($app['db']);
+        };
     }
 }

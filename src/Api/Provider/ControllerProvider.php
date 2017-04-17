@@ -14,5 +14,6 @@ class ControllerProvider implements ServiceProviderInterface
         $app->register(new Controller\AuthControllerProvider);
         $app->register(new Controller\UserControllerProvider);
         $app->register(new Controller\TireControllerProvider);
+        $app->register(new Controller\VehicleControllerProvider);
     }
 }

@@ -35,51 +35,6 @@ CREATE TABLE `auth_session` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `brand`
---
-
-DROP TABLE IF EXISTS `brand`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `brand` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `model`
---
-
-DROP TABLE IF EXISTS `model`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `model` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `size`
---
-
-DROP TABLE IF EXISTS `size`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `size` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `tire`
 --
 
@@ -100,21 +55,66 @@ CREATE TABLE `tire` (
   KEY `fk_tire_size_x` (`size`),
   KEY `fk_tire_type_x` (`type`),
   KEY `fk_tire_model_x` (`model`),
-  CONSTRAINT `fk_tire_brand_x` FOREIGN KEY (`brand`) REFERENCES `brand` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tire_model_x` FOREIGN KEY (`model`) REFERENCES `model` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tire_size_x` FOREIGN KEY (`size`) REFERENCES `size` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tire_type_x` FOREIGN KEY (`type`) REFERENCES `type` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_tire_brand_x` FOREIGN KEY (`brand`) REFERENCES `tire_brand` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tire_model_x` FOREIGN KEY (`model`) REFERENCES `tire_model` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tire_size_x` FOREIGN KEY (`size`) REFERENCES `tire_size` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tire_type_x` FOREIGN KEY (`type`) REFERENCES `tire_type` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `type`
+-- Table structure for table `tire_brand`
 --
 
-DROP TABLE IF EXISTS `type`;
+DROP TABLE IF EXISTS `tire_brand`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `type` (
+CREATE TABLE `tire_brand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tire_model`
+--
+
+DROP TABLE IF EXISTS `tire_model`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tire_model` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tire_size`
+--
+
+DROP TABLE IF EXISTS `tire_size`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tire_size` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tire_type`
+--
+
+DROP TABLE IF EXISTS `tire_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tire_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
@@ -140,6 +140,76 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vehicle`
+--
+
+DROP TABLE IF EXISTS `vehicle`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehicle` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `brand` varchar(50) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `model` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `plate` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `plate_UNIQUE` (`plate`),
+  KEY `fk_vehicle_brand_x` (`brand`),
+  KEY `fk_vehicle_category_x` (`category`),
+  KEY `fk_vehicle_type_x` (`type`),
+  CONSTRAINT `fk_vehicle_brand_x` FOREIGN KEY (`brand`) REFERENCES `vehicle_brand` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vehicle_category_x` FOREIGN KEY (`category`) REFERENCES `vehicle_category` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vehicle_type_x` FOREIGN KEY (`type`) REFERENCES `vehicle_type` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vehicle_brand`
+--
+
+DROP TABLE IF EXISTS `vehicle_brand`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehicle_brand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vehicle_category`
+--
+
+DROP TABLE IF EXISTS `vehicle_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehicle_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vehicle_type`
+--
+
+DROP TABLE IF EXISTS `vehicle_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehicle_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -150,4 +220,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-07 17:52:38
+-- Dump completed on 2017-04-17 16:48:01
