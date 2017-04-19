@@ -21,5 +21,7 @@ class RepositoryProviderTest extends TestCase
         $repositoryProvider = new RepositoryProvider;
 
         $repositoryProvider->register($mockContainer);
+    
+        $this->assertInstanceOf('Pimple\Container', $mockContainer);
     }
 }

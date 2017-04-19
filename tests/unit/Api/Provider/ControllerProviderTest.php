@@ -18,5 +18,9 @@ class ControllerProviderTest extends TestCase
         $controllerProvider = new ControllerProvider;
 
         $controllerProvider->register($mockContainer);
+
+        $this->assertInstanceOf('Pimple\Container', $mockContainer);
+
+        $this->assertInstanceOf('Api\Provider\ControllerProvider', $controllerProvider);
     }
 }

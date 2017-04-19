@@ -14,6 +14,10 @@ class AuthProviderTest extends TestCase
         $authProvider = new AuthProvider;
 
         $authProvider->register($mockContainer);
+
+        $this->assertInstanceOf('Pimple\Container', $mockContainer);
+
+        $this->assertInstanceOf('Api\Provider\AuthProvider', $authProvider);
     }
 
     public function testShouldCreateAuthMiddleware()
@@ -23,5 +27,9 @@ class AuthProviderTest extends TestCase
         $authProvider = new AuthProvider;
 
         $authProvider->boot($mockApplication);
+
+        $this->assertInstanceOf('Silex\Application', $mockApplication);
+
+        $this->assertInstanceOf('Api\Provider\AuthProvider', $authProvider);
     }
 }

@@ -18,14 +18,16 @@ class ModelProviderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mockAuthPasswd = $this->createMock('Api\\Repository\\Passwd');
+        $mockPasswdRepository = $this->createMock('Api\\Repository\\Passwd');
 
         $mockContainer['validator.user'] = $mockUserValidator;
         $mockContainer['repository.user'] = $mockUserRepository;
-        $mockContainer['repository.passwd'] = $mockAuthPasswd;
+        $mockContainer['repository.passwd'] = $mockPasswdRepository;
 
-        $modelProvider = new ModelProvider;
+        $modelProvider = new ModelProvider();
 
         $modelProvider->register($mockContainer);
+
+        $this->assertInstanceOf('Pimple\Container', $mockContainer);
     }
 }

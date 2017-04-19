@@ -14,5 +14,7 @@ class ValidatorProviderTest extends TestCase
         $validatorProvider = new ValidatorProvider;
 
         $validatorProvider->register($mockContainer);
+
+        $this->assertInstanceOf('Pimple\Container', $mockContainer);
     }
 }

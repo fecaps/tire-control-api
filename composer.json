@@ -25,5 +25,10 @@
         "psr-4": {
             "Api\\": "src/Api"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     }
 }
