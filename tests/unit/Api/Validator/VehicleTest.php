@@ -32,25 +32,23 @@ class VehicleTest extends TestCase
                 [
                     'type'      => 'Type2',
                     'brand'     => 'Brand2',
-                    'model'     => '<p><script></script></p>',
+                    'model'     => 'Model2',
                     'category'  => 'Category2',
                     'plate'     => '<>@Ç/>'
                 ],
                 [
-                    'model'     => [VehicleMessages::INVALID_MODEL],
                     'plate'     => [VehicleMessages::INVALID_PLATE]
                 ]
             ],
             [
                 [
-                    'type'      => 'Type2',
-                    'brand'     => 'Brand2',
-                    'model'     => str_pad('A', Vehicle::MODEL_MAX_LEN + 1),
-                    'category'  => 'Category2',
+                    'type'      => 'Type3',
+                    'brand'     => 'Brand3',
+                    'model'     => 'Model3',
+                    'category'  => 'Category3',
                     'plate'     => str_pad('A', Vehicle::PLATE_LEN + 1)
                 ],
                 [
-                    'model'     => [sprintf(VehicleMessages::MORE_THAN, Vehicle::MODEL_MAX_LEN)],
                     'plate'     => [sprintf(VehicleMessages::SPECIFIC_LEN, Vehicle::PLATE_LEN)]
                 ]
             ],

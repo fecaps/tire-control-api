@@ -15,7 +15,6 @@ class Vehicle
     private $validator;
     private $typeRepository;
     private $brandRepository;
-    private $modelRepository;
     private $categoryRepository;
     private $repository;
     

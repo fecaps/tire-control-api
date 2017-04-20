@@ -51,6 +51,10 @@ class ValidatorProvider implements ServiceProviderInterface
             return new Validator\Vehicle\Category;
         };
 
+        $app['validator.vehicle.model'] = function () {
+            return new Validator\Vehicle\Model;
+        };
+
         $app['validator.vehicle.type'] = function () {
             return new Validator\Vehicle\Type;
         };

@@ -51,6 +51,10 @@ class RepositoryProvider implements ServiceProviderInterface
             return new Repository\Vehicle\Category($app['db']);
         };
 
+        $app['repository.vehicle.model'] = function () use ($app) {
+            return new Repository\Vehicle\Model($app['db']);
+        };
+
         $app['repository.vehicle.type'] = function () use ($app) {
             return new Repository\Vehicle\Type($app['db']);
         };

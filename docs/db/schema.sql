@@ -197,6 +197,24 @@ CREATE TABLE `vehicle_category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `vehicle_model_brand`
+--
+
+DROP TABLE IF EXISTS `vehicle_model_brand`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehicle_model_brand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `brand` varchar(50) NOT NULL,
+  `model` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `model_UNIQUE` (`model`),
+  KEY `fk_vehicle_brand` (`brand`),
+  CONSTRAINT `fk_vehicle_brand` FOREIGN KEY (`brand`) REFERENCES `vehicle_brand` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `vehicle_type`
 --
 
@@ -220,4 +238,4 @@ CREATE TABLE `vehicle_type` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17 16:48:01
+-- Dump completed on 2017-04-20  1:32:51

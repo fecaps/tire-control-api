@@ -8,8 +8,7 @@ use Api\Enum\VehicleMessages;
 
 class Vehicle implements ValidatorInterface
 {
-    const MODEL_MAX_LEN = 50;
-    const PLATE_LEN     = 6;
+    const PLATE_LEN = 6;
 
     public function validate(array $data)
     {
@@ -33,9 +32,6 @@ class Vehicle implements ValidatorInterface
         $field = 'model';
         if (!isset($data[$field]) || $data[$field] == '') {
             $exception->addMessage($field, VehicleMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, VehicleMessages::INVALID_MODEL);
-            $this->validateMoreThan($field, $data[$field], self::MODEL_MAX_LEN, $exception);
         }
 
         $field = 'plate';
@@ -50,24 +46,11 @@ class Vehicle implements ValidatorInterface
         }
     }
 
-    public function validateUnicode($fieldName, $fieldValue, $exception, $message)
-    {
-        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
-            $exception->addMessage($fieldName, $message);
-        }
-    }
-
-    public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
-    {
-        if (mb_strlen($fieldValue) > $limit) {
-            $exception->addMessage($fieldName, sprintf(VehicleMessages::MORE_THAN, $limit));
-        }
-    }
-
     public function validatePlate($fieldName, $fieldValue, $limit, $exception)
     {
+        $message = VehicleMessages::INVALID_PLATE;
         if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
-            $exception->addMessage($fieldName, VehicleMessages::INVALID_PLATE);
+            $exception->addMessage($fieldName, $message);
         } else {
             if (mb_strlen($fieldValue) != $limit) {
                 $exception->addMessage($fieldName, sprintf(VehicleMessages::SPECIFIC_LEN, $limit));
@@ -76,7 +59,7 @@ class Vehicle implements ValidatorInterface
                 $stringPart = substr($fieldValue, -6, 3);
                 if (!filter_var($numericPart, FILTER_VALIDATE_INT) ||
                     filter_var($stringPart, FILTER_VALIDATE_INT)) {
-                    $exception->addMessage($fieldName, VehicleMessages::INVALID_PLATE);
+                    $exception->addMessage($fieldName, $message);
                 }
             }
         }

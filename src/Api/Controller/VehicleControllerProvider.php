@@ -20,6 +20,10 @@ class VehicleControllerProvider implements ControllerProviderInterface, ServiceP
             return new Vehicle\CategoryController($app['model.vehicle.category']);
         };
 
+        $app['vehicle.modelcontroller'] = function () use ($app) {
+            return new Vehicle\ModelController($app['model.vehicle.model']);
+        };
+
         $app['vehicle.typecontroller'] = function () use ($app) {
             return new Vehicle\TypeController($app['model.vehicle.type']);
         };
@@ -41,6 +45,9 @@ class VehicleControllerProvider implements ControllerProviderInterface, ServiceP
         $controllers->get('/vehicles/categories', 'vehicle.categorycontroller:list');
         $controllers->post('/vehicles/categories', 'vehicle.categorycontroller:create');
         
+        $controllers->get('/vehicles/models', 'vehicle.modelcontroller:list');
+        $controllers->post('/vehicles/models', 'vehicle.modelcontroller:create');
+
         $controllers->get('/vehicles/types', 'vehicle.typecontroller:list');
         $controllers->post('/vehicles/types', 'vehicle.typecontroller:create');
 
