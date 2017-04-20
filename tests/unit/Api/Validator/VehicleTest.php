@@ -34,7 +34,7 @@ class VehicleTest extends TestCase
                     'brand'     => 'Brand2',
                     'model'     => '<p><script></script></p>',
                     'category'  => 'Category2',
-                    'plate'     => '<p></script></p>'
+                    'plate'     => '<>@Ç/>'
                 ],
                 [
                     'model'     => [VehicleMessages::INVALID_MODEL],
@@ -47,11 +47,11 @@ class VehicleTest extends TestCase
                     'brand'     => 'Brand2',
                     'model'     => str_pad('A', Vehicle::MODEL_MAX_LEN + 1),
                     'category'  => 'Category2',
-                    'plate'     => str_pad('A', Vehicle::PLATE_MAX_LEN + 1)
+                    'plate'     => str_pad('A', Vehicle::PLATE_LEN + 1)
                 ],
                 [
                     'model'     => [sprintf(VehicleMessages::MORE_THAN, Vehicle::MODEL_MAX_LEN)],
-                    'plate'     => [sprintf(VehicleMessages::MORE_THAN, Vehicle::PLATE_MAX_LEN)]
+                    'plate'     => [sprintf(VehicleMessages::SPECIFIC_LEN, Vehicle::PLATE_LEN)]
                 ]
             ],
             [
@@ -60,7 +60,31 @@ class VehicleTest extends TestCase
                     'brand'     => 'Brand4',
                     'model'     => 'Model4',
                     'category'  => 'Category4',
-                    'plate'     => 'PLATE678'
+                    'plate'     => '678678'
+                ],
+                [
+                    'plate'     => [VehicleMessages::INVALID_PLATE]
+                ]
+            ],
+            [
+                [
+                    'type'      => 'Type4',
+                    'brand'     => 'Brand4',
+                    'model'     => 'Model4',
+                    'category'  => 'Category4',
+                    'plate'     => '678PLT'
+                ],
+                [
+                    'plate'     => [VehicleMessages::INVALID_PLATE]
+                ]
+            ],
+            [
+                [
+                    'type'      => 'Type4',
+                    'brand'     => 'Brand4',
+                    'model'     => 'Model4',
+                    'category'  => 'Category4',
+                    'plate'     => 'PLT678'
                 ],
                 [
                 ]
