@@ -550,6 +550,70 @@ paths:
           schema:
             $ref: '#/definitions/ApiError' 
 
+  /vehicles/models:
+    get:
+      description: Get vehicle models
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/VehicleModel'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'
+
+    post:
+      description: Register vehicle model
+      produces: 
+      - application/json
+      consumes: 
+      - application/x-www-form-urlencoded
+      - application/json
+
+      parameters:
+        - name: token
+          in: header
+          description: The Web API Token
+          required: true
+          type: string
+        - name: brand
+          in: formData
+          description: The vehicle brand name
+          required: true
+          type: string
+        - name: model
+          in: formData
+          description: The vehicle model name
+          required: true
+          type: string
+
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/VehicleModel'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ApiError'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ApiError'  
+
   /vehicles/types:
     get:
       description: Get vehicle types
@@ -776,6 +840,16 @@ definitions:
       id:
         type: string
       name:
+        type: string
+
+  VehicleModel:
+    type: object
+    properties:
+      id:
+        type: string
+      brand:
+        type: string
+      model:
         type: string
 
   VehicleType:

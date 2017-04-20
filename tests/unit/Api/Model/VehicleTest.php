@@ -39,16 +39,28 @@ class VehicleTest extends TestCase
             ->with($vehicleData['brand'])
             ->willReturn(true);
 
-        $mockCategoryRepository = $this
+        $mockCategRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
             ->disableOriginalConstructor()
             ->setMethods(['findByName'])
             ->getMock();
 
-        $mockCategoryRepository
+        $mockCategRepository
             ->expects($this->once())
             ->method('findByName')
             ->with($vehicleData['category'])
+            ->willReturn(true);
+
+        $mockModelRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByModel'])
+            ->getMock();
+
+        $mockModelRepository
+            ->expects($this->once())
+            ->method('findByModel')
+            ->with($vehicleData['model'])
             ->willReturn(true);
 
         $mockTypeRepository = $this
@@ -86,7 +98,8 @@ class VehicleTest extends TestCase
         $vehicleModel = new Vehicle(
             $mockValidator,
             $mockBrandRepository,
-            $mockCategoryRepository,
+            $mockCategRepository,
+            $mockModelRepository,
             $mockTypeRepository,
             $mockRepository
         );
@@ -132,16 +145,28 @@ class VehicleTest extends TestCase
             ->with($vehicleData['brand'])
             ->willReturn(false);
 
-        $mockCategoryRepository = $this
+        $mockCategRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
             ->disableOriginalConstructor()
             ->setMethods(['findByName'])
             ->getMock();
 
-        $mockCategoryRepository
+        $mockCategRepository
             ->expects($this->once())
             ->method('findByName')
             ->with($vehicleData['category'])
+            ->willReturn(false);
+
+        $mockModelRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByModel'])
+            ->getMock();
+
+        $mockModelRepository
+            ->expects($this->once())
+            ->method('findByModel')
+            ->with($vehicleData['model'])
             ->willReturn(false);
 
         $mockTypeRepository = $this
@@ -171,7 +196,8 @@ class VehicleTest extends TestCase
         $vehicleModel = new Vehicle(
             $mockValidator,
             $mockBrandRepository,
-            $mockCategoryRepository,
+            $mockCategRepository,
+            $mockModelRepository,
             $mockTypeRepository,
             $mockRepository
         );
@@ -200,10 +226,16 @@ class VehicleTest extends TestCase
             ->setMethods(['findByName'])
             ->getMock();
 
-        $mockCategoryRepository = $this
+        $mockCategRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
             ->disableOriginalConstructor()
             ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockModelRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByModel'])
             ->getMock();
 
         $mockTypeRepository = $this
@@ -226,7 +258,8 @@ class VehicleTest extends TestCase
         $vehicleModel = new Vehicle(
             $mockValidator,
             $mockBrandRepository,
-            $mockCategoryRepository,
+            $mockCategRepository,
+            $mockModelRepository,
             $mockTypeRepository,
             $mockRepository
         );

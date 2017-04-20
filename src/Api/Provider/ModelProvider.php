@@ -107,6 +107,7 @@ class ModelProvider implements ServiceProviderInterface
                 $app['validator.vehicle'],
                 $app['repository.vehicle.brand'],
                 $app['repository.vehicle.category'],
+                $app['repository.vehicle.model'],
                 $app['repository.vehicle.type'],
                 $app['repository.vehicle']
             );
