@@ -43,4 +43,5 @@ Create a new user by console:
 $ php bin/console tire-control:create-user  
 ```
 
-To see the available endpoints, check out **docs/api/swagger.yml**
+To see the available endpoints, check out the [documentation](http://docs.tirecontrol.apiary.io/ "Tire Control API Doc").
+
