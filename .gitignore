@@ -1,6 +1,5 @@
 config/parameters.yml
 build/codeCoverage/
-build/phpdox/
 apiary.html
 vendor/
 composer.lock
