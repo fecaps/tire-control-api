@@ -1,0 +1,528 @@
+FORMAT: 1A
+
+# Tire Control
+
+**Tire Control** is an API allowing companies/entities to maintain data on the logistics cycle involving tires and vehicles.
+
+# Group Tires
+
+Resources related to tires in the API.
+
+## Tire Brands Collection [/tires/brands]
+
+### List All Tire Brands [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "Pirelli"
+                },
+                {
+                    "id": "2",
+                    "name": "Continental"
+                }
+            ]
+        }
+
+### Create a New Tire Brand [POST]
+
+You **must** create a tire brand using this action. It takes a JSON object
+containing only one field.
+
++ name (string) - The tire brand name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "name": "Pirelli"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "1",
+                "name": "Pirelli"
+            }
+
+## Tire Models Collection [/tires/models]
+
+### List All Tire Models [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "Radial"
+                }
+            ]
+        }
+
+### Create a New Tire Model [POST]
+
+You **must** create a tire model using this action. It takes a JSON object
+containing only one field.
+
++ name (string) - The tire model name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "name": "Radial"
+            }
+
++ Response 201 (application/json)
+
+        {
+            "id": "1",
+            "name": "Radial"
+        }
+
+## Tire Sizes Collection [/tires/sizes]
+
+### List All Tire Sizes [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "295/80"
+                },
+                {
+                    "id": "2",
+                    "name": "295/90"
+                }
+            ]
+        }
+
+### Create a New Tire Size [POST]
+
+You **must** create a tire size using this action. It takes a JSON object
+containing only one field.
+
++ name (string) - The tire size name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "name": "295/90"
+            }
+
++ Response 201 (application/json)
+
+        {
+            "id": "2",
+            "name": "295/90"
+        }
+
+## Tire Types Collection [/tires/types]
+
+### List All Tire Types [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "FR85"
+                },
+                {
+                    "id": "2",
+                    "name": "FR90"
+                }
+            ]
+        }
+
+### Create a New Tire Type [POST]
+
+You **must** create a tire type using this action. It takes a JSON object
+containing only one field.
+
++ name (string) - The tire type name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "name": "FR90"
+            }
+
++ Response 201 (application/json)
+
+        {
+            "id": "2",
+            "name": "FR90"
+        }
+
+## Tires Collection [/tires]
+
+### List All Tires [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "brand": "Pirelli",
+                    "size": "295/80",
+                    "type": "FR85",
+                    "model": "Radial",
+                    "dot": "1209",
+                    "code": "code11"
+                },
+                {
+                    "id": "2",
+                    "brand": "Pirelli",
+                    "size": "295/80",
+                    "type": "FR85",
+                    "model": "Radial",
+                    "dot": "1210",
+                    "code": "code10"
+                }
+            ]
+        }
+
+### Create a New Tire [POST]
+
+You **must** create a tire using this action. It takes a JSON object
+containing specific fields.
+
++ brand (string) - The brand
++ model (string) - The model
++ size (string) - The size
++ type (string) - The type
++ dot (string) - The DOT (MonthYear)
++ code (string) - The unique code
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "brand": "Pirelli",
+                "model": "Radial",
+                "size": "295/80",
+                "type": "FR85",
+                "dot": "1215",
+                "code": "code10"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "1",
+                "brand": "Pirelli",
+                "model": "Radial",
+                "size": "295/80",
+                "type": "FR85",
+                "dot": "1215",
+                "code": "code10"
+            }
+
+# Group Vehicles
+
+Resources related to vehicles in the API.
+
+## Vehicle Brands Collection [/vehicles/brands]
+
+### List All Vehicle Brands [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "Ford"
+                },
+                {
+                    "id": "2",
+                    "name": "VW"
+                }
+            ]
+        }
+
+### Create a New Vehicle Brand [POST]
+
+You **must** create a vehicle brand using this action. It takes a JSON object
+containing only one field.
+
++ name (string) - The vehicle brand name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "name": "VW"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "2",
+                "name": "VW"
+            }
+
+## Vehicle Categories Collection [/vehicles/categories]
+
+### List All Vehicle Categories [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "Utilitary"
+                },
+                {
+                    "id": "2",
+                    "name": "2 axes"
+                }
+            ]
+        }
+
+### Create a New Vehicle Category [POST]
+
+You **must** create a vehicle category using this action. It takes a JSON object
+containing only one field.
+
++ name (string) - The vehicle category name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "name": "2 axes"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "2",
+                "name": "2 axes"
+            }
+
+## Vehicle Models Collection [/vehicles/models]
+
+### List All Vehicle Models [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "brand": "Ford",
+                    "model": "Model10"
+                },
+                {
+                    "id": "2",
+                    "brand": "Ford",
+                    "model": "Model20"
+                }
+            ]
+        }
+
+### Create a New Vehicle Model [POST]
+
+You **must** create a vehicle model using this action. It takes a JSON object
+containing only two fields.
+
++ brand (string) - The vehicle brand name (from vehicle brand)
++ model (string) - The vehicle model name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "brand": "Ford",
+                "model": "Model20"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "2",
+                "brand": "Ford",
+                "model": "Model20"
+            }
+
+## Vehicle Types Collection [/vehicles/types]
+
+### List All Vehicle Types [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "Truck"
+                },
+                {
+                    "id": "2",
+                    "name": "HR"
+                }
+            ]
+        }
+
+### Create a New Vehicle Type [POST]
+
+You **must** create a vehicle type using this action. It takes a JSON object
+containing only one field.
+
++ name (string) - The vehicle type name
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            token: <token>
+    
+    + Body
+
+            {
+                "name": "HR"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "2",
+                "name": "HR"
+            }
