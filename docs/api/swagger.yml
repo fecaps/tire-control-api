@@ -127,7 +127,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/TireBrand'
+            $ref: '#/definitions/Tire'
         403:
           description: Forbidden
           schema:
@@ -161,7 +161,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/TireBrand'
+            $ref: '#/definitions/Tire'
         401:
           description: Unauthorized
           schema:
@@ -186,7 +186,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/TireModel'
+            $ref: '#/definitions/Tire'
         403:
           description: Forbidden
           schema:
@@ -220,7 +220,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/TireModel'
+            $ref: '#/definitions/Tire'
         401:
           description: Unauthorized
           schema:
@@ -245,7 +245,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/TireSize'
+            $ref: '#/definitions/Tire'
         403:
           description: Forbidden
           schema:
@@ -279,7 +279,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/TireSize'
+            $ref: '#/definitions/Tire'
         401:
           description: Unauthorized
           schema:
@@ -304,7 +304,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/TireType'
+            $ref: '#/definitions/Tire'
         403:
           description: Forbidden
           schema:
@@ -338,7 +338,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/TireType'
+            $ref: '#/definitions/Tire'
         401:
           description: Unauthorized
           schema:
@@ -363,7 +363,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/Tire'
+            $ref: '#/definitions/TireFull'
         403:
           description: Forbidden
           schema:
@@ -422,7 +422,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/Tire'
+            $ref: '#/definitions/TireFull'
         401:
           description: Unauthorized
           schema:
@@ -447,7 +447,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/VehicleBrand'
+            $ref: '#/definitions/Vehicle'
         403:
           description: Forbidden
           schema:
@@ -481,7 +481,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/VehicleBrand'
+            $ref: '#/definitions/Vehicle'
         401:
           description: Unauthorized
           schema:
@@ -506,7 +506,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/VehicleCategory'
+            $ref: '#/definitions/Vehicle'
         403:
           description: Forbidden
           schema:
@@ -540,7 +540,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/VehicleCategory'
+            $ref: '#/definitions/Vehicle'
         401:
           description: Unauthorized
           schema:
@@ -629,7 +629,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/VehicleType'
+            $ref: '#/definitions/Vehicle'
         403:
           description: Forbidden
           schema:
@@ -663,7 +663,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/VehicleType'
+            $ref: '#/definitions/Vehicle'
         401:
           description: Unauthorized
           schema:
@@ -742,7 +742,7 @@ paths:
         201:
           description: Created
           schema:
-            $ref: '#/definitions/Vehicle'
+            $ref: '#/definitions/VehicleFull'
         401:
           description: Unauthorized
           schema:
@@ -776,39 +776,15 @@ definitions:
       token:
         type: string
 
-  TireBrand:
-    type: object
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-
-  TireModel:
-    type: object
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-
-  TireSize:
-    type: object
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-
-  TireType:
-    type: object
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-
   Tire:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+
+  TireFull:
     type: object
     properties:
       id:
@@ -826,15 +802,7 @@ definitions:
       code:
         type: string
 
-  VehicleBrand:
-    type: object
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-
-  VehicleCategory:
+  Vehicle:
     type: object
     properties:
       id:
@@ -852,15 +820,7 @@ definitions:
       model:
         type: string
 
-  VehicleType:
-    type: object
-    properties:
-      id:
-        type: string
-      name:
-        type: string
-
-  Vehicle:
+  VehicleFull:
     type: object
     properties:
       id:
