@@ -4,6 +4,142 @@ FORMAT: 1A
 
 **Tire Control** is an API allowing companies/entities to maintain data on the logistics cycle involving tires and vehicles.
 
+## Token
+
+Most endpoints in the Tire Control API will require the `token` HTTP header. 
+Only `/signup` and `/login` endpoinst will not require this HTTP header. 
+
+```http
+token: <token>
+```
+Failing to do so will cause the following error:
+
+```json
+{
+  "error": "Token is missing on request headers."
+}
+```
+
+# Group Users
+
+Resources related to users in the API.
+
+## Signup Collection [/signup]
+
+### Create a New User [POST]
+
+You **may** create an user using this action. It takes a JSON object
+containing only specific fields.
+
++ name (string) - The user name
++ username (sring) - The username (login) identification
++ email (string) - The user email
++ passwd (string) - The user password
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+    
+    + Body
+
+            {
+                "name": "User Name",
+                "username": "user_name",
+                "email": "user_email@gmail.com",
+                "passwd": "12345678"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "1",
+                "name": "User Name",
+                "email": "user_email@gmail.com",
+                "username": "user_name"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "",
+                "errors": {
+                    "name": [
+                        "This field cannot be blank"
+                    ],
+                    "username": [
+                        "This field cannot be blank"
+                    ],
+                    "email": [
+                        "This field cannot be blank"
+                    ],
+                    "passwd": [
+                        "This field cannot be blank"
+                    ]
+                }
+            }
+
+## Login Collection [/login]
+
+### Login an User [POST]
+
+You **must** login an user using this action. It takes a JSON object
+containing only specific fields.
+
++ email (string) - The user email
++ passwd (string) - The user password
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+    
+    + Body
+
+            {
+                "email": "user_email@gmail.com",
+                "passwd": "12345678"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "user_name": "User Name",
+                "user_email": "user_email@gmail.com",
+                "token": "MTU4ZTdmYzNjMzg0OWI2LjQ5ODk5NTc2"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "Invalid email or password.",
+                "errors": []
+            }
+
+## Logout Collection [/logout]
+
+### Logout an User [PUT]
+
+You **must** logout an user using this action. It takes just the token header.
+
++ Request
+
+    + Headers
+    
+            token: <token>
+    
++ Response 204
+
 # Group Tires
 
 Resources related to tires in the API.
@@ -45,8 +181,8 @@ containing only one field.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -61,6 +197,15 @@ containing only one field.
             {
                 "id": "1",
                 "name": "Pirelli"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "This tire brand name already exists.",
+                "errors": []
             }
 
 ## Tire Models Collection [/tires/models]
@@ -96,8 +241,8 @@ containing only one field.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -107,10 +252,21 @@ containing only one field.
 
 + Response 201 (application/json)
 
-        {
-            "id": "1",
-            "name": "Radial"
-        }
+    + Body
+
+            {
+                "id": "1",
+                "name": "Radial"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "This tire model name already exists.",
+                "errors": []
+            }
 
 ## Tire Sizes Collection [/tires/sizes]
 
@@ -149,8 +305,8 @@ containing only one field.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -160,10 +316,21 @@ containing only one field.
 
 + Response 201 (application/json)
 
-        {
-            "id": "2",
-            "name": "295/90"
-        }
+    + Body
+
+            {
+                "id": "2",
+                "name": "295/90"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "This tire size name already exists.",
+                "errors": []
+            }
 
 ## Tire Types Collection [/tires/types]
 
@@ -202,8 +369,8 @@ containing only one field.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -213,10 +380,21 @@ containing only one field.
 
 + Response 201 (application/json)
 
-        {
-            "id": "2",
-            "name": "FR90"
-        }
+    + Body
+
+            {
+                "id": "2",
+                "name": "FR90"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "This tire type name already exists.",
+                "errors": []
+            }
 
 ## Tires Collection [/tires]
 
@@ -270,8 +448,8 @@ containing specific fields.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -296,6 +474,19 @@ containing specific fields.
                 "type": "FR85",
                 "dot": "1215",
                 "code": "code10"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "",
+                "errors": {
+                    "code": [
+                        "Code already in use."
+                    ]
+                }
             }
 
 # Group Vehicles
@@ -339,8 +530,8 @@ containing only one field.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -355,6 +546,15 @@ containing only one field.
             {
                 "id": "2",
                 "name": "VW"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "This vehicle brand name already exists.",
+                "errors": []
             }
 
 ## Vehicle Categories Collection [/vehicles/categories]
@@ -394,8 +594,8 @@ containing only one field.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -410,6 +610,15 @@ containing only one field.
             {
                 "id": "2",
                 "name": "2 axes"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "This vehicle category name already exists.",
+                "errors": []
             }
 
 ## Vehicle Models Collection [/vehicles/models]
@@ -452,8 +661,8 @@ containing only two fields.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -470,6 +679,19 @@ containing only two fields.
                 "id": "2",
                 "brand": "Ford",
                 "model": "Model20"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "",
+                "errors": {
+                    "model": [
+                        "This vehicle model already exists."
+                    ]
+                }
             }
 
 ## Vehicle Types Collection [/vehicles/types]
@@ -509,8 +731,8 @@ containing only one field.
 
     + Headers
     
-            Content-Type: application/json
             token: <token>
+            Content-Type: application/json
     
     + Body
 
@@ -525,4 +747,93 @@ containing only one field.
             {
                 "id": "2",
                 "name": "HR"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "This vehicle type name already exists.",
+                "errors": []
+            }
+
+## Vehicles Collection [/vehicles]
+
+### List All Vehicles [GET]
+
++ Request
+
+    + Headers
+
+            token: <token>
+
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "brand": "Ford",
+                    "category": "Utilitary",
+                    "model": "Model1",
+                    "type": "Truck",
+                    "plate": "PLT687"
+                }
+            ]
+        }
+
+### Create a New Vehicle [POST]
+
+You **must** create a vehicle type using this action. It takes a JSON object
+containing specific fields.
+
++ brand (string) - The vehicle brand name
++ category (string) - The vehicle category name
++ model (string) - The vehicle model name
++ type (string) - The vehicle type name
++ plate (string) - The vehicle plate
+
++ Request
+
+    + Headers
+    
+            token: <token>
+            Content-Type: application/json
+    
+    + Body
+
+            {
+                "brand": "Ford",
+                "category": "Utilitary",
+                "model": "Model1",
+                "type": "Truck",
+                "plate": "PLT687"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "id": "1",
+                "brand": "Ford",
+                "category": "Utilitary",
+                "model": "Model1",
+                "type": "Truck",
+                "plate": "PLT687"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+
+            {
+                "error": "",
+                "errors": {
+                    "plate": [
+                        "Invalid vehicle plate"
+                    ]
+                }
             }
