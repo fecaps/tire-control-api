@@ -43,5 +43,11 @@ Create a new user by console:
 $ php bin/console tire-control:create-user  
 ```
 
-To see the available endpoints, check out the [documentation](http://docs.tirecontrol.apiary.io/ "Tire Control API Doc").
+### Endpoints
 
+Generating local HTML file to check out the available endpoints:
+```
+$ aglio -i apiary.apib -o apiary.html
+```
+
+Check out the API [documentation online](http://docs.tirecontrol.apiary.io/ "Tire Control API Doc").
