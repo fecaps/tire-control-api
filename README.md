@@ -38,11 +38,6 @@ Start local server:
 $ php -S localhost:8080 -t public/
 ```
 
-Create a new user by console:
-```
-$ php bin/console tire-control:create-user  
-```
-
 ### Endpoints
 
 Generating local HTML file to check out the available endpoints:
