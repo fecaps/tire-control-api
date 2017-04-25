@@ -19,51 +19,63 @@ class User implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $field = 'name';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, UserMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, UserMessages::INVALID_NAME);
-            $this->validateMoreThan($field, $data[$field], self::NAME_MAX_LEN, $exception);
-            $this->validateLessThan($field, $data[$field], self::NAME_MIN_LEN, $exception);
-        }
+        $this->validateFormats(
+            'name',
+            $data['name'],
+            UserMessages::INVALID_NAME,
+            self::NAME_MAX_LEN,
+            self::NAME_MIN_LEN,
+            $exception
+        );
 
-        $field = 'username';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, UserMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, UserMessages::INVALID_USERNAME);
-            $this->validateLessThan($field, $data[$field], self::USERNAME_MIN_LEN, $exception);
-            $this->validateMoreThan($field, $data[$field], self::USERNAME_MAX_LEN, $exception);
-        }
+        $this->validateFormats(
+            'username',
+            $data['username'],
+            UserMessages::INVALID_USERNAME,
+            self::USERNAME_MAX_LEN,
+            self::USERNAME_MIN_LEN,
+            $exception
+        );
+        
+        $this->validateEmail(
+            'email',
+            $data['email'],
+            UserMessages::INVALID_EMAIL,
+            $exception
+        );
 
-        $field = 'email';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, UserMessages::NOT_BLANK);
-        } elseif (!filter_var($data[$field], FILTER_VALIDATE_EMAIL)) {
-            $exception->addMessage($field, UserMessages::INVALID_EMAIL);
-        }
-
-        $field = 'passwd';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, UserMessages::NOT_BLANK);
-        } else {
-            $this->validateLessThan($field, $data[$field], self::PASSWORD_MIN_LEN, $exception);
-            $this->validateMoreThan($field, $data[$field], self::PASSWORD_MAX_LEN, $exception);
-        }
+        $this->validateFormats(
+            'passwd',
+            $data['passwd'],
+            UserMessages::INVALID_PASSWORD,
+            self::PASSWORD_MAX_LEN,
+            self::PASSWORD_MIN_LEN,
+            $exception
+        );
 
         if (count($exception->getMessages()) > 0) {
             throw $exception;
         }
     }
-
-    public function validateUnicode($fieldName, $fieldValue, $exception, $message)
-    {
-        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
-            $exception->addMessage($fieldName, $message);
-        }
-    }
     
+    public function validateFormats($fieldName, $fieldValue, $invalidMessage, $maxLen, $minLen, $exception)
+    {
+        $blankMessage = UserMessages::NOT_BLANK;
+
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, $blankMessage);
+            return;
+        }
+
+        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
+            $exception->addMessage($fieldName, $invalidMessage);
+            return;
+        }
+
+        $this->validateMoreThan($fieldName, $fieldValue, $maxLen, $exception);
+        $this->validateLessThan($fieldName, $fieldValue, $minLen, $exception);
+    }
+
     public function validateLessThan($fieldName, $fieldValue, $limit, $exception)
     {
         if (mb_strlen($fieldValue) < $limit) {
@@ -75,6 +87,20 @@ class User implements ValidatorInterface
     {
         if (mb_strlen($fieldValue) > $limit) {
             $exception->addMessage($fieldName, sprintf(UserMessages::MORE_THAN, $limit));
+        }
+    }
+
+    public function validateEmail($fieldName, $fieldValue, $invalidMessage, $exception)
+    {
+        $blankMessage = UserMessages::NOT_BLANK;
+
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, $blankMessage);
+            return;
+        }
+
+        if (!filter_var($fieldValue, FILTER_VALIDATE_EMAIL)) {
+            $exception->addMessage($fieldName, $invalidMessage);
         }
     }
 }

@@ -22,7 +22,7 @@ class UserTest extends TestCase
                 ]
             ],
             [
-                ['name' => '', 'email' => '', 'username' => ''],
+                ['name' => '', 'email' => '', 'username' => '', 'passwd' => ''],
                 [
                     'name'      => [UserMessages::NOT_BLANK],
                     'email'     => [UserMessages::NOT_BLANK],
@@ -58,11 +58,12 @@ class UserTest extends TestCase
                     'name'      => '<p><script>window.location.href="http://example.com";</script></p>',
                     'email'     => 'paul@gmail.com',
                     'username'  => '<p><script>alert("You cannot do whatever you want");</script></p>',
-                    'passwd'    => 'avalidpasswd'
+                    'passwd'    => '<p><script>alert("You cannot do whatever you want");</script></p>'
                 ],
                 [
                     'name'      => [UserMessages::INVALID_NAME],
-                    'username'  => [UserMessages::INVALID_USERNAME]
+                    'username'  => [UserMessages::INVALID_USERNAME],
+                    'passwd'    => [UserMessages::INVALID_PASSWORD],
                 ]
             ]
         ];

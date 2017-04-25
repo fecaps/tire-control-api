@@ -15,56 +15,44 @@ class Tire implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $field = 'brand';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, TireMessages::NOT_BLANK);
-        }
+        $this->validateNotEmpty('brand', $data['brand'], $exception);
 
-        $field = 'model';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, TireMessages::NOT_BLANK);
-        }
+        $this->validateNotEmpty('model', $data['model'], $exception);
 
-        $field = 'size';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, TireMessages::NOT_BLANK);
-        }
+        $this->validateNotEmpty('size', $data['size'], $exception);
 
-        $field = 'type';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, TireMessages::NOT_BLANK);
-        }
+        $this->validateNotEmpty('type', $data['type'], $exception);
 
-        $field = 'dot';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, TireMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, TireMessages::INVALID_DOT);
-            $this->validateLength($field, $data[$field], self::DOT_LEN, $exception);
-        }
+        $this->validateFormats('dot', $data['dot'], self::DOT_LEN, TireMessages::INVALID_DOT, $exception);
 
-        $field = 'code';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, TireMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, TireMessages::INVALID_CODE);
-            $this->validateLength($field, $data[$field], self::CODE_LEN, $exception);
-        }
+        $this->validateFormats('code', $data['code'], self::CODE_LEN, TireMessages::INVALID_CODE, $exception);
 
         if (count($exception->getMessages()) > 0) {
             throw $exception;
         }
     }
 
-    public function validateUnicode($fieldName, $fieldValue, $exception, $message)
+    public function validateNotEmpty($fieldName, $fieldValue, $exception)
     {
-        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
-            $exception->addMessage($fieldName, $message);
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, TireMessages::NOT_BLANK);
         }
     }
-    
-    public function validateLength($fieldName, $fieldValue, $limit, $exception)
+
+    public function validateFormats($fieldName, $fieldValue, $limit, $invalidMessage, $exception)
     {
+        $blankMessage = TireMessages::NOT_BLANK;
+
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, $blankMessage);
+            return;
+        }
+
+        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
+            $exception->addMessage($fieldName, $invalidMessage);
+            return;
+        }
+
         if (mb_strlen($fieldValue) != $limit) {
             $exception->addMessage($fieldName, sprintf(TireMessages::SPECIFIC_LEN, $limit));
         }

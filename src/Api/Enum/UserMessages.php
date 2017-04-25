@@ -11,6 +11,7 @@ class UserMessages
     const INVALID_NAME          = 'Invalid name';
     const INVALID_USERNAME      = 'Invalid username';
     const INVALID_EMAIL         = 'Invalid email';
+    const INVALID_PASSWORD      = 'Invalid password';
     const INVALID_IP_ADDRESS    = 'Invalid IP address';
     const INVALID_DATE_TIME     = 'Invalid date time. Format: %s';
 }
