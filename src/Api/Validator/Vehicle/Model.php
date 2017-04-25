@@ -15,31 +15,37 @@ class Model implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $field = 'brand';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, VehicleMessages::NOT_BLANK);
-        }
+        $this->validateNotEmpty('brand', $data['brand'], $exception);
 
-        $field = 'model';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, VehicleMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, VehicleMessages::INVALID_MODEL);
-            $this->validateMoreThan($field, $data[$field], self::MODEL_MAX_LEN, $exception);
-        }
+        $this->validateModelFormat('model', $data['model'], self::MODEL_MAX_LEN, $exception);
 
         if (count($exception->getMessages()) > 0) {
             throw $exception;
         }
     }
 
-    public function validateUnicode($fieldName, $fieldValue, $exception, $message)
+    public function validateNotEmpty($fieldName, $fieldValue, $exception)
     {
-        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
-            $exception->addMessage($fieldName, $message);
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, VehicleMessages::NOT_BLANK);
         }
     }
-    
+
+    public function validateModelFormat($fieldName, $fieldValue, $limit, $exception)
+    {
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, VehicleMessages::NOT_BLANK);
+            return;
+        }
+
+        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
+            $exception->addMessage($fieldName, VehicleMessages::INVALID_MODEL);
+            return;
+        }
+
+        $this->validateMoreThan($fieldName, $fieldValue, self::MODEL_MAX_LEN, $exception);
+    }
+
     public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
     {
         if (mb_strlen($fieldValue) > $limit) {

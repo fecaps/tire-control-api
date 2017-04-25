@@ -19,28 +19,23 @@ class Type implements ValidatorInterface
         $field = 'name';
         if (!isset($data[$field]) || $data[$field] == '') {
             $exception->addMessage($field, TireMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, TireMessages::INVALID_TYPE);
-            $this->validateLessThan($field, $data[$field], self::TYPE_MIN_LEN, $exception);
-            $this->validateMoreThan($field, $data[$field], self::TYPE_MAX_LEN, $exception);
-        }
-
-        if (count($exception->getMessages()) > 0) {
             throw $exception;
         }
+
+        if (htmlentities($data[$field], ENT_QUOTES, 'UTF-8') != $data[$field]) {
+            $exception->addMessage($field, TireMessages::INVALID_TYPE);
+            throw $exception;
+        }
+
+        $this->validateLessThan($field, $data[$field], self::TYPE_MIN_LEN, $exception);
+        $this->validateMoreThan($field, $data[$field], self::TYPE_MAX_LEN, $exception);
     }
 
-    public function validateUnicode($fieldName, $fieldValue, $exception, $message)
-    {
-        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
-            $exception->addMessage($fieldName, $message);
-        }
-    }
-    
     public function validateLessThan($fieldName, $fieldValue, $limit, $exception)
     {
         if (mb_strlen($fieldValue) < $limit) {
             $exception->addMessage($fieldName, sprintf(TireMessages::LESS_THAN, $limit));
+            throw $exception;
         }
     }
 
@@ -48,6 +43,7 @@ class Type implements ValidatorInterface
     {
         if (mb_strlen($fieldValue) > $limit) {
             $exception->addMessage($fieldName, sprintf(TireMessages::MORE_THAN, $limit));
+            throw $exception;
         }
     }
 }

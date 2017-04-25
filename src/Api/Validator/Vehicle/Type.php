@@ -18,27 +18,22 @@ class Type implements ValidatorInterface
         $field = 'name';
         if (!isset($data[$field]) || $data[$field] == '') {
             $exception->addMessage($field, VehicleMessages::NOT_BLANK);
-        } else {
-            $this->validateUnicode($field, $data[$field], $exception, VehicleMessages::INVALID_TYPE);
-            $this->validateMoreThan($field, $data[$field], self::TYPE_MAX_LEN, $exception);
-        }
-
-        if (count($exception->getMessages()) > 0) {
             throw $exception;
         }
-    }
 
-    public function validateUnicode($fieldName, $fieldValue, $exception, $message)
-    {
-        if (htmlentities($fieldValue, ENT_QUOTES, 'UTF-8') != $fieldValue) {
-            $exception->addMessage($fieldName, $message);
+        if (htmlentities($data[$field], ENT_QUOTES, 'UTF-8') != $data[$field]) {
+            $exception->addMessage($field, VehicleMessages::INVALID_TYPE);
+            throw $exception;
         }
+
+        $this->validateMoreThan($field, $data[$field], self::TYPE_MAX_LEN, $exception);
     }
     
     public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
     {
         if (mb_strlen($fieldValue) > $limit) {
             $exception->addMessage($fieldName, sprintf(VehicleMessages::MORE_THAN, $limit));
+            throw $exception;
         }
     }
 }
