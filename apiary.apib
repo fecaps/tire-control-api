@@ -162,10 +162,6 @@ Resources related to tires in the API.
                 {
                     "id": "1",
                     "name": "Pirelli"
-                },
-                {
-                    "id": "2",
-                    "name": "Continental"
                 }
             ]
         }
@@ -285,10 +281,6 @@ containing only one field.
             "data": [
                 {
                     "id": "1",
-                    "name": "295/80"
-                },
-                {
-                    "id": "2",
                     "name": "295/90"
                 }
             ]
@@ -319,7 +311,7 @@ containing only one field.
     + Body
 
             {
-                "id": "2",
+                "id": "1",
                 "name": "295/90"
             }
 
@@ -349,10 +341,6 @@ containing only one field.
             "data": [
                 {
                     "id": "1",
-                    "name": "FR85"
-                },
-                {
-                    "id": "2",
                     "name": "FR90"
                 }
             ]
@@ -383,7 +371,7 @@ containing only one field.
     + Body
 
             {
-                "id": "2",
+                "id": "1",
                 "name": "FR90"
             }
 
@@ -418,16 +406,9 @@ containing only one field.
                     "type": "FR85",
                     "model": "Radial",
                     "dot": "1209",
-                    "code": "code11"
-                },
-                {
-                    "id": "2",
-                    "brand": "Pirelli",
-                    "size": "295/80",
-                    "type": "FR85",
-                    "model": "Radial",
-                    "dot": "1210",
-                    "code": "code10"
+                    "code": "code10",
+                    "purchase_price": "190.9",
+                    "purchase_date": "2017-04-26"
                 }
             ]
         }
@@ -441,8 +422,10 @@ containing specific fields.
 + model (string) - The model
 + size (string) - The size
 + type (string) - The type
-+ dot (string) - The DOT (MonthYear)
++ dot (string) - The DOT
 + code (string) - The unique code
++ purchase_price (float) - The purchase price
++ purchase_date (date) - The purchase date (Y-m-d)
 
 + Request
 
@@ -458,8 +441,10 @@ containing specific fields.
                 "model": "Radial",
                 "size": "295/80",
                 "type": "FR85",
-                "dot": "1215",
-                "code": "code10"
+                "dot": "1209",
+                "code": "code10",
+                "purchase_price": "190.9",
+                "purchase_date": "2017-04-26"
             }
 
 + Response 201 (application/json)
@@ -473,7 +458,9 @@ containing specific fields.
                 "size": "295/80",
                 "type": "FR85",
                 "dot": "1215",
-                "code": "code10"
+                "code": "code10",
+                "purchase_price": "190.9",
+                "purchase_date": "2017-04-26"
             }
 
 + Response 401 (application/json)

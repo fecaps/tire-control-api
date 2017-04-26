@@ -49,6 +49,8 @@ CREATE TABLE `tire` (
   `model` varchar(50) NOT NULL,
   `dot` varchar(50) NOT NULL,
   `code` varchar(50) NOT NULL,
+  `purchase_price` float NOT NULL,
+  `purchase_date` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_UNIQUE` (`code`),
   KEY `fk_tire_brand_x` (`brand`),
@@ -238,4 +240,4 @@ CREATE TABLE `vehicle_type` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-25 13:31:06
+-- Dump completed on 2017-04-26 19:42:23

@@ -60,7 +60,6 @@ class Vehicle implements ValidatorInterface
         $stringPart = substr($fieldValue, -6, 3);
         if (!filter_var($numericPart, FILTER_VALIDATE_INT) || filter_var($stringPart, FILTER_VALIDATE_INT)) {
             $exception->addMessage($fieldName, $invalidMessage);
-            return;
         }
     }
 }

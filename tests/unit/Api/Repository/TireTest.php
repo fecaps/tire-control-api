@@ -11,12 +11,14 @@ class TireTest extends TestCase
     public function testShouldFindByCode()
     {
         $expectedData = [
-            'brand' => 'Brand Test',
-            'model' => 'Model Test',
-            'size'  => 'Size Test',
-            'type'  => 'Type Test',
-            'dot'   => 'DOT Test',
-            'code'  => 'Code Test'
+            'brand'             => 'Brand Test',
+            'model'             => 'Model Test',
+            'size'              => 'Size Test',
+            'type'              => 'Type Test',
+            'dot'               => 'DOT Test',
+            'code'              => 'Code Test',
+            'purchase_date'     => '2017-12-31',
+            'purchase_price'    => '17.50'
         ];
 
         $mockQuery = $this
@@ -52,12 +54,14 @@ class TireTest extends TestCase
     public function testShouldCreateATire()
     {
         $tireData = [
-            'brand' => 'Brand Test',
-            'model' => 'Model Test',
-            'size'  => 'Size Test',
-            'type'  => 'Type Test',
-            'dot'   => 'DOT Test',
-            'code'  => 'Code Test'
+            'brand'             => 'Brand Test',
+            'model'             => 'Model Test',
+            'size'              => 'Size Test',
+            'type'              => 'Type Test',
+            'dot'               => 'DOT Test',
+            'code'              => 'Code Test',
+            'purchase_date'     => '2017-12-31',
+            'purchase_price'    => '17.50'
         ];
 
         $mockConnection = $this
@@ -89,13 +93,14 @@ class TireTest extends TestCase
     public function testShouldSelectAll()
     {
         $expectedData = [
-            'id'    => 123,
-            'brand' => 'Brand Test',
-            'model' => 'Model Test',
-            'size'  => 'Size Test',
-            'type'  => 'Type Test',
-            'dot'   => 'DOT Test',
-            'code'  => 'Code Test'
+            'brand'             => 'Brand Test',
+            'model'             => 'Model Test',
+            'size'              => 'Size Test',
+            'type'              => 'Type Test',
+            'dot'               => 'DOT Test',
+            'code'              => 'Code Test',
+            'purchase_date'     => '2017-12-31',
+            'purchase_price'    => '17.50'
         ];
 
         $mockQuery = $this
