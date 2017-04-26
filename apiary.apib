@@ -498,10 +498,6 @@ Resources related to vehicles in the API.
                 {
                     "id": "1",
                     "name": "Ford"
-                },
-                {
-                    "id": "2",
-                    "name": "VW"
                 }
             ]
         }
@@ -523,7 +519,7 @@ containing only one field.
     + Body
 
             {
-                "name": "VW"
+                "name": "Ford"
             }
 
 + Response 201 (application/json)
@@ -531,8 +527,8 @@ containing only one field.
     + Body
 
             {
-                "id": "2",
-                "name": "VW"
+                "id": "1",
+                "name": "Ford"
             }
 
 + Response 401 (application/json)
@@ -562,10 +558,6 @@ containing only one field.
                 {
                     "id": "1",
                     "name": "Utilitary"
-                },
-                {
-                    "id": "2",
-                    "name": "2 axes"
                 }
             ]
         }
@@ -587,7 +579,7 @@ containing only one field.
     + Body
 
             {
-                "name": "2 axes"
+                "name": "1 Utilitary"
             }
 
 + Response 201 (application/json)
@@ -595,8 +587,8 @@ containing only one field.
     + Body
 
             {
-                "id": "2",
-                "name": "2 axes"
+                "id": "1",
+                "name": "1 Utilitary"
             }
 
 + Response 401 (application/json)
@@ -627,11 +619,6 @@ containing only one field.
                     "id": "1",
                     "brand": "Ford",
                     "model": "Model10"
-                },
-                {
-                    "id": "2",
-                    "brand": "Ford",
-                    "model": "Model20"
                 }
             ]
         }
@@ -655,7 +642,7 @@ containing only two fields.
 
             {
                 "brand": "Ford",
-                "model": "Model20"
+                "model": "Model10"
             }
 
 + Response 201 (application/json)
@@ -663,9 +650,9 @@ containing only two fields.
     + Body
 
             {
-                "id": "2",
+                "id": "1",
                 "brand": "Ford",
-                "model": "Model20"
+                "model": "Model10"
             }
 
 + Response 401 (application/json)
@@ -699,10 +686,6 @@ containing only two fields.
                 {
                     "id": "1",
                     "name": "Truck"
-                },
-                {
-                    "id": "2",
-                    "name": "HR"
                 }
             ]
         }
@@ -724,7 +707,7 @@ containing only one field.
     + Body
 
             {
-                "name": "HR"
+                "name": "Truck"
             }
 
 + Response 201 (application/json)
@@ -732,8 +715,8 @@ containing only one field.
     + Body
 
             {
-                "id": "2",
-                "name": "HR"
+                "id": "1",
+                "name": "Truck"
             }
 
 + Response 401 (application/json)
