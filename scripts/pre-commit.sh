@@ -9,6 +9,8 @@ printf "\nCheck raw metrics stream with PHP Mess Detector:\n"
 vendor/bin/phpmd src/ text codesize
 printf "\nCheck copy/paste with PHP Copy/Paste Detector:\n"
 vendor/bin/phpcpd --verbose src/
+printf "\nGenerating static analysis with PHP Metrics:\n"
+vendor/bin/phpmetrics --report-html=build/phpmetrics src/
 
 
 

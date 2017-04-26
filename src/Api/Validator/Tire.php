@@ -32,14 +32,14 @@ class Tire implements ValidatorInterface
         }
     }
 
-    public function validateNotEmpty($fieldName, $fieldValue, $exception)
+    private function validateNotEmpty($fieldName, $fieldValue, $exception)
     {
         if (!isset($fieldValue) || $fieldValue == '') {
             $exception->addMessage($fieldName, TireMessages::NOT_BLANK);
         }
     }
 
-    public function validateFormats($fieldName, $fieldValue, $limit, $invalidMessage, $exception)
+    private function validateFormats($fieldName, $fieldValue, $limit, $invalidMessage, $exception)
     {
         $blankMessage = TireMessages::NOT_BLANK;
 

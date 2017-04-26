@@ -27,22 +27,13 @@ class Type implements ValidatorInterface
             throw $exception;
         }
 
-        $this->validateLessThan($field, $data[$field], self::TYPE_MIN_LEN, $exception);
-        $this->validateMoreThan($field, $data[$field], self::TYPE_MAX_LEN, $exception);
-    }
-
-    public function validateLessThan($fieldName, $fieldValue, $limit, $exception)
-    {
-        if (mb_strlen($fieldValue) < $limit) {
-            $exception->addMessage($fieldName, sprintf(TireMessages::LESS_THAN, $limit));
+        if (mb_strlen($data[$field]) < self::TYPE_MIN_LEN) {
+            $exception->addMessage($field, sprintf(TireMessages::LESS_THAN, self::TYPE_MIN_LEN));
             throw $exception;
         }
-    }
 
-    public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
-    {
-        if (mb_strlen($fieldValue) > $limit) {
-            $exception->addMessage($fieldName, sprintf(TireMessages::MORE_THAN, $limit));
+        if (mb_strlen($data[$field]) > self::TYPE_MAX_LEN) {
+            $exception->addMessage($field, sprintf(TireMessages::MORE_THAN, self::TYPE_MAX_LEN));
             throw $exception;
         }
     }

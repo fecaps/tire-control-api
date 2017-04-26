@@ -29,14 +29,14 @@ class Vehicle implements ValidatorInterface
         }
     }
 
-    public function validateNotEmpty($fieldName, $fieldValue, $exception)
+    private function validateNotEmpty($fieldName, $fieldValue, $exception)
     {
         if (!isset($fieldValue) || $fieldValue == '') {
             $exception->addMessage($fieldName, VehicleMessages::NOT_BLANK);
         }
     }
 
-    public function validatePlate($fieldName, $fieldValue, $limit, $exception)
+    private function validatePlate($fieldName, $fieldValue, $limit, $exception)
     {
         $blankMessage   = VehicleMessages::NOT_BLANK;
         $invalidMessage = VehicleMessages::INVALID_PLATE;

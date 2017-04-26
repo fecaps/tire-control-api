@@ -26,13 +26,8 @@ class Brand implements ValidatorInterface
             throw $exception;
         }
 
-        $this->validateMoreThan($field, $data[$field], self::BRAND_MAX_LEN, $exception);
-    }
-
-    public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
-    {
-        if (mb_strlen($fieldValue) > $limit) {
-            $exception->addMessage($fieldName, sprintf(VehicleMessages::MORE_THAN, $limit));
+        if (mb_strlen($data[$field]) > self::BRAND_MAX_LEN) {
+            $exception->addMessage($field, sprintf(VehicleMessages::MORE_THAN, self::BRAND_MAX_LEN));
             throw $exception;
         }
     }

@@ -58,7 +58,7 @@ class User implements ValidatorInterface
         }
     }
     
-    public function validateFormats($fieldName, $fieldValue, $invalidMessage, $maxLen, $minLen, $exception)
+    private function validateFormats($fieldName, $fieldValue, $invalidMessage, $maxLen, $minLen, $exception)
     {
         $blankMessage = UserMessages::NOT_BLANK;
 
@@ -72,25 +72,17 @@ class User implements ValidatorInterface
             return;
         }
 
-        $this->validateMoreThan($fieldName, $fieldValue, $maxLen, $exception);
-        $this->validateLessThan($fieldName, $fieldValue, $minLen, $exception);
-    }
+        if (mb_strlen($fieldValue) < $minLen) {
+            $exception->addMessage($fieldName, sprintf(UserMessages::LESS_THAN, $minLen));
+            return;
+        }
 
-    public function validateLessThan($fieldName, $fieldValue, $limit, $exception)
-    {
-        if (mb_strlen($fieldValue) < $limit) {
-            $exception->addMessage($fieldName, sprintf(UserMessages::LESS_THAN, $limit));
+        if (mb_strlen($fieldValue) > $maxLen) {
+            $exception->addMessage($fieldName, sprintf(UserMessages::MORE_THAN, $maxLen));
         }
     }
 
-    public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
-    {
-        if (mb_strlen($fieldValue) > $limit) {
-            $exception->addMessage($fieldName, sprintf(UserMessages::MORE_THAN, $limit));
-        }
-    }
-
-    public function validateEmail($fieldName, $fieldValue, $invalidMessage, $exception)
+    private function validateEmail($fieldName, $fieldValue, $invalidMessage, $exception)
     {
         $blankMessage = UserMessages::NOT_BLANK;
 

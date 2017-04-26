@@ -15,23 +15,20 @@ class Model implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $this->validateNotEmpty('brand', $data['brand'], $exception);
+        $field = 'brand';
+        if (!isset($data[$field]) || $data[$field] == '') {
+            $exception->addMessage($field, VehicleMessages::NOT_BLANK);
+        }
 
-        $this->validateModelFormat('model', $data['model'], self::MODEL_MAX_LEN, $exception);
+        $field = 'model';
+        $this->validateModelFormat($field, $data[$field], $exception);
 
         if (count($exception->getMessages()) > 0) {
             throw $exception;
         }
     }
 
-    public function validateNotEmpty($fieldName, $fieldValue, $exception)
-    {
-        if (!isset($fieldValue) || $fieldValue == '') {
-            $exception->addMessage($fieldName, VehicleMessages::NOT_BLANK);
-        }
-    }
-
-    public function validateModelFormat($fieldName, $fieldValue, $limit, $exception)
+    private function validateModelFormat($fieldName, $fieldValue, $exception)
     {
         if (!isset($fieldValue) || $fieldValue == '') {
             $exception->addMessage($fieldName, VehicleMessages::NOT_BLANK);
@@ -43,13 +40,8 @@ class Model implements ValidatorInterface
             return;
         }
 
-        $this->validateMoreThan($fieldName, $fieldValue, self::MODEL_MAX_LEN, $exception);
-    }
-
-    public function validateMoreThan($fieldName, $fieldValue, $limit, $exception)
-    {
-        if (mb_strlen($fieldValue) > $limit) {
-            $exception->addMessage($fieldName, sprintf(VehicleMessages::MORE_THAN, $limit));
+        if (mb_strlen($fieldValue) > self::MODEL_MAX_LEN) {
+            $exception->addMessage($fieldName, sprintf(VehicleMessages::MORE_THAN, self::MODEL_MAX_LEN));
         }
     }
 }
