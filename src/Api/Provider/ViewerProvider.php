@@ -36,7 +36,7 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
                 $code = 201;
             }
     
-            if ($request->getMethod() == 'PUT' || $request->getMethod() == 'OPTIONS') {
+            if ($request->getMethod() == 'PUT') {
                 $code = 204;
             }
         
