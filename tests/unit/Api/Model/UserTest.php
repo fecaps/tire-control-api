@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\User as UserValidator;
 
 class UserTest extends TestCase
 {
@@ -19,15 +20,7 @@ class UserTest extends TestCase
         $changedUserData = $userData;
         $changedUserData['passwd'] = '20202020';
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\User')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($userData);
+        $validator = new UserValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\User')
@@ -65,8 +58,8 @@ class UserTest extends TestCase
             ->method('tokenize')
             ->with($userData['passwd'])
             ->willReturn($changedUserData['passwd']);
-
-        $userModel = new User($mockValidator, $mockRepository, $mockPassword);
+        
+        $userModel = new User($validator, $mockRepository, $mockPassword);
 
         $retrieveData = $userModel->create($userData);
 
@@ -85,15 +78,7 @@ class UserTest extends TestCase
             'passwd'    => '12345678'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\User')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($userData);
+        $validator = new UserValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\User')
@@ -117,7 +102,7 @@ class UserTest extends TestCase
             ->getMockBuilder('Api\\Repository\\Passwd')
             ->getMock();
 
-        $userModel = new User($mockValidator, $mockRepository, $mockPassword);
+        $userModel = new User($validator, $mockRepository, $mockPassword);
 
         $userModel->create($userData);
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model\Vehicle;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Vehicle\Category as CategoryValidator;
 
 class CategoryTest extends TestCase
 {
@@ -13,15 +14,7 @@ class CategoryTest extends TestCase
             'name' => 'Category Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle\\Category')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($categoryData);
+        $validator = new CategoryValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
@@ -43,7 +36,7 @@ class CategoryTest extends TestCase
             ->with($categoryData)
             ->willReturn($newCategoryData);
 
-        $categoryModel = new Category($mockValidator, $mockRepository);
+        $categoryModel = new Category($validator, $mockRepository);
 
         $retrieveData = $categoryModel->create($categoryData);
 
@@ -57,10 +50,7 @@ class CategoryTest extends TestCase
             'name'  => 'Category Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle\\Category')
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new CategoryValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
@@ -73,7 +63,7 @@ class CategoryTest extends TestCase
             ->method('list')
             ->willReturn($categoryData);
 
-        $categoryModel = new Category($mockValidator, $mockRepository);
+        $categoryModel = new Category($validator, $mockRepository);
 
         $retrieveData = $categoryModel->list();
 
@@ -89,15 +79,7 @@ class CategoryTest extends TestCase
             'name' => 'Category Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle\\Category')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($categoryData);
+        $validator = new CategoryValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
@@ -111,7 +93,7 @@ class CategoryTest extends TestCase
             ->with($categoryData['name'])
             ->willReturn($categoryData);
 
-        $categoryModel = new Category($mockValidator, $mockRepository);
+        $categoryModel = new Category($validator, $mockRepository);
 
         $categoryModel->create($categoryData);
     }

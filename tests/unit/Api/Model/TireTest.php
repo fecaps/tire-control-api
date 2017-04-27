@@ -4,29 +4,24 @@ declare(strict_types=1);
 namespace Api\Model;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Tire as TireValidator;
 
 class TireTest extends TestCase
 {
     public function testShouldCreateNewTire()
     {
         $tireData = [
-            'brand' => 'Brand Test',
-            'model' => 'Model Test',
-            'size'  => 'Size Test',
-            'type'  => 'Type Test',
-            'dot'   => 'DOT Test',
-            'code'  => 'Code Test'
+            'brand'             => 'Brand Test',
+            'model'             => 'Model Test',
+            'size'              => 'Size Test',
+            'type'              => 'Type Test',
+            'dot'               => '4444',
+            'code'              => '666666',
+            'purchase_date'     => '2017-12-31',
+            'purchase_price'    => '17.50'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($tireData);
+        $validator = new TireValidator;
 
         $mockBrandRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Brand')
@@ -97,7 +92,7 @@ class TireTest extends TestCase
             ->willReturn($newTireData);
 
         $tireModel = new Tire(
-            $mockValidator,
+            $validator,
             $mockBrandRepository,
             $mockModelRepository,
             $mockSizeRepository,
@@ -110,30 +105,87 @@ class TireTest extends TestCase
         $this->assertEquals($newTireData, $retrieveData);
     }
 
-    
-     /**
+    public function testShouldSelectAll()
+    {
+        $tireData = [
+            'brand'             => 'Brand Test',
+            'model'             => 'Model Test',
+            'size'              => 'Size Test',
+            'type'              => 'Type Test',
+            'dot'               => '4444',
+            'code'              => '666666',
+            'purchase_date'     => '2017-12-31',
+            'purchase_price'    => '17.50'
+        ];
+
+        $validator = new TireValidator;
+
+        $mockBrandRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire\\Brand')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockModelRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire\\Model')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockSizeRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire\\Size')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockTypeRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire\\Type')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockRepository = $this
+            ->getMockBuilder('Api\\Repository\\Tire')
+            ->disableOriginalConstructor()
+            ->setMethods(['list'])
+            ->getMock();
+
+        $mockRepository
+            ->expects($this->once())
+            ->method('list')
+            ->willReturn($tireData);
+
+        $tireModel = new Tire(
+            $validator,
+            $mockBrandRepository,
+            $mockModelRepository,
+            $mockSizeRepository,
+            $mockTypeRepository,
+            $mockRepository
+        );
+
+        $retrieveData = $tireModel->list();
+
+        $this->assertEquals($tireData, $retrieveData);
+    }
+
+    /**
      * @expectedException Api\Exception\ValidatorException
      */
     public function testShouldGetErrorWhenDataAlreadyInUse()
     {
         $tireData = [
-            'brand' => 'Brand Test',
-            'model' => 'Model Test',
-            'size'  => 'Size Test',
-            'type'  => 'Type Test',
-            'dot'   => 'DOT Test',
-            'code'  => 'Code Test'
+            'brand'             => 'Brand Test',
+            'model'             => 'Model Test',
+            'size'              => 'Size Test',
+            'type'              => 'Type Test',
+            'dot'               => '4444',
+            'code'              => '666666',
+            'purchase_date'     => '2017-12-31',
+            'purchase_price'    => '17.50'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($tireData);
+        $validator = new TireValidator;
 
         $mockBrandRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Brand')
@@ -196,7 +248,7 @@ class TireTest extends TestCase
             ->willReturn($tireData);
 
         $tireModel = new Tire(
-            $mockValidator,
+            $validator,
             $mockBrandRepository,
             $mockModelRepository,
             $mockSizeRepository,
@@ -205,70 +257,5 @@ class TireTest extends TestCase
         );
 
         $tireModel->create($tireData);
-    }
-
-    public function testShouldSelectAll()
-    {
-        $tireData = [
-            'brand' => 'Brand Test',
-            'model' => 'Model Test',
-            'size'  => 'Size Test',
-            'type'  => 'Type Test',
-            'dot'   => 'DOT Test',
-            'code'  => 'Code Test'
-        ];
-
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockBrandRepository = $this
-            ->getMockBuilder('Api\\Repository\\Tire\\Brand')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockModelRepository = $this
-            ->getMockBuilder('Api\\Repository\\Tire\\Model')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockSizeRepository = $this
-            ->getMockBuilder('Api\\Repository\\Tire\\Size')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockTypeRepository = $this
-            ->getMockBuilder('Api\\Repository\\Tire\\Type')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockRepository = $this
-            ->getMockBuilder('Api\\Repository\\Tire')
-            ->disableOriginalConstructor()
-            ->setMethods(['list'])
-            ->getMock();
-
-        $mockRepository
-            ->expects($this->once())
-            ->method('list')
-            ->willReturn($tireData);
-
-        $tireModel = new Tire(
-            $mockValidator,
-            $mockBrandRepository,
-            $mockModelRepository,
-            $mockSizeRepository,
-            $mockTypeRepository,
-            $mockRepository
-        );
-
-        $retrieveData = $tireModel->list();
-
-        $this->assertEquals($tireData, $retrieveData);
     }
 }

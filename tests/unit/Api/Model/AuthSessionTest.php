@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\AuthSession as AuthSessionValidator;
 use DateTime;
 
 class AuthSessionTest extends TestCase
@@ -18,16 +19,7 @@ class AuthSessionTest extends TestCase
             'user_ip'       => '127.0.0.1'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\AuthSession')
-            ->disableOriginalConstructor()
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($data);
+        $validator = new AuthSessionValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\AuthSession')
@@ -40,21 +32,17 @@ class AuthSessionTest extends TestCase
             ->method('create')
             ->with($data);
 
-        $model = new AuthSession($mockValidator, $mockRepository);
+        $model = new AuthSession($validator, $mockRepository);
 
         $model->create($data);
     }
 
     public function testShouldUpdateAuthSession()
     {
-        $data = ['expire_at' => '2017-03-22 14:50:30'];
-        $criteria = ['token' => 'aValidToken'];
+        $data       = ['expire_at'  => '2017-03-22 14:50:30'];
+        $criteria   = ['token'      => 'aValidToken'];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\AuthSession')
-            ->disableOriginalConstructor()
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new AuthSessionValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\AuthSession')
@@ -67,7 +55,7 @@ class AuthSessionTest extends TestCase
             ->method('update')
             ->with($data, $criteria);
 
-        $model = new AuthSession($mockValidator, $mockRepository);
+        $model = new AuthSession($validator, $mockRepository);
 
         $model->update($criteria['token'], $data);
     }
@@ -76,11 +64,7 @@ class AuthSessionTest extends TestCase
     {
         $token = 'ABC';
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\AuthSession')
-            ->disableOriginalConstructor()
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new AuthSessionValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\AuthSession')
@@ -94,7 +78,7 @@ class AuthSessionTest extends TestCase
             ->with($token)
             ->willReturn(false);
 
-        $model = new AuthSession($mockValidator, $mockRepository);
+        $model = new AuthSession($validator, $mockRepository);
 
         $this->assertFalse($model->check($token));
     }
@@ -109,11 +93,7 @@ class AuthSessionTest extends TestCase
             'expire_at' => $futureExpireAt->format('Y-m-d H:i:s')
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\AuthSession')
-            ->disableOriginalConstructor()
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new AuthSessionValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\AuthSession')
@@ -127,7 +107,7 @@ class AuthSessionTest extends TestCase
             ->with($token)
             ->willReturn($retrieveData);
 
-        $model = new AuthSession($mockValidator, $mockRepository);
+        $model = new AuthSession($validator, $mockRepository);
 
         $this->assertTrue($model->check($token));
     }
@@ -142,11 +122,7 @@ class AuthSessionTest extends TestCase
             'expire_at' => $futureExpireAt->format('Y-m-d H:i:s')
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\AuthSession')
-            ->disableOriginalConstructor()
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new AuthSessionValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\AuthSession')
@@ -160,7 +136,7 @@ class AuthSessionTest extends TestCase
             ->with($token)
             ->willReturn($retrieveData);
 
-        $model = new AuthSession($mockValidator, $mockRepository);
+        $model = new AuthSession($validator, $mockRepository);
 
         $this->assertFalse($model->check($token));
     }

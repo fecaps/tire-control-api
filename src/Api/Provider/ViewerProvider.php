@@ -7,8 +7,6 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Application;
 use Silex\Api\BootableProviderInterface;
-use Silex\Controller;
-use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,6 +21,14 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
 
     public function boot(Application $app)
     {
+        $app->before(function (Request $request) {
+            $contentType = $request->headers->get('Content-Type') ?? 'Content-Type';
+            if (0 === strpos($contentType, 'application/json')) {
+                $data = json_decode($request->getContent(), true);
+                $request->request->replace(is_array($data) ? $data : array());
+            }
+        });
+
         $app->view(function (array $data, Request $request) use ($app) {
             $code = 200;
 
@@ -30,7 +36,7 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
                 $code = 201;
             }
     
-            if ($request->getMethod() == 'PUT') {
+            if ($request->getMethod() == 'PUT' || $request->getMethod() == 'OPTIONS') {
                 $code = 204;
             }
         
@@ -50,13 +56,5 @@ class ViewerProvider implements ServiceProviderInterface, BootableProviderInterf
             return [];
         })
         ->assert('wildcard', '.*');
-
-        $app->before(function (Request $request) {
-            $contentType = $request->headers->get('Content-Type') ?? 'Content-Type';
-            if (0 === strpos($contentType, 'application/json')) {
-                $data = json_decode($request->getContent(), true);
-                $request->request->replace(is_array($data) ? $data : array());
-            }
-        });
     }
 }

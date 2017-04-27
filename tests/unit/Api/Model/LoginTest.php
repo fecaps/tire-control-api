@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Login as LoginValidator;
 
 class LoginTest extends TestCase
 {
@@ -14,15 +15,17 @@ class LoginTest extends TestCase
             'passwd'    => '12345678'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Login')
-            ->setMethods(['validate'])
-            ->getMock();
+        // $mockValidator = $this
+        //     ->getMockBuilder('Api\\Validator\\Login')
+        //     ->setMethods(['validate'])
+        //     ->getMock();
 
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($loginData);
+        // $mockValidator
+        //     ->expects($this->once())
+        //     ->method('validate')
+        //     ->with($loginData);
+
+        $validator = new LoginValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\User')
@@ -47,7 +50,7 @@ class LoginTest extends TestCase
             ->with($loginData['passwd'], $loginData['passwd'])
             ->willReturn(true);
 
-        $loginModel = new Login($mockValidator, $mockRepository, $mockPasswd);
+        $loginModel = new Login($validator, $mockRepository, $mockPasswd);
 
         $retrieveData = $loginModel->authenticate($loginData);
 
@@ -109,15 +112,7 @@ class LoginTest extends TestCase
             'passwd'    => '12345678'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Login')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($loginData);
+        $validator = new LoginValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\User')
@@ -144,7 +139,7 @@ class LoginTest extends TestCase
             ->with($loginData['passwd'], $dbloginData['passwd'])
             ->willReturn(false);
 
-        $loginModel = new Login($mockValidator, $mockRepository, $mockPasswd);
+        $loginModel = new Login($validator, $mockRepository, $mockPasswd);
 
         $loginModel->authenticate($loginData);
     }

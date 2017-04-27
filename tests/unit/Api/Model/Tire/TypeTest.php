@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model\Tire;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Tire\Type as TypeValidator;
 
 class TypeTest extends TestCase
 {
@@ -13,15 +14,7 @@ class TypeTest extends TestCase
             'name' => 'Type Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Type')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($typeData);
+        $validator = new TypeValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Type')
@@ -43,7 +36,7 @@ class TypeTest extends TestCase
             ->with($typeData)
             ->willReturn($newTypeData);
 
-        $typeModel = new Type($mockValidator, $mockRepository);
+        $typeModel = new Type($validator, $mockRepository);
 
         $retrieveData = $typeModel->create($typeData);
 
@@ -57,10 +50,7 @@ class TypeTest extends TestCase
             'name'  => 'Type Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Type')
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new TypeValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Type')
@@ -73,7 +63,7 @@ class TypeTest extends TestCase
             ->method('list')
             ->willReturn($typeData);
 
-        $typeModel = new Type($mockValidator, $mockRepository);
+        $typeModel = new Type($validator, $mockRepository);
 
         $retrieveData = $typeModel->list();
 
@@ -89,15 +79,7 @@ class TypeTest extends TestCase
             'name' => 'Type Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Type')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($typeData);
+        $validator = new TypeValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Type')
@@ -111,7 +93,7 @@ class TypeTest extends TestCase
             ->with($typeData['name'])
             ->willReturn($typeData);
 
-        $typeModel = new Type($mockValidator, $mockRepository);
+        $typeModel = new Type($validator, $mockRepository);
 
         $typeModel->create($typeData);
     }

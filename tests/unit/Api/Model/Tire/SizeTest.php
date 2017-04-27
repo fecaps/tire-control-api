@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model\Tire;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Tire\Size as SizeValidator;
 
 class SizeTest extends TestCase
 {
@@ -13,15 +14,7 @@ class SizeTest extends TestCase
             'name' => 'Size Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Size')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($sizeData);
+        $validator = new SizeValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Size')
@@ -43,7 +36,7 @@ class SizeTest extends TestCase
             ->with($sizeData)
             ->willReturn($newSizeData);
 
-        $sizeModel = new Size($mockValidator, $mockRepository);
+        $sizeModel = new Size($validator, $mockRepository);
 
         $retrieveData = $sizeModel->create($sizeData);
 
@@ -57,10 +50,7 @@ class SizeTest extends TestCase
             'name'  => 'Size Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Size')
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new SizeValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Size')
@@ -73,7 +63,7 @@ class SizeTest extends TestCase
             ->method('list')
             ->willReturn($sizeData);
 
-        $sizeModel = new Size($mockValidator, $mockRepository);
+        $sizeModel = new Size($validator, $mockRepository);
 
         $retrieveData = $sizeModel->list();
 
@@ -89,15 +79,7 @@ class SizeTest extends TestCase
             'name' => 'Size Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Size')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($sizeData);
+        $validator = new SizeValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Size')
@@ -111,7 +93,7 @@ class SizeTest extends TestCase
             ->with($sizeData['name'])
             ->willReturn($sizeData);
 
-        $sizeModel = new Size($mockValidator, $mockRepository);
+        $sizeModel = new Size($validator, $mockRepository);
 
         $sizeModel->create($sizeData);
     }

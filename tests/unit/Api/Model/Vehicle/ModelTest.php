@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model\Vehicle;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Vehicle\Model as ModelValidator;
 
 class ModelTest extends TestCase
 {
@@ -14,15 +15,7 @@ class ModelTest extends TestCase
             'model' => 'Model Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle\\Model')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($modelData);
+        $validator = new ModelValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
@@ -56,7 +49,7 @@ class ModelTest extends TestCase
             ->with($modelData['brand'])
             ->willReturn(true);
 
-        $modelModel = new Model($mockValidator, $mockRepository, $mockBrandRepository);
+        $modelModel = new Model($validator, $mockRepository, $mockBrandRepository);
 
         $retrieveData = $modelModel->create($modelData);
 
@@ -71,10 +64,7 @@ class ModelTest extends TestCase
             'model' => 'Model Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle\\Model')
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new ModelValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
@@ -92,7 +82,7 @@ class ModelTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $modelModel = new Model($mockValidator, $mockRepository, $mockBrandRepository);
+        $modelModel = new Model($validator, $mockRepository, $mockBrandRepository);
 
         $retrieveData = $modelModel->list();
 
@@ -109,15 +99,7 @@ class ModelTest extends TestCase
             'model' => 'Model Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle\\Model')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($modelData);
+        $validator = new ModelValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
@@ -143,7 +125,7 @@ class ModelTest extends TestCase
             ->with($modelData['brand'])
             ->willReturn(false);
 
-        $modelModel = new Model($mockValidator, $mockRepository, $mockBrandRepository);
+        $modelModel = new Model($validator, $mockRepository, $mockBrandRepository);
 
         $modelModel->create($modelData);
     }

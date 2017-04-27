@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Vehicle as VehicleValidator;
 
 class VehicleTest extends TestCase
 {
@@ -14,18 +15,10 @@ class VehicleTest extends TestCase
             'brand'     => 'Brand Test',
             'model'     => 'Model Test',
             'category'  => 'Category Test',
-            'plate'     => 'Plate Test'
+            'plate'     => 'PLT678'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($vehicleData);
+        $validator = new VehicleValidator;
 
         $mockBrandRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
@@ -96,7 +89,7 @@ class VehicleTest extends TestCase
             ->willReturn($newVehicleData);
 
         $vehicleModel = new Vehicle(
-            $mockValidator,
+            $validator,
             $mockBrandRepository,
             $mockCategRepository,
             $mockModelRepository,
@@ -109,8 +102,68 @@ class VehicleTest extends TestCase
         $this->assertEquals($newVehicleData, $retrieveData);
     }
 
-    
-     /**
+    public function testShouldSelectAll()
+    {
+        $vehicleData = [
+            'type'      => 'Type Test',
+            'brand'     => 'Brand Test',
+            'model'     => 'Model Test',
+            'category'  => 'Category Test',
+            'plate'     => 'PLT678'
+        ];
+
+        $validator = new VehicleValidator;
+
+        $mockBrandRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockCategRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockModelRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByModel'])
+            ->getMock();
+
+        $mockTypeRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Type')
+            ->disableOriginalConstructor()
+            ->setMethods(['findByName'])
+            ->getMock();
+
+        $mockRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle')
+            ->disableOriginalConstructor()
+            ->setMethods(['list'])
+            ->getMock();
+
+        $mockRepository
+            ->expects($this->once())
+            ->method('list')
+            ->willReturn($vehicleData);
+
+        $vehicleModel = new Vehicle(
+            $validator,
+            $mockBrandRepository,
+            $mockCategRepository,
+            $mockModelRepository,
+            $mockTypeRepository,
+            $mockRepository
+        );
+
+        $retrieveData = $vehicleModel->list();
+
+        $this->assertEquals($vehicleData, $retrieveData);
+    }
+
+    /**
      * @expectedException Api\Exception\ValidatorException
      */
     public function testShouldGetErrorWhenDataAlreadyInUse()
@@ -120,18 +173,10 @@ class VehicleTest extends TestCase
             'brand'     => 'Brand Test',
             'model'     => 'Model Test',
             'category'  => 'Category Test',
-            'plate'     => 'Plate Test'
+            'plate'     => 'PLT678'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($vehicleData);
+        $validator = new VehicleValidator;
 
         $mockBrandRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
@@ -194,7 +239,7 @@ class VehicleTest extends TestCase
             ->willReturn($vehicleData);
 
         $vehicleModel = new Vehicle(
-            $mockValidator,
+            $validator,
             $mockBrandRepository,
             $mockCategRepository,
             $mockModelRepository,
@@ -203,69 +248,5 @@ class VehicleTest extends TestCase
         );
 
         $vehicleModel->create($vehicleData);
-    }
-
-    public function testShouldSelectAll()
-    {
-        $vehicleData = [
-            'type'      => 'Type Test',
-            'brand'     => 'Brand Test',
-            'model'     => 'Model Test',
-            'category'  => 'Category Test',
-            'plate'     => 'Plate Test'
-        ];
-
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Vehicle')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockBrandRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockCategRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockModelRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByModel'])
-            ->getMock();
-
-        $mockTypeRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle\\Type')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle')
-            ->disableOriginalConstructor()
-            ->setMethods(['list'])
-            ->getMock();
-
-        $mockRepository
-            ->expects($this->once())
-            ->method('list')
-            ->willReturn($vehicleData);
-
-        $vehicleModel = new Vehicle(
-            $mockValidator,
-            $mockBrandRepository,
-            $mockCategRepository,
-            $mockModelRepository,
-            $mockTypeRepository,
-            $mockRepository
-        );
-
-        $retrieveData = $vehicleModel->list();
-
-        $this->assertEquals($vehicleData, $retrieveData);
     }
 }

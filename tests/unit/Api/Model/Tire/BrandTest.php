@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Api\Model\Tire;
 
 use PHPUnit\Framework\TestCase;
+use Api\Validator\Tire\Brand as BrandValidator;
 
 class BrandTest extends TestCase
 {
@@ -13,15 +14,7 @@ class BrandTest extends TestCase
             'name' => 'Brand Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Brand')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($brandData);
+        $validator = new BrandValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Brand')
@@ -43,7 +36,7 @@ class BrandTest extends TestCase
             ->with($brandData)
             ->willReturn($newBrandData);
 
-        $brandModel = new Brand($mockValidator, $mockRepository);
+        $brandModel = new Brand($validator, $mockRepository);
 
         $retrieveData = $brandModel->create($brandData);
 
@@ -57,10 +50,7 @@ class BrandTest extends TestCase
             'name'  => 'Brand Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Brand')
-            ->setMethods(['validate'])
-            ->getMock();
+        $validator = new BrandValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Brand')
@@ -73,7 +63,7 @@ class BrandTest extends TestCase
             ->method('list')
             ->willReturn($brandData);
 
-        $brandModel = new Brand($mockValidator, $mockRepository);
+        $brandModel = new Brand($validator, $mockRepository);
 
         $retrieveData = $brandModel->list();
 
@@ -89,15 +79,7 @@ class BrandTest extends TestCase
             'name' => 'Brand Test'
         ];
 
-        $mockValidator = $this
-            ->getMockBuilder('Api\\Validator\\Tire\\Brand')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $mockValidator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($brandData);
+        $validator = new BrandValidator;
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Tire\\Brand')
@@ -111,7 +93,7 @@ class BrandTest extends TestCase
             ->with($brandData['name'])
             ->willReturn($brandData);
 
-        $brandModel = new Brand($mockValidator, $mockRepository);
+        $brandModel = new Brand($validator, $mockRepository);
 
         $brandModel->create($brandData);
     }
