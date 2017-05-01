@@ -37,7 +37,7 @@ class UserTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM user WHERE email = ?', [$expectedData['email']])
+            ->with('SELECT * FROM users WHERE email = ?', [$expectedData['email']])
             ->willReturn($mockQuery);
 
         $repository = new User($mockConnection);
@@ -76,7 +76,7 @@ class UserTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM user WHERE username = ?', [$expectedData['username']])
+            ->with('SELECT * FROM users WHERE username = ?', [$expectedData['username']])
             ->willReturn($mockQuery);
 
         $repository = new User($mockConnection);
@@ -104,7 +104,7 @@ class UserTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('insert')
-            ->with('user', $userData)
+            ->with('users', $userData)
             ->willReturn(1);
 
         $mockConnection

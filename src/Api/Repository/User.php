@@ -19,7 +19,7 @@ class User
     public function create(array $data): array
     {
         try {
-            $this->connection->insert('user', $data);
+            $this->connection->insert('users', $data);
         } catch (DBALException $exception) {
             throw new DatabaseException($exception->getMessage());
         }
@@ -31,7 +31,7 @@ class User
     
     public function findByEmail($email)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM user WHERE email = ?', [$email]);
+        $query = $this->connection->executeQuery('SELECT * FROM users WHERE email = ?', [$email]);
 
         $user = $query->fetch();
 
@@ -40,7 +40,7 @@ class User
 
     public function findByUsername($username)
     {
-        $query = $this->connection->executeQuery('SELECT * FROM user WHERE username = ?', [$username]);
+        $query = $this->connection->executeQuery('SELECT * FROM users WHERE username = ?', [$username]);
 
         $user = $query->fetch();
 

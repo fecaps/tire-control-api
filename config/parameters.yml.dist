@@ -4,9 +4,9 @@ timezone: America/Sao_Paulo
 
 database:
   db.options:
-    driver: pdo_mysql
+    driver: pdo_pgsql
     host: localhost
     dbname: tire_control
     user: root
     password: 123
-    charset: utf8mb4
+    charset: UTF8

@@ -18,14 +18,14 @@ $ ./scripts/pre-commit.sh
 
 ### Usage
 
-Access database and create tire_control:
+Access **PostgreSQL** (default) and create tire_control:
 ```
 CREATE DATABASE tire_control; 
 ```
 
-Restore sql script to create tables (this command is for mysql):
+Restore SQL script to create tables:
 ```
-$ mysql -uroot -p tire_control < db/schema.sql 
+$ psql tire_control < db/schema.sql 
 ```
 
 Copy params dist file to params file and change database configs if necessary:

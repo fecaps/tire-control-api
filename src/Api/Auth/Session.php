@@ -19,6 +19,7 @@ class Session
 
     public function create($userId): array
     {
+        $userId     = (string) $userId;
         $token      = base64_encode(uniqid($userId, true));
         $userIp     = $_SERVER['REMOTE_ADDR'] ?? [];
         $createAt   = new DateTime;
