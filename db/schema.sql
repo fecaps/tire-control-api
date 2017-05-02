@@ -34,7 +34,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE auth_session (
-    token character varying(510) NOT NULL,
+    token character varying(255) NOT NULL,
     created_at timestamp with time zone NOT NULL,
     expire_at timestamp with time zone NOT NULL,
     user_id integer NOT NULL,
@@ -177,10 +177,10 @@ CREATE SEQUENCE users_id_seq
 
 CREATE TABLE users (
     id integer DEFAULT nextval('users_id_seq'::regclass) NOT NULL,
-    name character varying(510) NOT NULL,
-    email character varying(510) NOT NULL,
-    username character varying(510) NOT NULL,
-    passwd character varying(510) NOT NULL
+    name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    username character varying(255) NOT NULL,
+    passwd character varying(255) NOT NULL
 );
 
 
@@ -624,16 +624,6 @@ ALTER TABLE ONLY vehicle
 
 ALTER TABLE ONLY vehicle
     ADD CONSTRAINT fk_vehicle_type_x FOREIGN KEY (type) REFERENCES vehicle_type(name) DEFERRABLE INITIALLY DEFERRED;
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: -
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
