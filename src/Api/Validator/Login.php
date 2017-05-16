@@ -13,11 +13,7 @@ class Login implements ValidatorInterface
         $exception = new ValidatorException;
 
         $field = 'email';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, UserMessages::NOT_BLANK);
-        } elseif (!filter_var($data[$field], FILTER_VALIDATE_EMAIL)) {
-            $exception->addMessage($field, UserMessages::INVALID_EMAIL);
-        }
+        $this->validateEmail($field, $data[$field], $exception);
 
         $field = 'passwd';
         if (!isset($data[$field]) || $data[$field] == '') {
@@ -26,6 +22,18 @@ class Login implements ValidatorInterface
 
         if (count($exception->getMessages()) > 0) {
             throw $exception;
+        }
+    }
+
+    private function validateEmail($fieldName, $fieldValue, $exception)
+    {
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, UserMessages::NOT_BLANK);
+            return;
+        }
+
+        if (!filter_var($fieldValue, FILTER_VALIDATE_EMAIL)) {
+            $exception->addMessage($fieldName, UserMessages::INVALID_EMAIL);
         }
     }
 }
