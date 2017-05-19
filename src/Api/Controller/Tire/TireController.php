@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Api\Controller;
+namespace Api\Controller\Tire;
 
 use Symfony\Component\HttpFoundation\Request;
-use Api\Model\Tire;
+use Api\Model\Tire\Tire;
 
 class TireController
 {
@@ -24,10 +24,10 @@ class TireController
         
         $returnData = [
             'id'                => $tire['id'],
-            'brand'             => $tire['brand'],
-            'model'             => $tire['model'],
-            'size'              => $tire['size'],
-            'type'              => $tire['type'],
+            'brand_id'          => $tire['brand_id'],
+            'model_id'          => $tire['model_id'],
+            'size_id'           => $tire['size_id'],
+            'type_id'           => $tire['type_id'],
             'dot'               => $tire['dot'],
             'code'              => $tire['code'],
             'purchase_price'    => $tire['purchase_price'],

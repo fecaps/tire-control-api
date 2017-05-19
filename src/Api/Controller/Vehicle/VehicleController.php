@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Api\Controller;
+namespace Api\Controller\Vehicle;
 
 use Symfony\Component\HttpFoundation\Request;
-use Api\Model\Vehicle;
+use Api\Model\Vehicle\Vehicle;
 
 class VehicleController
 {
@@ -23,12 +23,12 @@ class VehicleController
         $vehicle = $this->vehicle->create($data);
         
         $returnData = [
-            'id'        => $vehicle['id'],
-            'brand'     => $vehicle['brand'],
-            'category'  => $vehicle['category'],
-            'model'     => $vehicle['model'],
-            'type'      => $vehicle['type'],
-            'plate'     => $vehicle['plate']
+            'id'            => $vehicle['id'],
+            'brand_id'      => $vehicle['brand_id'],
+            'category_id'   => $vehicle['category_id'],
+            'model_id'      => $vehicle['model_id'],
+            'type_id'       => $vehicle['type_id'],
+            'plate'         => $vehicle['plate']
         ];
 
         return $returnData;
