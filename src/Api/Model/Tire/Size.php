@@ -7,9 +7,25 @@ use Api\Validator\Tire\Size as SizeValidator;
 use Api\Repository\Tire\Size as SizeRepository;
 use Api\Exception\ValidatorException;
 
+/**
+ * @Entity @Table(name="tire_size")
+ **/
 class Size
 {
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
+    /**
+     * @Column(type="string", length=100, unique=true, nullable=false)
+     */
+    private $name;
+
     private $validator;
+
     private $repository;
     
     public function __construct(SizeValidator $validator, SizeRepository $repository)
