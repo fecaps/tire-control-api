@@ -29,6 +29,15 @@ class Brand
         return ['id' => $lastInsertId] + $data;
     }
 
+    public function findById($id)
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM vehicle_brand WHERE id = ?', [$id]);
+
+        $brand = $query->fetch();
+
+        return $brand;
+    }
+
     public function findByName($name)
     {
         $query = $this->connection->executeQuery('SELECT * FROM vehicle_brand WHERE name = ?', [$name]);

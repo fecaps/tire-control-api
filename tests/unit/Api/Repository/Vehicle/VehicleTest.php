@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Repository;
+namespace Api\Repository\Vehicle;
 
 use PHPUnit\Framework\TestCase;
 use Doctrine\DBAL\DBALException;
@@ -11,11 +11,11 @@ class VehicleTest extends TestCase
     public function testShouldFindByPlate()
     {
         $expectedData = [
-            'type'      => 'Type Test',
-            'brand'     => 'Brand Test',
-            'model'     => 'Model Test',
-            'category'  => 'Category Test',
-            'plate'     => 'Plate Test'
+            'brand_id'      => 1,
+            'category_id'   => 10,
+            'model_id'      => 20,
+            'type_id'       => 30,
+            'plate'         => 'PLT678'
         ];
 
         $mockQuery = $this
@@ -51,11 +51,11 @@ class VehicleTest extends TestCase
     public function testShouldCreateAVehicle()
     {
         $vehicleData = [
-            'type'      => 'Type Test',
-            'brand'     => 'Brand Test',
-            'model'     => 'Model Test',
-            'category'  => 'Category Test',
-            'plate'     => 'Plate Test'
+            'brand_id'      => 1,
+            'category_id'   => 10,
+            'model_id'      => 20,
+            'type_id'       => 30,
+            'plate'         => 'PLT678'
         ];
 
         $mockConnection = $this
@@ -87,11 +87,11 @@ class VehicleTest extends TestCase
     public function testShouldSelectAll()
     {
         $expectedData = [
-            'type'      => 'Type Test',
-            'brand'     => 'Brand Test',
-            'model'     => 'Model Test',
-            'category'  => 'Category Test',
-            'plate'     => 'Plate Test'
+            'brand_id'      => 1,
+            'category_id'   => 10,
+            'model_id'      => 20,
+            'type_id'       => 30,
+            'plate'         => 'PLT678'
         ];
 
         $mockQuery = $this

@@ -29,6 +29,15 @@ class Category
         return ['id' => $lastInsertId] + $data;
     }
 
+    public function findById($id)
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM vehicle_category WHERE id = ?', [$id]);
+
+        $category = $query->fetch();
+
+        return $category;
+    }
+
     public function findByName($name)
     {
         $query = $this->connection->executeQuery('SELECT * FROM vehicle_category WHERE name = ?', [$name]);
