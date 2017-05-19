@@ -7,9 +7,25 @@ use Api\Validator\Vehicle\Category as CategoryValidator;
 use Api\Repository\Vehicle\Category as CategoryRepository;
 use Api\Exception\ValidatorException;
 
+/**
+ * @Entity @Table(name="vehicle_category")
+ **/
 class Category
 {
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
+    /**
+     * @Column(type="string", length=100, unique=true, nullable=false)
+     */
+    private $name;
+
     private $validator;
+
     private $repository;
     
     public function __construct(CategoryValidator $validator, CategoryRepository $repository)

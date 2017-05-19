@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Model;
+namespace Api\Model\Vehicle;
 
 use PHPUnit\Framework\TestCase;
-use Api\Validator\Vehicle as VehicleValidator;
+use Api\Validator\Vehicle\Vehicle as VehicleValidator;
 
 class VehicleTest extends TestCase
 {
     public function testShouldCreateNewVehicle()
     {
         $vehicleData = [
-            'type'      => 'Type Test',
-            'brand'     => 'Brand Test',
-            'model'     => 'Model Test',
-            'category'  => 'Category Test',
-            'plate'     => 'PLT678'
+            'brand_id'      => 1,
+            'category_id'   => 10,
+            'model_id'      => 20,
+            'type_id'       => 30,
+            'plate'         => 'PLT678'
         ];
 
         $validator = new VehicleValidator;
@@ -23,53 +23,53 @@ class VehicleTest extends TestCase
         $mockBrandRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockBrandRepository
             ->expects($this->once())
-            ->method('findByName')
-            ->with($vehicleData['brand'])
+            ->method('findById')
+            ->with($vehicleData['brand_id'])
             ->willReturn(true);
 
         $mockCategRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockCategRepository
             ->expects($this->once())
-            ->method('findByName')
-            ->with($vehicleData['category'])
+            ->method('findById')
+            ->with($vehicleData['category_id'])
             ->willReturn(true);
 
         $mockModelRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
             ->disableOriginalConstructor()
-            ->setMethods(['findByModel'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockModelRepository
             ->expects($this->once())
-            ->method('findByModel')
-            ->with($vehicleData['model'])
+            ->method('findById')
+            ->with($vehicleData['model_id'])
             ->willReturn(true);
 
         $mockTypeRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Type')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockTypeRepository
             ->expects($this->once())
-            ->method('findByName')
-            ->with($vehicleData['type'])
+            ->method('findById')
+            ->with($vehicleData['type_id'])
             ->willReturn(true);
 
         $mockRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle')
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Vehicle')
             ->disableOriginalConstructor()
             ->setMethods(['findByPlate', 'create'])
             ->getMock();
@@ -105,11 +105,11 @@ class VehicleTest extends TestCase
     public function testShouldSelectAll()
     {
         $vehicleData = [
-            'type'      => 'Type Test',
-            'brand'     => 'Brand Test',
-            'model'     => 'Model Test',
-            'category'  => 'Category Test',
-            'plate'     => 'PLT678'
+            'brand_id'      => 1,
+            'category_id'   => 10,
+            'model_id'      => 20,
+            'type_id'       => 30,
+            'plate'         => 'PLT678'
         ];
 
         $validator = new VehicleValidator;
@@ -117,29 +117,29 @@ class VehicleTest extends TestCase
         $mockBrandRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockCategRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockModelRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
             ->disableOriginalConstructor()
-            ->setMethods(['findByModel'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockTypeRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Type')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle')
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Vehicle')
             ->disableOriginalConstructor()
             ->setMethods(['list'])
             ->getMock();
@@ -169,11 +169,11 @@ class VehicleTest extends TestCase
     public function testShouldGetErrorWhenDataAlreadyInUse()
     {
         $vehicleData = [
-            'type'      => 'Type Test',
-            'brand'     => 'Brand Test',
-            'model'     => 'Model Test',
-            'category'  => 'Category Test',
-            'plate'     => 'PLT678'
+            'brand_id'      => 1,
+            'category_id'   => 10,
+            'model_id'      => 20,
+            'type_id'       => 30,
+            'plate'         => 'PLT678'
         ];
 
         $validator = new VehicleValidator;
@@ -181,53 +181,53 @@ class VehicleTest extends TestCase
         $mockBrandRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockBrandRepository
             ->expects($this->once())
-            ->method('findByName')
-            ->with($vehicleData['brand'])
+            ->method('findById')
+            ->with($vehicleData['brand_id'])
             ->willReturn(false);
 
         $mockCategRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Category')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockCategRepository
             ->expects($this->once())
-            ->method('findByName')
-            ->with($vehicleData['category'])
+            ->method('findById')
+            ->with($vehicleData['category_id'])
             ->willReturn(false);
 
         $mockModelRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
             ->disableOriginalConstructor()
-            ->setMethods(['findByModel'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockModelRepository
             ->expects($this->once())
-            ->method('findByModel')
-            ->with($vehicleData['model'])
+            ->method('findById')
+            ->with($vehicleData['model_id'])
             ->willReturn(false);
 
         $mockTypeRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Type')
             ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
+            ->setMethods(['findById'])
             ->getMock();
 
         $mockTypeRepository
             ->expects($this->once())
-            ->method('findByName')
-            ->with($vehicleData['type'])
+            ->method('findById')
+            ->with($vehicleData['type_id'])
             ->willReturn(false);
 
         $mockRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle')
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Vehicle')
             ->disableOriginalConstructor()
             ->setMethods(['findByPlate', 'create'])
             ->getMock();

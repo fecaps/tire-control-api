@@ -4,24 +4,47 @@ declare(strict_types=1);
 namespace Api\Model\Vehicle;
 
 use Api\Validator\Vehicle\Model as ModelValidator;
-use Api\Repository\Vehicle\Model as ModelRepository;
-use Api\Repository\Vehicle\Brand as BrandRepository;
+use Api\Repository\Vehicle as VehiclesRepository;
 use Api\Exception\ValidatorException;
 
+/**
+ * @Entity @Table(name="vehicle_model_brand")
+ **/
 class Model
 {
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * Many Model has One Brand.
+     * @OneToOne(targetEntity="Brand")
+     * @JoinColumn(name="brand_id", referencedColumnName="id")
+     */
+    private $brand;
+
+    /**
+     * @Column(type="string", length=100, nullable=false)
+     */
+    private $model;
+
     private $validator;
+
     private $repository;
+
     private $brandRepository;
     
     public function __construct(
         ModelValidator $validator,
-        ModelRepository $repository,
-        BrandRepository $brandRepository
+        VehiclesRepository\Brand $brandRepository,
+        VehiclesRepository\Model $repository
     ) {
         $this->validator = $validator;
-        $this->repository = $repository;
         $this->brandRepository = $brandRepository;
+        $this->repository = $repository;
     }
 
     public function create(array $modelData): array
@@ -30,13 +53,13 @@ class Model
 
         $this->validator->validate($modelData);
 
-        $brand = $modelData['brand'];
+        $brand = $modelData['brand_id'];
         $model = $modelData['model'];
 
-        $existsBrand = $this->brandRepository->findByName($brand);
+        $existsBrand = $this->brandRepository->findById($brand);
 
         if (!$existsBrand) {
-            $exception->addMessage('brand', 'The brand must be registered in the vehicle brand table.');
+            $exception->addMessage('brand_id', 'The brand_id must be registered in the vehicle brand table.');
         }
 
         $existsModel = $this->repository->findByModel($model);

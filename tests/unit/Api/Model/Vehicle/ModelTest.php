@@ -11,11 +11,23 @@ class ModelTest extends TestCase
     public function testShouldCreateNewModel()
     {
         $modelData = [
-            'brand' => 'Brand Test',
-            'model' => 'Model Test'
+            'brand_id'  => 1,
+            'model'     => 'Model Test'
         ];
 
         $validator = new ModelValidator;
+
+        $mockBrandRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
+            ->disableOriginalConstructor()
+            ->setMethods(['findById'])
+            ->getMock();
+
+        $mockBrandRepository
+            ->expects($this->once())
+            ->method('findById')
+            ->with($modelData['brand_id'])
+            ->willReturn(true);
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
@@ -37,19 +49,7 @@ class ModelTest extends TestCase
             ->with($modelData)
             ->willReturn($newModelData);
 
-        $mockBrandRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockBrandRepository
-            ->expects($this->once())
-            ->method('findByName')
-            ->with($modelData['brand'])
-            ->willReturn(true);
-
-        $modelModel = new Model($validator, $mockRepository, $mockBrandRepository);
+        $modelModel = new Model($validator, $mockBrandRepository, $mockRepository);
 
         $retrieveData = $modelModel->create($modelData);
 
@@ -59,12 +59,17 @@ class ModelTest extends TestCase
     public function testShouldSelectAll()
     {
         $modelData = [
-            'id'    => '123',
-            'brand' => 'Brand Test',
-            'model' => 'Model Test'
+            'id'        => 123,
+            'brand_id'  => 1,
+            'model'     => 'Model Test'
         ];
 
         $validator = new ModelValidator;
+
+        $mockBrandRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
@@ -77,12 +82,7 @@ class ModelTest extends TestCase
             ->method('list')
             ->willReturn($modelData);
 
-        $mockBrandRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $modelModel = new Model($validator, $mockRepository, $mockBrandRepository);
+        $modelModel = new Model($validator, $mockBrandRepository, $mockRepository);
 
         $retrieveData = $modelModel->list();
 
@@ -95,11 +95,23 @@ class ModelTest extends TestCase
     public function testShouldGetErrorWhenBrandAndModelAreAlreadyInUse()
     {
         $modelData = [
-            'brand' => 'Brand Test',
-            'model' => 'Model Test'
+            'brand_id'  => 1,
+            'model'     => 'Model Test'
         ];
 
         $validator = new ModelValidator;
+
+        $mockBrandRepository = $this
+            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
+            ->disableOriginalConstructor()
+            ->setMethods(['findById'])
+            ->getMock();
+
+        $mockBrandRepository
+            ->expects($this->once())
+            ->method('findById')
+            ->with($modelData['brand_id'])
+            ->willReturn(false);
 
         $mockRepository = $this
             ->getMockBuilder('Api\\Repository\\Vehicle\\Model')
@@ -113,19 +125,7 @@ class ModelTest extends TestCase
             ->with($modelData['model'])
             ->willReturn($modelData);
 
-        $mockBrandRepository = $this
-            ->getMockBuilder('Api\\Repository\\Vehicle\\Brand')
-            ->disableOriginalConstructor()
-            ->setMethods(['findByName'])
-            ->getMock();
-
-        $mockBrandRepository
-            ->expects($this->once())
-            ->method('findByName')
-            ->with($modelData['brand'])
-            ->willReturn(false);
-
-        $modelModel = new Model($validator, $mockRepository, $mockBrandRepository);
+        $modelModel = new Model($validator, $mockBrandRepository, $mockRepository);
 
         $modelModel->create($modelData);
     }

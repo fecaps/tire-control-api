@@ -7,9 +7,25 @@ use Api\Validator\Vehicle\Type as TypeValidator;
 use Api\Repository\Vehicle\Type as TypeRepository;
 use Api\Exception\ValidatorException;
 
+/**
+ * @Entity @Table(name="vehicle_type")
+ **/
 class Type
 {
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
+    /**
+     * @Column(type="string", length=100, unique=true, nullable=false)
+     */
+    private $name;
+
     private $validator;
+
     private $repository;
     
     public function __construct(TypeValidator $validator, TypeRepository $repository)

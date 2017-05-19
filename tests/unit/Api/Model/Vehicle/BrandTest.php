@@ -6,7 +6,7 @@ namespace Api\Model\Vehicle;
 use PHPUnit\Framework\TestCase;
 use Api\Validator\Vehicle\Brand as BrandValidator;
 
-class VehicleTest extends TestCase
+class BrandTest extends TestCase
 {
     public function testShouldCreateNewBrand()
     {
