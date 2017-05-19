@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Repository;
+namespace Api\Repository\Tire;
 
 use PHPUnit\Framework\TestCase;
 use Doctrine\DBAL\DBALException;
@@ -11,12 +11,12 @@ class TireTest extends TestCase
     public function testShouldFindByCode()
     {
         $expectedData = [
-            'brand'             => 'Brand Test',
-            'model'             => 'Model Test',
-            'size'              => 'Size Test',
-            'type'              => 'Type Test',
-            'dot'               => 'DOT Test',
-            'code'              => 'Code Test',
+            'brand_id'          => 1,
+            'model_id'          => 10,
+            'size_id'           => 20,
+            'type_id'           => 30,
+            'dot'               => '4444',
+            'code'              => '666666',
             'purchase_date'     => '2017-12-31',
             'purchase_price'    => '17.50'
         ];
@@ -54,12 +54,12 @@ class TireTest extends TestCase
     public function testShouldCreateATire()
     {
         $tireData = [
-            'brand'             => 'Brand Test',
-            'model'             => 'Model Test',
-            'size'              => 'Size Test',
-            'type'              => 'Type Test',
-            'dot'               => 'DOT Test',
-            'code'              => 'Code Test',
+            'brand_id'          => 1,
+            'model_id'          => 10,
+            'size_id'           => 20,
+            'type_id'           => 30,
+            'dot'               => '4444',
+            'code'              => '666666',
             'purchase_date'     => '2017-12-31',
             'purchase_price'    => '17.50'
         ];
@@ -93,12 +93,12 @@ class TireTest extends TestCase
     public function testShouldSelectAll()
     {
         $expectedData = [
-            'brand'             => 'Brand Test',
-            'model'             => 'Model Test',
-            'size'              => 'Size Test',
-            'type'              => 'Type Test',
-            'dot'               => 'DOT Test',
-            'code'              => 'Code Test',
+            'brand_id'          => 1,
+            'model_id'          => 10,
+            'size_id'           => 20,
+            'type_id'           => 30,
+            'dot'               => '4444',
+            'code'              => '666666',
             'purchase_date'     => '2017-12-31',
             'purchase_price'    => '17.50'
         ];

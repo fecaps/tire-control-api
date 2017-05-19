@@ -29,6 +29,15 @@ class Size
         return ['id' => $lastInsertId] + $data;
     }
 
+    public function findById($id)
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM tire_size WHERE id = ?', [$id]);
+
+        $size = $query->fetch();
+
+        return $size;
+    }
+
     public function findByName($name)
     {
         $query = $this->connection->executeQuery('SELECT * FROM tire_size WHERE name = ?', [$name]);

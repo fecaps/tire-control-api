@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Repository;
+namespace Api\Repository\Tire;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;

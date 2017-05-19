@@ -40,6 +40,42 @@ class TypeTest extends TestCase
         $this->assertEquals($expectedData, $retrieveData);
     }
 
+    public function testShouldFindById()
+    {
+        $expectedData = [
+            'id' => 1
+        ];
+
+        $mockQuery = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Statement')
+            ->disableOriginalConstructor()
+            ->setMethods(['fetch'])
+            ->getMock();
+
+        $mockQuery
+            ->expects($this->once())
+            ->method('fetch')
+            ->willReturn($expectedData);
+
+        $mockConnection = $this
+            ->getMockBuilder('Doctrine\\DBAL\\Connection')
+            ->disableOriginalConstructor()
+            ->setMethods(['executeQuery'])
+            ->getMock();
+
+        $mockConnection
+            ->expects($this->once())
+            ->method('executeQuery')
+            ->with('SELECT * FROM tire_type WHERE id = ?', [$expectedData['id']])
+            ->willReturn($mockQuery);
+
+        $repository = new Type($mockConnection);
+
+        $retrieveData = $repository->findById($expectedData['id']);
+
+        $this->assertEquals($expectedData, $retrieveData);
+    }
+
     public function testShouldFindByName()
     {
         $expectedData = [

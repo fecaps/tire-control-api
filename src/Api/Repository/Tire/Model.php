@@ -29,6 +29,15 @@ class Model
         return ['id' => $lastInsertId] + $data;
     }
 
+    public function findById($id)
+    {
+        $query = $this->connection->executeQuery('SELECT * FROM tire_model WHERE id = ?', [$id]);
+
+        $model = $query->fetch();
+
+        return $model;
+    }
+
     public function findByName($name)
     {
         $query = $this->connection->executeQuery('SELECT * FROM tire_model WHERE name = ?', [$name]);
