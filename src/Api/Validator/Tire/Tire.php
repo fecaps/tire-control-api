@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Validator;
+namespace Api\Validator\Tire;
 
 use Api\Exception\ValidatorException;
+use Api\Validator\ValidatorInterface;
 use Api\Enum\TireMessages;
 use DateTime;
 
@@ -16,13 +17,13 @@ class Tire implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $this->validateNotEmpty('brand', $data['brand'], $exception);
+        $this->validateFormat('brand_id', $data['brand_id'], $exception, TireMessages::INVALID_BRAND);
 
-        $this->validateNotEmpty('model', $data['model'], $exception);
+        $this->validateFormat('model_id', $data['model_id'], $exception, TireMessages::INVALID_MODEL);
 
-        $this->validateNotEmpty('size', $data['size'], $exception);
+        $this->validateFormat('size_id', $data['size_id'], $exception, TireMessages::INVALID_SIZE);
 
-        $this->validateNotEmpty('type', $data['type'], $exception);
+        $this->validateFormat('type_id', $data['type_id'], $exception, TireMessages::INVALID_TYPE);
 
         $this->validateDotAndCode('dot', $data['dot'], self::DOT_LEN, TireMessages::INVALID_DOT, $exception);
 
@@ -37,10 +38,15 @@ class Tire implements ValidatorInterface
         }
     }
 
-    private function validateNotEmpty($fieldName, $fieldValue, $exception)
+    private function validateFormat($fieldName, $fieldValue, $exception, $message)
     {
         if (!isset($fieldValue) || $fieldValue == '') {
             $exception->addMessage($fieldName, TireMessages::NOT_BLANK);
+            return;
+        }
+
+        if (!is_int($fieldValue)) {
+            $exception->addMessage($fieldName, $message);
         }
     }
 

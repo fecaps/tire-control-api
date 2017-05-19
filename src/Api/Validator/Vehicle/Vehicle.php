@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Api\Validator;
+namespace Api\Validator\Vehicle;
 
 use Api\Exception\ValidatorException;
+use Api\Validator\ValidatorInterface;
 use Api\Enum\VehicleMessages;
 
 class Vehicle implements ValidatorInterface
@@ -14,13 +15,13 @@ class Vehicle implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $this->validateNotEmpty('type', $data['type'], $exception);
-        
-        $this->validateNotEmpty('brand', $data['brand'], $exception);
+        $this->validateFormat('brand_id', $data['brand_id'], $exception, VehicleMessages::INVALID_BRAND);
 
-        $this->validateNotEmpty('category', $data['category'], $exception);
+        $this->validateFormat('category_id', $data['category_id'], $exception, VehicleMessages::INVALID_CATEGORY);
 
-        $this->validateNotEmpty('model', $data['model'], $exception);
+        $this->validateFormat('model_id', $data['model_id'], $exception, VehicleMessages::INVALID_MODEL);
+
+        $this->validateFormat('type_id', $data['type_id'], $exception, VehicleMessages::INVALID_TYPE);
 
         $this->validatePlate('plate', $data['plate'], self::PLATE_LEN, $exception);
 
@@ -29,10 +30,15 @@ class Vehicle implements ValidatorInterface
         }
     }
 
-    private function validateNotEmpty($fieldName, $fieldValue, $exception)
+    private function validateFormat($fieldName, $fieldValue, $exception, $message)
     {
         if (!isset($fieldValue) || $fieldValue == '') {
             $exception->addMessage($fieldName, VehicleMessages::NOT_BLANK);
+            return;
+        }
+
+        if (!is_int($fieldValue)) {
+            $exception->addMessage($fieldName, $message);
         }
     }
 

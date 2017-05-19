@@ -15,16 +15,25 @@ class Model implements ValidatorInterface
     {
         $exception = new ValidatorException;
 
-        $field = 'brand';
-        if (!isset($data[$field]) || $data[$field] == '') {
-            $exception->addMessage($field, VehicleMessages::NOT_BLANK);
-        }
+        $this->validateFormat('brand_id', $data['brand_id'], $exception, VehicleMessages::INVALID_BRAND);
 
         $field = 'model';
         $this->validateModelFormat($field, $data[$field], $exception);
 
         if (count($exception->getMessages()) > 0) {
             throw $exception;
+        }
+    }
+
+    private function validateFormat($fieldName, $fieldValue, $exception, $message)
+    {
+        if (!isset($fieldValue) || $fieldValue == '') {
+            $exception->addMessage($fieldName, VehicleMessages::NOT_BLANK);
+            return;
+        }
+
+        if (!is_int($fieldValue)) {
+            $exception->addMessage($fieldName, $message);
         }
     }
 
