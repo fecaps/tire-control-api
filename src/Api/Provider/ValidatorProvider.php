@@ -39,8 +39,8 @@ class ValidatorProvider implements ServiceProviderInterface
             return new Validator\Tire\Type;
         };
 
-        $app['validator.tire'] = function () {
-            return new Validator\Tire;
+        $app['validator.tire.tire'] = function () {
+            return new Validator\Tire\Tire;
         };
 
         $app['validator.vehicle.brand'] = function () {
@@ -59,8 +59,8 @@ class ValidatorProvider implements ServiceProviderInterface
             return new Validator\Vehicle\Type;
         };
 
-        $app['validator.vehicle'] = function () {
-            return new Validator\Vehicle;
+        $app['validator.vehicle.vehicle'] = function () {
+            return new Validator\Vehicle\Vehicle;
         };
     }
 }

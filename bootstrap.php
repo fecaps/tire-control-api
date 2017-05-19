@@ -1,8 +1,14 @@
 <?php
-
 declare(strict_types=1);
 
 chdir(__DIR__);
+
+use Symfony\Component\Yaml\Yaml;
+use Silex\Application;
+use Silex\Provider\DoctrineServiceProvider;
+use Silex\Provider\ServiceControllerServiceProvider;
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
 
 $composerAutoload = 'vendor/autoload.php';
 
@@ -10,12 +16,7 @@ if (file_exists($composerAutoload) === false) {
     trigger_error('Please, run the composer install. ', E_USER_ERROR);
 }
 
-require $composerAutoload;
-
-use Symfony\Component\Yaml\Yaml;
-use Silex\Application;
-use Silex\Provider\DoctrineServiceProvider;
-use Silex\Provider\ServiceControllerServiceProvider;
+require_once $composerAutoload;
 
 $parametersFile = 'config/parameters.yml';
 
@@ -29,7 +30,13 @@ date_default_timezone_set($parameters['timezone'] ?? 'America/Sao_Paulo');
 
 $app = new Application();
 
-$app['debug'] = $parameters['debug'] ?? false;
+$isDevMode      = $parameters['devMode'] ?? false;
+$app['debug']   = $parameters['debug'] ?? false;
+
+$path = array(__DIR__.'/src/Api/Model');
+
+$config         = Setup::createAnnotationMetadataConfiguration($path, $isDevMode);
+$entityManager  = EntityManager::create($parameters['database']['db.options'], $config);
 
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 $app->register(new DoctrineServiceProvider, $parameters['database']);

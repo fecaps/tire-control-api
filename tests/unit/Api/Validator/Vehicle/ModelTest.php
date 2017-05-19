@@ -14,36 +14,37 @@ class ModelTest extends TestCase
         $testData = [
             [
                 [
-                    'brand' => '',
-                    'model' => ''
+                    'brand_id'  => '',
+                    'model'     => ''
                 ],
                 [
-                    'brand' => [VehicleMessages::NOT_BLANK],
-                    'model' => [VehicleMessages::NOT_BLANK]
+                    'brand_id'  => [VehicleMessages::NOT_BLANK],
+                    'model'     => [VehicleMessages::NOT_BLANK]
                 ]
             ],
             [
                 [
-                    'brand' => 'Brand1',
-                    'model' => str_pad('A', Model::MODEL_MAX_LEN + 1)
+                    'brand_id'  => '1',
+                    'model'     => str_pad('A', Model::MODEL_MAX_LEN + 1)
                 ],
                 [
-                    'model' => [sprintf(VehicleMessages::MORE_THAN, Model::MODEL_MAX_LEN)]
+                    'brand_id'  => [VehicleMessages::INVALID_BRAND],
+                    'model'     => [sprintf(VehicleMessages::MORE_THAN, Model::MODEL_MAX_LEN)]
                 ]
             ],
             [
                 [
-                    'brand' => 'Brand2',
-                    'model' => '<p><script></script></p>'
+                    'brand_id'  => 1,
+                    'model'     => '<p><script></script></p>'
                 ],
                 [
-                    'model' => [VehicleMessages::INVALID_MODEL]
+                    'model'     => [VehicleMessages::INVALID_MODEL]
                 ]
             ],
             [
                 [
-                    'brand' => 'Brand3',
-                    'model' => 'Model3'
+                    'brand_id'  => 1,
+                    'model'     => 'Model3'
                 ],
                 []
             ]

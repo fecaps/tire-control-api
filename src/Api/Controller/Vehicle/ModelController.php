@@ -22,9 +22,9 @@ class ModelController
         $model = $this->model->create($data);
         
         $returnData = [
-            'id'    => $model['id'],
-            'brand' => $model['brand'],
-            'model' => $model['model']
+            'id'        => $model['id'],
+            'brand_id'  => $model['brand_id'],
+            'model'     => $model['model']
         ];
 
         return $returnData;

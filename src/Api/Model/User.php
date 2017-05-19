@@ -8,11 +8,41 @@ use Api\Repository\User as UserRepository;
 use Api\Repository\Passwd;
 use Api\Exception\ValidatorException;
 
+/**
+ * @Entity @Table(name="users")
+ **/
 class User
 {
-    private $validator;
-    private $repository;
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @Column(type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @Column(type="string", length=255, unique=true, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @Column(type="string", length=255, unique=true, nullable=false)
+     */
+    private $username;
+
+    /**
+     * @Column(type="string", length=255, nullable=false)
+     */
     private $passwd;
+
+    private $validator;
+
+    private $repository;
 
     public function __construct(UserValidator $validator, UserRepository $repository, Passwd $passwd)
     {

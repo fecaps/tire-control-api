@@ -7,9 +7,41 @@ use Api\Validator\AuthSession as AuthSessionValidator;
 use Api\Repository\AuthSession as AuthSessionRepository;
 use DateTime;
 
+/**
+ * @Entity @Table(name="auth_session")
+ **/
 class AuthSession
 {
+    /**
+     * @Id
+     * @Column(type="string", length=255)
+     */
+    private $token;
+
+    /**
+     * Many AuthSession has One User.
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @Column(type="datetime", nullable=false)
+     */
+    private $created_at;
+
+    /**
+     * @Column(type="datetime", nullable=false)
+     */
+    private $expire_at;
+
+    /**
+     * @Column(type="string", length=200, nullable=false)
+     */
+    private $user_ip;
+
     private $validator;
+
     private $repository;
 
     public function __construct(AuthSessionValidator $validator, AuthSessionRepository $repository)

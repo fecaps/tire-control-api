@@ -39,8 +39,8 @@ class RepositoryProvider implements ServiceProviderInterface
             return new Repository\Tire\Type($app['db']);
         };
 
-        $app['repository.tire'] = function () use ($app) {
-            return new Repository\Tire($app['db']);
+        $app['repository.tire.tire'] = function () use ($app) {
+            return new Repository\Tire\Tire($app['db']);
         };
 
         $app['repository.vehicle.brand'] = function () use ($app) {
@@ -59,8 +59,8 @@ class RepositoryProvider implements ServiceProviderInterface
             return new Repository\Vehicle\Type($app['db']);
         };
 
-        $app['repository.vehicle'] = function () use ($app) {
-            return new Repository\Vehicle($app['db']);
+        $app['repository.vehicle.vehicle'] = function () use ($app) {
+            return new Repository\Vehicle\Vehicle($app['db']);
         };
     }
 }

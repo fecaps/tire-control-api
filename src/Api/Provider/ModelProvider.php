@@ -62,14 +62,14 @@ class ModelProvider implements ServiceProviderInterface
             );
         };
 
-        $app['model.tire'] = function () use ($app) {
-            return new Model\Tire(
-                $app['validator.tire'],
+        $app['model.tire.tire'] = function () use ($app) {
+            return new Model\Tire\Tire(
+                $app['validator.tire.tire'],
                 $app['repository.tire.brand'],
                 $app['repository.tire.model'],
                 $app['repository.tire.size'],
                 $app['repository.tire.type'],
-                $app['repository.tire']
+                $app['repository.tire.tire']
             );
         };
 
@@ -90,8 +90,8 @@ class ModelProvider implements ServiceProviderInterface
         $app['model.vehicle.model'] = function () use ($app) {
             return new Model\Vehicle\Model(
                 $app['validator.vehicle.model'],
-                $app['repository.vehicle.model'],
-                $app['repository.vehicle.brand']
+                $app['repository.vehicle.brand'],
+                $app['repository.vehicle.model']
             );
         };
 
@@ -102,14 +102,14 @@ class ModelProvider implements ServiceProviderInterface
             );
         };
 
-        $app['model.vehicle'] = function () use ($app) {
-            return new Model\Vehicle(
-                $app['validator.vehicle'],
+        $app['model.vehicle.vehicle'] = function () use ($app) {
+            return new Model\Vehicle\Vehicle(
+                $app['validator.vehicle.vehicle'],
                 $app['repository.vehicle.brand'],
                 $app['repository.vehicle.category'],
                 $app['repository.vehicle.model'],
                 $app['repository.vehicle.type'],
-                $app['repository.vehicle']
+                $app['repository.vehicle.vehicle']
             );
         };
     }
