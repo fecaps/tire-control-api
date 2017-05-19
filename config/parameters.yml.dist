@@ -1,5 +1,7 @@
 debug: true
 
+devMode: true
+
 timezone: America/Sao_Paulo
 
 database:

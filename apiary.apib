@@ -401,10 +401,10 @@ containing only one field.
             "data": [
                 {
                     "id": 1,
-                    "brand": "Pirelli",
-                    "size": "295/80",
-                    "type": "FR85",
-                    "model": "Radial",
+                    "brand_id": 1,
+                    "size_id": 1,
+                    "type_id": 1,
+                    "model_id": 1,
                     "dot": "1209",
                     "code": "code10",
                     "purchase_price": "190.9",
@@ -418,10 +418,10 @@ containing only one field.
 You **must** create a tire using this action. It takes a JSON object
 containing specific fields.
 
-+ brand (string) - The brand
-+ model (string) - The model
-+ size (string) - The size
-+ type (string) - The type
++ brand_id (integer) - The tire brand id
++ model_id (integer) - The tire model id
++ size_id (integer) - The tire size id
++ type_id (integer) - The tire type id
 + dot (string) - The DOT
 + code (string) - The unique code
 + purchase_price (float) - The purchase price
@@ -437,10 +437,10 @@ containing specific fields.
     + Body
 
             {
-                "brand": "Pirelli",
-                "model": "Radial",
-                "size": "295/80",
-                "type": "FR85",
+                "brand_id": 1,
+                "model_id": 1,
+                "size_id": 1,
+                "type_id": 1,
                 "dot": "1209",
                 "code": "code10",
                 "purchase_price": "190.9",
@@ -453,10 +453,10 @@ containing specific fields.
 
             {
                 "id": 1,
-                "brand": "Pirelli",
-                "model": "Radial",
-                "size": "295/80",
-                "type": "FR85",
+                "brand": 1,
+                "model": 1,
+                "size": 1,
+                "type": 1,
                 "dot": "1215",
                 "code": "code10",
                 "purchase_price": "190.9",
@@ -471,7 +471,7 @@ containing specific fields.
                 "error": "",
                 "errors": {
                     "code": [
-                        "Code already in use."
+                        "The code is already in use."
                     ]
                 }
             }
@@ -745,10 +745,10 @@ containing only one field.
             "data": [
                 {
                     "id": 1,
-                    "brand": "Ford",
-                    "category": "Utilitary",
-                    "model": "Model1",
-                    "type": "Truck",
+                    "brand_id": 1,
+                    "category_id": 1,
+                    "model_id": 1,
+                    "type_id": 1,
                     "plate": "PLT687"
                 }
             ]
@@ -759,10 +759,10 @@ containing only one field.
 You **must** create a vehicle type using this action. It takes a JSON object
 containing specific fields.
 
-+ brand (string) - The vehicle brand name
-+ category (string) - The vehicle category name
-+ model (string) - The vehicle model name
-+ type (string) - The vehicle type name
++ brand_id (integer) - The vehicle brand id
++ category_id (integer) - The vehicle category id
++ model_id (integer) - The vehicle model id
++ type_id (integer) - The vehicle type id
 + plate (string) - The vehicle plate
 
 + Request
@@ -775,10 +775,10 @@ containing specific fields.
     + Body
 
             {
-                "brand": "Ford",
-                "category": "Utilitary",
-                "model": "Model1",
-                "type": "Truck",
+                "brand_id": 1,
+                "category_id": 1,
+                "model_id": 1,
+                "type_id": 1,
                 "plate": "PLT687"
             }
 
@@ -788,10 +788,10 @@ containing specific fields.
 
             {
                 "id": 1,
-                "brand": "Ford",
-                "category": "Utilitary",
-                "model": "Model1",
-                "type": "Truck",
+                "brand_id": 1,
+                "category_id": 1,
+                "model_id": 1,
+                "type_id": 1,
                 "plate": "PLT687"
             }
 
@@ -803,7 +803,7 @@ containing specific fields.
                 "error": "",
                 "errors": {
                     "plate": [
-                        "Invalid vehicle plate"
+                        "The plate is already in use"
                     ]
                 }
             }

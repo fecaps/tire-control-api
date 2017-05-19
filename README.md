@@ -18,19 +18,19 @@ $ ./scripts/pre-commit.sh
 
 ### Usage
 
+Copy params dist file to params file and change database configs if necessary:
+```
+$ cp config/parameters.yml.dist config/parameters.yml 
+```
+
 Access **PostgreSQL** (default) and create tire_control:
 ```
 CREATE DATABASE tire_control; 
 ```
 
-Restore SQL script to create tables:
+Create database schema using Doctrine ORM:
 ```
-$ psql tire_control < db/schema.sql 
-```
-
-Copy params dist file to params file and change database configs if necessary:
-```
-$ cp config/parameters.yml.dist config/parameters.yml 
+$ vendor/bin/doctrine orm:schema-tool:create 
 ```
 
 Start local server:
