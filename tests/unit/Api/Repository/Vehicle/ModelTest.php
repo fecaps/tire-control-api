@@ -141,7 +141,10 @@ class ModelTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM vehicle_model_brand')
+            ->with('
+            SELECT a.id, b.name as brand, a.model 
+            FROM vehicle_model_brand a LEFT JOIN vehicle_brand b 
+            ON a.brand_id = b.id')
             ->willReturn($mockQuery);
 
         $repository = new Model($mockConnection);

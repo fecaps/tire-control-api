@@ -114,7 +114,13 @@ class VehicleTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM vehicle')
+            ->with('
+            SELECT a.id, b.name as brand, c.name as category,
+            d.model as model, e.name as type, a.plate FROM vehicle a 
+            LEFT JOIN vehicle_brand b ON a.brand_id = b.id 
+            LEFT JOIN vehicle_category c ON a.category_id = c.id
+            LEFT JOIN vehicle_model_brand d ON a.model_id = d.id
+            LEFT JOIN vehicle_type e ON a.type_id = e.id')
             ->willReturn($mockQuery);
 
         $repository = new Vehicle($mockConnection);

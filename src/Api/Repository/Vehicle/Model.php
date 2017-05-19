@@ -49,7 +49,10 @@ class Model
 
     public function list()
     {
-        $query = $this->connection->executeQuery('SELECT * FROM vehicle_model_brand');
+        $query = $this->connection->executeQuery('
+            SELECT a.id, b.name as brand, a.model 
+            FROM vehicle_model_brand a LEFT JOIN vehicle_brand b 
+            ON a.brand_id = b.id');
 
         $model = $query->fetchAll();
 

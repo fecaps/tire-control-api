@@ -123,7 +123,14 @@ class TireTest extends TestCase
         $mockConnection
             ->expects($this->once())
             ->method('executeQuery')
-            ->with('SELECT * FROM tire')
+            ->with('
+            SELECT a.id, b.name as brand, c.name as model, 
+            d.name as size, e.name as type, a.dot, a.code, 
+            a.purchase_price, a.purchase_date FROM tire a 
+            LEFT JOIN tire_brand b ON a.brand_id = b.id
+            LEFT JOIN tire_model c ON a.model_id = c.id
+            LEFT JOIN tire_size d ON a.size_id = d.id
+            LEFT JOIN tire_type e ON a.type_id = e.id')
             ->willReturn($mockQuery);
 
         $repository = new Tire($mockConnection);

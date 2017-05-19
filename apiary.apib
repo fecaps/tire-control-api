@@ -401,10 +401,10 @@ containing only one field.
             "data": [
                 {
                     "id": 1,
-                    "brand_id": 1,
-                    "size_id": 1,
-                    "type_id": 1,
-                    "model_id": 1,
+                    "brand": "Pirelli",
+                    "model": "Radial",
+                    "size": "295/80",
+                    "type": "FR85",
                     "dot": "1209",
                     "code": "code10",
                     "purchase_price": "190.9",
@@ -628,7 +628,7 @@ containing only one field.
 You **must** create a vehicle model using this action. It takes a JSON object
 containing only two fields.
 
-+ brand (string) - The vehicle brand name (from vehicle brand)
++ brand_id (integer) - The vehicle brand id (from vehicle brand)
 + model (string) - The vehicle model name
 
 + Request
@@ -641,7 +641,7 @@ containing only two fields.
     + Body
 
             {
-                "brand": "Ford",
+                "brand_id": 1,
                 "model": "Model10"
             }
 
@@ -651,7 +651,7 @@ containing only two fields.
 
             {
                 "id": 1,
-                "brand": "Ford",
+                "brand_id": 1,
                 "model": "Model10"
             }
 
@@ -745,10 +745,10 @@ containing only one field.
             "data": [
                 {
                     "id": 1,
-                    "brand_id": 1,
-                    "category_id": 1,
-                    "model_id": 1,
-                    "type_id": 1,
+                    "brand": "Ford",
+                    "category": "Utilitary",
+                    "model": "Model10",
+                    "type": "Truck",
                     "plate": "PLT687"
                 }
             ]
